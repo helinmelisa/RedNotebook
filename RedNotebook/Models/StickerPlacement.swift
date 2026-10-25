@@ -10,8 +10,8 @@ enum StickerChoice {
     case emoji(String)
     case drawn(DrawnSticker)
     case photo(PhotoSticker)
-    /// A photo of the day in a polaroid frame (JPEG data, not cut out).
-    case polaroid(Data)
+    /// Photos of the day in a frame: a polaroid, instax, film strip or photo-booth strip (JPEGs, not cut out).
+    case photos(PhotoFrameStyle, [Data])
 }
 
 /// A sticker stuck on a day page, with where it sits and how it's been resized and turned.
@@ -32,8 +32,10 @@ final class StickerPlacement {
     var createdAt: Date = Date.distantPast
     /// What's written on it (tapes, labels and notes).
     var text: String = ""
-    /// The photo, for polaroids.
+    /// The (first) photo, for framed photos. The frame style is kept in `value`.
     @Attribute(.externalStorage) var imageData: Data?
+    /// Any further photos, for film and photo-booth strips.
+    var extraImages: [Data]?
     var page: DayPage?
     var photo: PhotoSticker?
 
@@ -48,9 +50,11 @@ final class StickerPlacement {
         case .photo(let photo):
             kindRaw = StickerKind.photo.rawValue
             self.photo = photo
-        case .polaroid(let data):
+        case .photos(let style, let images):
             kindRaw = StickerKind.polaroid.rawValue
-            imageData = data
+            value = style.rawValue
+            imageData = images.first
+            extraImages = images.count > 1 ? Array(images.dropFirst()) : nil
         }
         self.x = x
         self.y = y
@@ -72,7 +76,7 @@ final class StickerPlacement {
         case .emoji: .emoji(value)
         case .drawn: DrawnSticker(rawValue: value).map { .drawn($0) }
         case .photo: photo.map { .photo($0) }
-        case .polaroid: imageData.map { .polaroid($0) }
+        case .polaroid: imageData.map { .photos(PhotoFrameStyle(rawValue: value) ?? .polaroid, [$0] + (extraImages ?? [])) }
         case nil: nil
         }
     }

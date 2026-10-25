@@ -16,17 +16,22 @@ enum PhotoCutout {
         }.value
     }
 
-    /// A square, downscaled JPEG for a polaroid: the whole photo, cropped to its centre.
-    static func polaroidPhoto(from data: Data) async -> Data? {
+    /// A downscaled JPEG for a photo frame: the whole photo (not cut out), cropped around its centre to `aspect` (width ÷ height).
+    static func framedPhoto(from data: Data, aspect: CGFloat) async -> Data? {
         await Task.detached(priority: .userInitiated) {
             guard let image = UIImage(data: data)?.downscaled(maxSide: 900) else { return nil }
-            let side = min(image.size.width, image.size.height)
+            var size = image.size
+            if size.width / size.height > aspect {
+                size.width = size.height * aspect
+            } else {
+                size.height = size.width / aspect
+            }
             let format = UIGraphicsImageRendererFormat()
             format.scale = 1
-            let square = UIGraphicsImageRenderer(size: CGSize(width: side, height: side), format: format).image { _ in
-                image.draw(at: CGPoint(x: (side - image.size.width) / 2, y: (side - image.size.height) / 2))
+            let cropped = UIGraphicsImageRenderer(size: size, format: format).image { _ in
+                image.draw(at: CGPoint(x: (size.width - image.size.width) / 2, y: (size.height - image.size.height) / 2))
             }
-            return square.jpegData(compressionQuality: 0.85)
+            return cropped.jpegData(compressionQuality: 0.85)
         }.value
     }
 

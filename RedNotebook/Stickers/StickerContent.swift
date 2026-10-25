@@ -13,8 +13,8 @@ struct StickerContent: View {
                 .stickerOutline()
         case .drawn(let drawn):
             DrawnStickerView(sticker: drawn, text: text)
-        case .polaroid(let data):
-            PolaroidPhoto(data: data, caption: text)
+        case .photos(let style, let photos):
+            PhotoFrameView(style: style, photos: photos, caption: text)
         case .photo(let photo):
             if let image = photo.image {
                 Image(uiImage: image)

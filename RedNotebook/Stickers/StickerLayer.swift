@@ -23,6 +23,17 @@ struct StickerLayer: View {
                 }
             }
         }
+        .onChange(of: selection) { _, selected in
+            // Framed photos that were just added ask for their caption right away
+            guard let selected,
+                  let placement = page.sortedStickers.first(where: { $0.persistentModelID == selected }),
+                  StickerKind(rawValue: placement.kindRaw) == .polaroid, placement.text.isEmpty,
+                  Date.now.timeIntervalSince(placement.createdAt) < 3 else { return }
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(700)) // let it drop onto the page first
+                startWriting(on: placement)
+            }
+        }
         .alert("Write on it", isPresented: Binding(get: { writingOn != nil }, set: { if !$0 { writingOn = nil } })) {
             TextField("A word or two", text: $draft)
             Button("Done") {

@@ -38,6 +38,7 @@
 		6328777B969A58B3BA8B294E /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */; };
 		65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */; };
 		6B9C8C399C61CA45FF54CAB3 /* NotebookWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC5C815A656359CAD8772CA /* NotebookWidget.swift */; };
+		6F1F2AC0EEA82A5A7CD1B454 /* PhotoFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */; };
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
 		7C79AEC275AE3529FB7ECDAC /* Fraunces-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
@@ -146,6 +147,7 @@
 		7B2E587CB9652567AA20C815 /* NewEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
+		7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrames.swift; sourceTree = "<group>"; };
 		87F8FD4050BC69B234BFB9FA /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
 		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				A679AA6F2257C2228E045E7F /* LifeStickers.swift */,
 				AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */,
 				21506043CFEC00E10FF1598A /* PhotoCutout.swift */,
+				7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */,
 				B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */,
 				E35E6A0058041DA2C3004F1B /* StickerContent.swift */,
 				946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */,
@@ -535,6 +538,7 @@
 				65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */,
 				9A170195B9383BCD870C0E1C /* OutfitSection.swift in Sources */,
 				DA653CAA3CA99917ABC222B2 /* PhotoCutout.swift in Sources */,
+				6F1F2AC0EEA82A5A7CD1B454 /* PhotoFrames.swift in Sources */,
 				499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */,
 				D31273FAA4DE67580BA426FC /* PortugueseHolidays.swift in Sources */,
 				C01C7ACB871CA4A7C937B0FF /* PortugueseWord.swift in Sources */,
