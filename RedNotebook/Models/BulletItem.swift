@@ -69,3 +69,26 @@ final class BulletItem {
     /// Done, migrated and cancelled lines are drawn faded.
     var isSettled: Bool { state != .open }
 }
+
+extension BulletItem {
+    /// Moves a task to another day (or to "someday" when `day` is nil).
+    ///
+    /// A task already on a page is migrated bullet journal style: it's marked `>` and copied to the new day.
+    /// A someday task has no page yet, so it simply moves.
+    func schedule(on day: Date?, in context: ModelContext) {
+        let target = day.map { DayPage.page(for: $0, in: context) }
+        let nextOrder = (target?.sortedItems.last?.order ?? -1) + 1
+
+        guard let current = page else {
+            order = nextOrder
+            page = target
+            return
+        }
+        guard target?.day != current.day else { return }
+
+        let copy = BulletItem(text: text, kind: kind, order: nextOrder)
+        context.insert(copy)
+        copy.page = target
+        state = .migrated
+    }
+}

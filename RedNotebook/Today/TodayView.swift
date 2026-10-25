@@ -75,11 +75,7 @@ private struct DayPageContent: View {
     /// Bullet journal migration: mark the task `>` and copy it to tomorrow's page.
     private func migrate(_ item: BulletItem) {
         guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: page.day) else { return }
-        let target = DayPage.page(for: tomorrow, in: context)
-        let copy = BulletItem(text: item.text, kind: item.kind,
-                              order: (target.sortedItems.last?.order ?? -1) + 1)
-        copy.page = target
-        item.state = .migrated
+        item.schedule(on: tomorrow, in: context)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
     }
 }
