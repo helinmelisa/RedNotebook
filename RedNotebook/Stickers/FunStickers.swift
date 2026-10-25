@@ -45,7 +45,7 @@ struct FunStickerView: View {
         case .simit: Simit().frame(width: 58, height: 58).stickerOutline()
         case .lokum: Lokum().stickerOutline()
 
-        default: EmptyView()
+        default: TravelStickerView(sticker: sticker)
         }
     }
 }

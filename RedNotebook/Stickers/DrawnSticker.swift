@@ -43,6 +43,12 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     case faceHappy, faceLove, faceSleepy, faceSad, faceAngry, faceExcited
     // Türkiye
     case nazar, cay, simit, lokum
+    // Antalya
+    case portakal, palmTree, caretta, hadrianGate, yivliMinare, gulet, nar, stampAntalya
+    // More seasons
+    case chestnuts, rainBoots, snowman, mitten, hotChocolate, sakura, watermelon, seashell, icePop, scarf
+    // More food
+    case onigiri, dango, matchaLatte, ramen, baklava, pancakes, cookie, cakeSlice
 
     var id: Self { self }
 
@@ -52,6 +58,7 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case words = "Words"
         case portugal = "Portugal 🇵🇹"
         case turkiye = "Türkiye 🇹🇷"
+        case antalya = "Antalya ☀️"
         case food = "Food & café"
         case animals = "Animals"
         case faces = "Mood faces"
@@ -119,6 +126,12 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
             .faces
         case .nazar, .cay, .simit, .lokum:
             .turkiye
+        case .portakal, .palmTree, .caretta, .hadrianGate, .yivliMinare, .gulet, .nar, .stampAntalya:
+            .antalya
+        case .chestnuts, .rainBoots, .snowman, .mitten, .hotChocolate, .sakura, .watermelon, .seashell, .icePop, .scarf:
+            .seasons
+        case .onigiri, .dango, .matchaLatte, .ramen, .baklava, .pancakes, .cookie, .cakeSlice:
+            .food
         }
     }
 
@@ -248,6 +261,32 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .cay: "Turkish tea"
         case .simit: "Simit"
         case .lokum: "Lokum"
+        case .portakal: "Antalya orange"
+        case .palmTree: "Palm tree"
+        case .caretta: "Caretta turtle"
+        case .hadrianGate: "Hadrian's Gate"
+        case .yivliMinare: "Yivli Minare"
+        case .gulet: "Gulet"
+        case .nar: "Pomegranate"
+        case .stampAntalya: "Antalya stamp"
+        case .chestnuts: "Chestnuts"
+        case .rainBoots: "Rain boots"
+        case .snowman: "Snowman"
+        case .mitten: "Mitten"
+        case .hotChocolate: "Hot chocolate"
+        case .sakura: "Sakura branch"
+        case .watermelon: "Watermelon"
+        case .seashell: "Seashell"
+        case .icePop: "Ice pop"
+        case .scarf: "Scarf"
+        case .onigiri: "Onigiri"
+        case .dango: "Dango"
+        case .matchaLatte: "Matcha latte"
+        case .ramen: "Ramen"
+        case .baklava: "Baklava"
+        case .pancakes: "Pancakes"
+        case .cookie: "Cookie"
+        case .cakeSlice: "Cake slice"
         }
     }
 }

@@ -20,6 +20,12 @@ struct MoreStickerView: View {
             Stamp(color: Color(red: 0.15, green: 0.30, blue: 0.62), title: "PORTO", value: "€1,20") {
                 BridgeArc().stroke(.white, lineWidth: 2).frame(width: 34, height: 16)
             }
+        case .stampAntalya:
+            Stamp(color: Color(red: 0.0, green: 0.55, blue: 0.62), title: "ANTALYA", value: "₺25") {
+                Image(systemName: "sun.horizon.fill").font(.system(size: 17))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.35), .white)
+            }
         case .stampLisboa:
             Stamp(color: Color(red: 0.78, green: 0.20, blue: 0.20), title: "LISBOA", value: "€0,80") {
                 Image(systemName: "tram.fill").font(.system(size: 16)).foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.3))
