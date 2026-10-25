@@ -9,12 +9,22 @@ struct TodayView: View {
     @State private var page: DayPage?
     @State private var selectedSticker: PersistentIdentifier?
     @State private var showingStickers = false
+    @State private var turningForward = true
 
     var body: some View {
         ScrollView {
-            if let page {
-                DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
-                               onAddSticker: { showingStickers = true })
+            // ZStack so the old and new page overlap while one turns over the other
+            ZStack(alignment: .top) {
+                if let page {
+                    DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
+                                   onAddSticker: { showingStickers = true })
+                        // Paper behind the page so it looks solid while turning, lined up with the notebook's grid
+                        .background(GridPaper().padding(.leading, -28).padding(.trailing, -44))
+                        .id(page.persistentModelID)
+                        // The earlier day is always on top: it turns away going forward, and back over going backward
+                        .zIndex(-page.day.timeIntervalSinceReferenceDate / 1e9)
+                        .transition(.pageTurn(forward: turningForward))
+                }
             }
         }
         .scrollIndicators(.hidden)
@@ -40,9 +50,17 @@ struct TodayView: View {
                 selectedSticker = placement.persistentModelID
             }
         }
+        .onChange(of: day) { oldDay, newDay in
+            turningForward = newDay > oldDay
+        }
         .task(id: day) {
             selectedSticker = nil
-            page = DayPage.page(for: day, in: context)
+            let next = DayPage.page(for: day, in: context)
+            if page == nil {
+                page = next
+            } else {
+                withAnimation(.easeInOut(duration: 0.5)) { page = next }
+            }
         }
     }
 }
@@ -55,6 +73,8 @@ private struct DayPageContent: View {
 
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
+    /// Where the sticky notes strip is, so swiping inside it scrolls the notes instead of flipping the day.
+    @State private var notesFrame: CGRect = .zero
 
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
@@ -81,6 +101,7 @@ private struct DayPageContent: View {
 
             PageSection(title: "Little notes", color: NotebookSection.today.tabColor) {
                 QuickNotesStrip(page: page)
+                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.space)) } action: { notesFrame = $0 }
             }
 
             quote
@@ -90,6 +111,23 @@ private struct DayPageContent: View {
         .overlay {
             StickerLayer(page: page, selection: $selectedSticker)
         }
+        .coordinateSpace(.named(Self.space))
+        .simultaneousGesture(swipeToFlip, including: selectedSticker == nil ? .all : .subviews)
+    }
+
+    private static let space = "dayPage"
+
+    /// Swipe left for the next day, right for the previous one.
+    private var swipeToFlip: some Gesture {
+        DragGesture(minimumDistance: 30, coordinateSpace: .named(Self.space))
+            .onEnded { value in
+                let dx = value.translation.width, dy = value.translation.height
+                guard abs(dx) > 80, abs(dx) > abs(dy) * 2,
+                      !notesFrame.contains(value.startLocation),
+                      let target = Calendar.current.date(byAdding: .day, value: dx < 0 ? 1 : -1, to: day) else { return }
+                UISelectionFeedbackGenerator().selectionChanged()
+                day = target
+            }
     }
 
     private var quote: some View {
@@ -142,4 +180,27 @@ private struct PageSection<Content: View>: View {
     }
     .modelContainer(SampleData.container)
     .environment(CalendarStore())
+}
+
+/// A page turning over its left edge, like flipping a notebook page.
+private struct PageTurn: ViewModifier {
+    let angle: Double
+
+    func body(content: Content) -> some View {
+        content
+            .rotation3DEffect(.degrees(angle), axis: (x: 0, y: 1, z: 0), anchor: .leading, perspective: 0.4)
+            .shadow(color: .black.opacity(angle == 0 ? 0 : 0.2), radius: 8, x: 4, y: 0)
+    }
+}
+
+private extension AnyTransition {
+    /// Forward: the old page turns away and the new one is underneath.
+    /// Backward: the previous page turns back over the current one.
+    static func pageTurn(forward: Bool) -> AnyTransition {
+        let turn = AnyTransition.modifier(active: PageTurn(angle: -90), identity: PageTurn(angle: 0))
+        let stay = AnyTransition.opacity.animation(.easeInOut(duration: 0.01).delay(0.5))
+        return forward
+            ? .asymmetric(insertion: .identity, removal: turn)
+            : .asymmetric(insertion: turn, removal: stay)
+    }
 }
