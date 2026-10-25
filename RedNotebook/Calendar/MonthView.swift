@@ -70,7 +70,7 @@ private struct MonthGrid: View {
         let pagesByDay = Dictionary(pages.map { ($0.day, $0) }, uniquingKeysWith: { first, _ in first })
         let cells = calendar.monthGrid(for: month)
 
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 7), spacing: 2) {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 3), count: 7), spacing: 3) {
             ForEach(Array(calendar.orderedWeekdaySymbols.enumerated()), id: \.offset) { _, symbol in
                 Text(symbol)
                     .font(Theme.serif(11, .semibold))
@@ -91,7 +91,7 @@ private struct MonthGrid: View {
                             isSelected: calendar.isDate(day, inSameDayAs: selectedDay))
                         .onTapGesture { select(day) }
                 } else {
-                    Color.clear.frame(height: 48)
+                    Color.clear.frame(height: 56)
                 }
             }
         }
@@ -117,27 +117,35 @@ private struct DayCell: View {
 
     var body: some View {
         let isToday = Calendar.current.isDateInToday(day)
+        let mood = page?.mood
 
-        VStack(spacing: 2) {
-            Text(day.formatted(.dateTime.day()))
-                .font(Theme.serif(14, isToday ? .bold : .regular))
-                .foregroundStyle(isToday ? Theme.accent : isHoliday ? PortugueseHolidays.color : Theme.ink)
-                .frame(width: 26, height: 26)
-                .overlay {
-                    if isToday { Circle().stroke(Theme.accent, lineWidth: 1.2) }
+        // A little planner square: number and mood on top, the day's top sticker in the middle, events below
+        VStack(spacing: 1) {
+            HStack(alignment: .top, spacing: 0) {
+                Text(day.formatted(.dateTime.day()))
+                    .font(Theme.serif(12, isToday ? .bold : .medium))
+                    .foregroundStyle(isToday ? Theme.paper : isHoliday ? PortugueseHolidays.color : Theme.ink)
+                    .frame(width: 20, height: 20)
+                    .background { if isToday { Circle().fill(Theme.accent) } }
+                Spacer(minLength: 0)
+                if let mood {
+                    Text(mood).font(.system(size: 9))
                 }
+            }
 
-            // Mood if the day has one, otherwise a small dot when something was written
             Group {
-                if let mood = page?.mood {
-                    Text(mood).font(.system(size: 10))
+                if let top = page?.sortedStickers.last, let choice = top.choice {
+                    StickerContent(choice: choice, text: top.text)
+                        .scaleEffect(0.24)
+                        .frame(width: 30, height: 20)
                 } else if let page, !page.isEmpty {
-                    Circle().fill(Theme.accent.opacity(0.6)).frame(width: 4, height: 4)
+                    Circle().fill(Theme.accent.opacity(0.5)).frame(width: 4, height: 4)
                 } else {
                     Color.clear
                 }
             }
-            .frame(height: 12)
+            .frame(height: 20)
+            .allowsHitTesting(false)
 
             HStack(spacing: 2) {
                 ForEach(eventColors.indices, id: \.self) { index in
@@ -146,10 +154,15 @@ private struct DayCell: View {
             }
             .frame(height: 3)
         }
-        .frame(maxWidth: .infinity, minHeight: 48)
+        .padding(3)
+        .frame(maxWidth: .infinity, minHeight: 56, alignment: .top)
         .background(
-            RoundedRectangle(cornerRadius: 6)
-                .fill(isSelected ? NotebookSection.calendar.tabColor.opacity(0.35) : .clear)
+            RoundedRectangle(cornerRadius: 5)
+                .fill(mood.map { Moods.color($0).opacity(0.3) } ?? Theme.ink.opacity(0.02))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(isSelected ? Theme.accent : .clear, lineWidth: 1.5)
         )
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)

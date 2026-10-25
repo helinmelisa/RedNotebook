@@ -6,7 +6,7 @@ struct DayHeader: View {
     @Bindable var page: DayPage
     @Binding var day: Date
 
-    private static let moods = ["🥰", "😊", "🙂", "😐", "😔", "😢", "😡", "😴"]
+    private static let moods = Moods.all
     private static let weathers = ["sun.max", "cloud.sun", "cloud", "cloud.rain", "cloud.bolt", "snowflake", "wind"]
 
     var body: some View {
