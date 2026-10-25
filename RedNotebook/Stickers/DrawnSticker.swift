@@ -312,14 +312,18 @@ extension View {
         }
     }
 
-    /// White die-cut border and a soft shadow, like a real sticker.
+    /// A matte "flake" sticker, like Japanese sticker sheets: slightly softened colours,
+    /// a thin cream kiss-cut edge and barely any shadow, so it sits on the paper instead of floating above it.
     func stickerOutline(_ width: CGFloat = 2) -> some View {
-        self
-            .shadow(color: .white, radius: 0, x: width, y: 0)
-            .shadow(color: .white, radius: 0, x: -width, y: 0)
-            .shadow(color: .white, radius: 0, x: 0, y: width)
-            .shadow(color: .white, radius: 0, x: 0, y: -width)
-            .shadow(color: .black.opacity(0.22), radius: 2, x: 1, y: 2)
+        let edge = Color(red: 0.995, green: 0.985, blue: 0.955)
+        let w = width * 0.75
+        return self
+            .saturation(0.82)
+            .shadow(color: edge, radius: 0, x: w, y: 0)
+            .shadow(color: edge, radius: 0, x: -w, y: 0)
+            .shadow(color: edge, radius: 0, x: 0, y: w)
+            .shadow(color: edge, radius: 0, x: 0, y: -w)
+            .shadow(color: Color(red: 0.35, green: 0.25, blue: 0.15).opacity(0.16), radius: 0.6, x: 0.4, y: 0.8)
     }
 }
 

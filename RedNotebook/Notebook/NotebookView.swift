@@ -36,6 +36,8 @@ struct NotebookView: View {
                 .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .opacity))
 
+            PrintGrain()
+
             Ribbon()
                 .padding(.trailing, 22)
                 .frame(maxWidth: .infinity, alignment: .trailing)

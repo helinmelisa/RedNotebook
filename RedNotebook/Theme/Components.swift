@@ -133,3 +133,23 @@ struct PageStack: View {
         }
     }
 }
+
+/// Fine grain laid over everything on the page (multiply), so ink and stickers read as printed on paper.
+struct PrintGrain: View {
+    var body: some View {
+        Canvas { context, size in
+            var rng = SeededRandom(seed: 5)
+            for _ in 0..<Int(size.width * size.height / 55) {
+                let x = Double.random(in: 0...size.width, using: &rng)
+                let y = Double.random(in: 0...size.height, using: &rng)
+                let r = Double.random(in: 0.3...0.9, using: &rng)
+                context.fill(Path(ellipseIn: CGRect(x: x, y: y, width: r, height: r)),
+                             with: .color(Color(red: 0.45, green: 0.35, blue: 0.25).opacity(Double.random(in: 0.04...0.11, using: &rng))))
+            }
+        }
+        .blendMode(.multiply)
+        .drawingGroup()
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+}

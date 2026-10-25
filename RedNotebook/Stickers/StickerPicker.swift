@@ -32,12 +32,13 @@ struct StickerPicker: View {
 
             ForEach(DrawnSticker.Category.allCases, id: \.self) { category in
                 section(category.rawValue) {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 12)], spacing: 16) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 62), spacing: 2)], spacing: 6) {
                         ForEach(DrawnSticker.allCases.filter { $0.category == category }) { drawn in
-                            tile(.drawn(drawn), size: 70)
+                            tile(.drawn(drawn), size: 62)
                                 .accessibilityLabel(drawn.name)
                         }
                     }
+                    .stickerSheet()
                 }
             }
 
@@ -111,11 +112,13 @@ struct StickerPicker: View {
         pick(.polaroid(jpeg))
     }
 
+    /// A fixed-size cell, so wide stickers like tapes shrink to fit instead of stretching the grid.
     private func tile(_ choice: StickerChoice, size: CGFloat) -> some View {
         Button { pick(choice) } label: {
             StickerContent(choice: choice)
-                .scaleEffect(0.75)
-                .frame(minWidth: size, minHeight: size)
+                .scaleEffect(0.6)
+                .frame(width: size, height: size * 0.85)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
     }
@@ -167,5 +170,17 @@ struct StickerDrawer: View {
         }
         .tint(Theme.red)
         .presentationDetents([.medium, .large])
+    }
+}
+
+private extension View {
+    /// A sheet of stickers: off-white backing paper with a soft edge, like the ones sold in stationery shops.
+    func stickerSheet() -> some View {
+        padding(10)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(red: 0.995, green: 0.99, blue: 0.975))
+                    .shadow(color: Color(red: 0.35, green: 0.25, blue: 0.15).opacity(0.14), radius: 3, x: 0, y: 1.5)
+            )
     }
 }
