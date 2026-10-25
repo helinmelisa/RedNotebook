@@ -32,6 +32,16 @@ for _ in 0..<26000 {
     ctx.fillEllipse(in: CGRect(x: x, y: y, width: r, height: r))
 }
 
+// Glossy covers (pass "glossy" after the colour): a lacquer shine instead of leather grain
+if args.count >= 6 && args[5] == "glossy" {
+    let shine = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                           colors: [NSColor(white: 1, alpha: 0.42).cgColor, NSColor(white: 1, alpha: 0.06).cgColor,
+                                    NSColor(white: 1, alpha: 0).cgColor, NSColor(white: 1, alpha: 0.18).cgColor,
+                                    NSColor(white: 1, alpha: 0).cgColor] as CFArray,
+                           locations: [0, 0.35, 0.5, 0.62, 0.72])!
+    ctx.drawLinearGradient(shine, start: CGPoint(x: 0, y: size), end: CGPoint(x: size, y: 0), options: [])
+}
+
 // Spine shadow on the left
 let spine = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                        colors: [NSColor(white: 0, alpha: 0.35).cgColor, NSColor(white: 0, alpha: 0).cgColor] as CFArray,

@@ -118,7 +118,17 @@ struct CoverFace: View {
             ZStack {
                 shape.fill(LinearGradient(colors: [color.light, color.base, color.dark],
                                           startPoint: .topLeading, endPoint: .bottomTrailing))
-                LeatherTexture().clipShape(shape)
+                LeatherTexture().clipShape(shape).opacity(color.isGlossy ? 0.25 : 1)
+                if color.isGlossy {
+                    // Shine: a soft glow at the top and a light band across, like lacquered card
+                    LinearGradient(stops: [.init(color: .white.opacity(0.38), location: 0),
+                                           .init(color: .white.opacity(0.08), location: 0.35),
+                                           .init(color: .white.opacity(0.0), location: 0.5),
+                                           .init(color: .white.opacity(0.16), location: 0.62),
+                                           .init(color: .white.opacity(0.0), location: 0.72)],
+                                   startPoint: .topLeading, endPoint: .bottomTrailing)
+                        .clipShape(shape)
+                }
 
                 shape
                     .inset(by: 10 * scale)
