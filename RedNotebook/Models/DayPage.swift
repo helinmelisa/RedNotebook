@@ -19,6 +19,9 @@ final class DayPage {
     @Relationship(deleteRule: .cascade, inverse: \QuickNote.page)
     var notes: [QuickNote]? = []
 
+    @Relationship(deleteRule: .cascade, inverse: \StickerPlacement.page)
+    var stickers: [StickerPlacement]? = []
+
     init(day: Date) {
         self.day = Calendar.current.startOfDay(for: day)
     }
@@ -31,9 +34,13 @@ final class DayPage {
         (notes ?? []).sorted { $0.createdAt < $1.createdAt }
     }
 
+    var sortedStickers: [StickerPlacement] {
+        (stickers ?? []).sorted { $0.z < $1.z }
+    }
+
     var isEmpty: Bool {
         diaryText.isEmpty && mood == nil && weather == nil
-            && (items ?? []).isEmpty && (notes ?? []).isEmpty
+            && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
     }
 }
 

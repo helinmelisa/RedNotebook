@@ -10,7 +10,7 @@ struct RedNotebookApp: App {
             RootView()
                 .environment(calendarStore)
         }
-        .modelContainer(for: DayPage.self)
+        .modelContainer(for: [DayPage.self, PhotoSticker.self])
     }
 }
 
