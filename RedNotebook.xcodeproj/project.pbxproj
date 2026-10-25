@@ -14,13 +14,16 @@
 		1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */; };
 		1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7619AFA459ED5027E674AB77 /* DrawnSticker.swift */; };
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
+		1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
 		2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331087EAB51100176211A0D /* QuickNotesStrip.swift */; };
 		2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */; };
 		3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */; };
+		4365403B37113BE1C22FCEFE /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF157F404FEEC1AE4716E /* DiaryView.swift */; };
 		499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE9BC272B1E886102676AB /* PhotoSticker.swift */; };
 		53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */; };
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
+		8797399104C8768C4ABB3389 /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */; };
 		93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */; };
 		9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E587CB9652567AA20C815 /* NewEventSheet.swift */; };
 		9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */; };
@@ -44,6 +47,7 @@
 /* Begin PBXFileReference section */
 		009BFB9BA002835C6D93AAEC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		0B91D0224EBFFC32859A1120 /* DailyQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuote.swift; sourceTree = "<group>"; };
+		0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Caveat-OFL.txt"; sourceTree = "<group>"; };
 		175E70D7A93D0DE220F4E6E3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1B67464B0C01A407C165D896 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherTexture.swift; sourceTree = "<group>"; };
@@ -69,11 +73,13 @@
 		B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedNotebookApp.swift; sourceTree = "<group>"; };
 		B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPlacement.swift; sourceTree = "<group>"; };
 		B8AE9BC272B1E886102676AB /* PhotoSticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSticker.swift; sourceTree = "<group>"; };
+		BA6AF157F404FEEC1AE4716E /* DiaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
 		BDF2F4039960E975B17AB58D /* NotebookSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookSection.swift; sourceTree = "<group>"; };
 		C331087EAB51100176211A0D /* QuickNotesStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNotesStrip.swift; sourceTree = "<group>"; };
 		DE931863901B96C7EE8DC80E /* GridPaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPaper.swift; sourceTree = "<group>"; };
 		E35E6A0058041DA2C3004F1B /* StickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerContent.swift; sourceTree = "<group>"; };
 		E8D6B4E136C2B183144635B4 /* QuickNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNote.swift; sourceTree = "<group>"; };
+		F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
 		FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,8 +108,10 @@
 				6FFA7123CCCA0E31C3A60DF2 /* App */,
 				5ECD0194119FD2EF7541CF08 /* Calendar */,
 				D5B9385A2D4B4265DA9AAC87 /* Cover */,
+				DC8FED3D05502620396A0CDA /* Diary */,
 				C906808771CE0B8D63C75709 /* Models */,
 				01BC9BECCCE545A0977A9081 /* Notebook */,
+				5F49E09DB6EB60ED62AB0203 /* Resources */,
 				471E6BB85BF2B60A9F8501D0 /* Stickers */,
 				D4A8C9BF31E7E65151967A04 /* Theme */,
 				C3DC9405E9AA6D3A9189F396 /* Today */,
@@ -125,6 +133,15 @@
 			path = Stickers;
 			sourceTree = "<group>";
 		};
+		59EFF0A1B0BE8D120852B6F6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */,
+				F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		5ECD0194119FD2EF7541CF08 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +154,14 @@
 				363EAE3B2F3F2318C244BBCE /* WeekView.swift */,
 			);
 			path = Calendar;
+			sourceTree = "<group>";
+		};
+		5F49E09DB6EB60ED62AB0203 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				59EFF0A1B0BE8D120852B6F6 /* Fonts */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		6FFA7123CCCA0E31C3A60DF2 /* App */ = {
@@ -205,6 +230,14 @@
 			path = Cover;
 			sourceTree = "<group>";
 		};
+		DC8FED3D05502620396A0CDA /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				BA6AF157F404FEEC1AE4716E /* DiaryView.swift */,
+			);
+			path = Diary;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -213,6 +246,7 @@
 			buildConfigurationList = EDE143824C31ABD37BD86714 /* Build configuration list for PBXNativeTarget "RedNotebook" */;
 			buildPhases = (
 				43F6EB83568C17CFB9A644E0 /* Sources */,
+				F270A929FB8BA4B946D6E7CD /* Resources */,
 			);
 			buildRules = (
 			);
@@ -255,6 +289,18 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		F270A929FB8BA4B946D6E7CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */,
+				8797399104C8768C4ABB3389 /* Caveat.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		43F6EB83568C17CFB9A644E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -269,6 +315,7 @@
 				D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */,
 				3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */,
 				F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */,
+				4365403B37113BE1C22FCEFE /* DiaryView.swift in Sources */,
 				1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */,
 				74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */,
 				E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */,

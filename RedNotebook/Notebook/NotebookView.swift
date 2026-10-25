@@ -53,11 +53,10 @@ struct NotebookView: View {
             CalendarView(selectedDay: $selectedDay, onOpenDay: openDay)
         case .todo:
             TodoView(onOpenDay: openDay)
+        case .diary:
+            DiaryView(onOpenDay: openDay)
         case .stickers:
             StickerBookView(day: selectedDay, onOpenDay: openDay)
-        default:
-            SectionPlaceholder(section: section)
-                .padding(.top, 20)
         }
     }
 
@@ -153,23 +152,6 @@ private struct IndexTabs: View {
         .frame(width: 36, alignment: .leading)
         .padding(.top, 40)
         .padding(.bottom, 20)
-    }
-}
-
-/// Stand-in content until each section is built.
-private struct SectionPlaceholder: View {
-    let section: NotebookSection
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(section == .today ? Date.now.formatted(.dateTime.weekday(.wide).day().month(.wide)) : section.title)
-                .font(.system(size: 24, weight: .semibold, design: .serif))
-                .foregroundStyle(Theme.ink)
-            Rectangle().fill(section.tabColor).frame(height: 2)
-            Text("Coming soon")
-                .font(.system(.body, design: .serif).italic())
-                .foregroundStyle(Theme.ink.opacity(0.45))
-        }
     }
 }
 
