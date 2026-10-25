@@ -24,6 +24,9 @@ final class DayPage {
     @Attribute(.externalStorage) var outfitPhoto: Data?
     var outfitNote: String = ""
 
+    /// Handwriting and doodles on the page (PencilKit drawing data).
+    @Attribute(.externalStorage) var drawing: Data?
+
     /// Clothes from the closet worn on this day.
     @Relationship(deleteRule: .nullify, inverse: \ClothingItem.days)
     var outfitItems: [ClothingItem]? = []
@@ -62,7 +65,7 @@ final class DayPage {
         diaryText.isEmpty && mood == nil && weather == nil
             && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
             && [breakfast, lunch, dinner, snacks, outfitNote].allSatisfy(\.isEmpty) && outfitPhoto == nil
-            && (outfitItems ?? []).isEmpty
+            && (outfitItems ?? []).isEmpty && drawing == nil
     }
 }
 

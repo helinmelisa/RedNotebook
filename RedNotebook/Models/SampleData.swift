@@ -44,7 +44,7 @@ enum SampleData {
         }
         if (page.stickers ?? []).isEmpty {
             let examples: [(StickerChoice, Double, Double, Double)] = [
-                (.drawn(.washiPink), 0.45, 12, -4),
+                (.drawn(.washiPink), 0.78, 600, 6),
                 (.drawn(.flower), 0.85, 470, -10),
                 (.emoji("☕️"), 0.8, 760, 12),
             ]

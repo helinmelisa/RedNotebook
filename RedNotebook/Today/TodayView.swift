@@ -11,6 +11,7 @@ struct TodayView: View {
     @State private var selectedSticker: PersistentIdentifier?
     @State private var showingStickers = false
     @State private var turningForward = true
+    @State private var isDrawing = false
 
     var body: some View {
         ScrollView {
@@ -18,7 +19,7 @@ struct TodayView: View {
             ZStack(alignment: .top) {
                 if let page {
                     DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
-                                   onAddSticker: { showingStickers = true }, onDressUp: onDressUp)
+                                   isDrawing: isDrawing, onDressUp: onDressUp)
                         // Paper behind the page so it looks solid while turning, lined up with the notebook's grid
                         .background(GridPaper().padding(.leading, -28).padding(.trailing, -44))
                         .id(page.persistentModelID)
@@ -30,18 +31,22 @@ struct TodayView: View {
         }
         .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.interactively)
-        // While a sticker is selected, drags move the sticker instead of scrolling
-        .scrollDisabled(selectedSticker != nil)
+        // While moving a sticker or drawing, drags belong to the page, not the scroll view
+        .scrollDisabled(selectedSticker != nil || isDrawing)
         .overlay(alignment: .bottom) {
             if selectedSticker != nil {
-                Button("Done") { withAnimation(.snappy) { selectedSticker = nil } }
-                    .font(.system(size: 14, weight: .semibold, design: .serif))
-                    .foregroundStyle(Theme.paper)
-                    .padding(.horizontal, 22)
-                    .padding(.vertical, 9)
-                    .background(Capsule().fill(Theme.coverRed))
+                doneButton { selectedSticker = nil }
                     .padding(.bottom, 20)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            } else if !isDrawing {
+                toolDock
+            }
+        }
+        .overlay(alignment: .topTrailing) {
+            // The pen palette covers the bottom of the screen, so "Done" sits at the top,
+            // over the day arrows so a stray tap can't flip the page mid-drawing
+            if isDrawing {
+                doneButton { isDrawing = false }
+                    .padding(.top, 24)
             }
         }
         .sheet(isPresented: $showingStickers) {
@@ -56,6 +61,7 @@ struct TodayView: View {
         }
         .task(id: day) {
             selectedSticker = nil
+            isDrawing = false
             let next = DayPage.page(for: day, in: context)
             if page == nil {
                 page = next
@@ -64,13 +70,58 @@ struct TodayView: View {
             }
         }
     }
+
+    /// Floating tools for decorating the page: stickers and the pen.
+    private var toolDock: some View {
+        HStack(spacing: 4) {
+            dockButton("star.bubble", label: "Add sticker") { showingStickers = true }
+            Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
+            dockButton("pencil.tip", label: "Draw") {
+                selectedSticker = nil
+                isDrawing = true
+            }
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
+        .background(Capsule().fill(Theme.paper))
+        .overlay(Capsule().stroke(Theme.hairline, lineWidth: 1))
+        .shadow(color: .black.opacity(0.15), radius: 6, x: 0, y: 3)
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        .padding(.bottom, 18)
+        .transition(.scale(scale: 0.8).combined(with: .opacity))
+    }
+
+    private func dockButton(_ systemImage: String, label: String, action: @escaping () -> Void) -> some View {
+        Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            withAnimation(.snappy) { action() }
+        } label: {
+            Image(systemName: systemImage)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(Theme.ink)
+                .frame(width: 40, height: 36)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+    }
+
+    private func doneButton(_ action: @escaping () -> Void) -> some View {
+        Button("Done") { withAnimation(.snappy) { action() } }
+            .font(.system(size: 14, weight: .semibold, design: .serif))
+            .foregroundStyle(Theme.paper)
+            .padding(.horizontal, 22)
+            .padding(.vertical, 9)
+            .background(Capsule().fill(Theme.accent))
+            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+    }
 }
 
 private struct DayPageContent: View {
     @Bindable var page: DayPage
     @Binding var day: Date
     @Binding var selectedSticker: PersistentIdentifier?
-    var onAddSticker: () -> Void
+    let isDrawing: Bool
     var onDressUp: () -> Void
 
     @Environment(\.modelContext) private var context
@@ -79,8 +130,8 @@ private struct DayPageContent: View {
     @State private var notesFrame: CGRect = .zero
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 22) {
-            DayHeader(page: page, day: $day, onAddSticker: onAddSticker)
+        VStack(alignment: .leading, spacing: Theme.sectionSpacing) {
+            DayHeader(page: page, day: $day)
 
             PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
                 // Holiday and iPhone Calendar events first, then the notebook's own bullets
@@ -117,12 +168,17 @@ private struct DayPageContent: View {
             quote
         }
         .padding(.top, 20)
-        .padding(.bottom, 40)
+        .padding(.bottom, 80)
+        .overlay {
+            // Drawing sits under the stickers, like ink under something stuck on the page
+            DrawingCanvas(data: $page.drawing, isActive: isDrawing)
+        }
         .overlay {
             StickerLayer(page: page, selection: $selectedSticker)
+                .allowsHitTesting(!isDrawing)
         }
         .coordinateSpace(.named(Self.space))
-        .simultaneousGesture(swipeToFlip, including: selectedSticker == nil ? .all : .subviews)
+        .simultaneousGesture(swipeToFlip, including: selectedSticker == nil && !isDrawing ? .all : .subviews)
     }
 
     private static let space = "dayPage"
@@ -169,13 +225,7 @@ private struct PageSection<Content: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 6) {
-                RoundedRectangle(cornerRadius: 1.5).fill(color).frame(width: 14, height: 3)
-                Text(title.uppercased())
-                    .font(.system(size: 11, weight: .semibold, design: .serif))
-                    .tracking(1.5)
-                    .foregroundStyle(Theme.ink.opacity(0.6))
-            }
+            SectionLabel(title: title, color: color)
             content
         }
     }
