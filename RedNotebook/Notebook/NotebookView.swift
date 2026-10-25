@@ -51,6 +51,8 @@ struct NotebookView: View {
             TodayView(day: $selectedDay)
         case .calendar:
             CalendarView(selectedDay: $selectedDay, onOpenDay: openDay)
+        case .todo:
+            TodoView(onOpenDay: openDay)
         default:
             SectionPlaceholder(section: section)
                 .padding(.top, 20)

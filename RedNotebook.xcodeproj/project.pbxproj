@@ -19,6 +19,7 @@
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
 		93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */; };
 		9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E587CB9652567AA20C815 /* NewEventSheet.swift */; };
+		B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552C6D655B1FCD71EBBC41 /* TodoView.swift */; };
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
 		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
 		D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */; };
@@ -47,6 +48,7 @@
 		4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCoverView.swift; sourceTree = "<group>"; };
 		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
 		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		74552C6D655B1FCD71EBBC41 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		78B96FEC539EE00FA3A10302 /* BulletList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletList.swift; sourceTree = "<group>"; };
 		7B2E587CB9652567AA20C815 /* NewEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 			path = Notebook;
 			sourceTree = "<group>";
 		};
+		20B535D62EEA320C6B130557 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				74552C6D655B1FCD71EBBC41 /* TodoView.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
 		2FCFAE4EBBF9E2C02C084B38 /* RedNotebook */ = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +90,7 @@
 				01BC9BECCCE545A0977A9081 /* Notebook */,
 				D4A8C9BF31E7E65151967A04 /* Theme */,
 				C3DC9405E9AA6D3A9189F396 /* Today */,
+				20B535D62EEA320C6B130557 /* Todo */,
 			);
 			path = RedNotebook;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 				7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */,
 				D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */,
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,
+				B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */,
 				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

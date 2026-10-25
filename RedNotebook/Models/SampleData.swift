@@ -20,6 +20,17 @@ enum SampleData {
             if earlier.isEmpty {
                 earlier.mood = mood
                 earlier.diaryText = "A good day."
+                if offset == -3 {
+                    BulletItem(text: "Return library books", kind: .task, order: 0).page = earlier
+                }
+            }
+        }
+
+        // Someday tasks have no page
+        let someday = FetchDescriptor<BulletItem>(predicate: #Predicate { $0.page == nil })
+        if (try? context.fetchCount(someday)) == 0 {
+            for text in ["Learn watercolour", "Reorganise bookshelf"] {
+                context.insert(BulletItem(text: text, kind: .task, order: 0))
             }
         }
 
