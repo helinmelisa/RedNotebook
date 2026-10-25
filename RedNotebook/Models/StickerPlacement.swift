@@ -28,6 +28,8 @@ final class StickerPlacement {
     var z: Int = 0
     /// When it was stuck on. Stickers from before this existed default to long ago, so they don't animate.
     var createdAt: Date = Date.distantPast
+    /// What's written on it (tapes, labels and notes).
+    var text: String = ""
     var page: DayPage?
     var photo: PhotoSticker?
 
@@ -48,6 +50,10 @@ final class StickerPlacement {
         self.rotation = rotation
         self.z = z
         self.createdAt = .now
+    }
+
+    var isWritable: Bool {
+        StickerKind(rawValue: kindRaw) == .drawn && (DrawnSticker(rawValue: value)?.isWritable ?? false)
     }
 
     var choice: StickerChoice? {
