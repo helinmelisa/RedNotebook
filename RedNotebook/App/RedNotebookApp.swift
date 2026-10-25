@@ -13,9 +13,6 @@ struct RedNotebookApp: App {
         WindowGroup {
             RootView()
                 .environment(calendarStore)
-                // A paper notebook looks the same in Dark Mode; red instead of iOS blue for controls
-                .preferredColorScheme(.light)
-                .tint(Theme.accent)
         }
         .modelContainer(for: [DayPage.self, PhotoSticker.self, ClothingItem.self, BodyPhoto.self])
     }
@@ -27,6 +24,8 @@ struct RootView: View {
     @State private var isOpen = ProcessInfo.processInfo.arguments.contains("--open")
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
+    /// Picking a new cover colour redraws the whole notebook in it.
+    @AppStorage(CoverColor.storageKey) private var coverColor = CoverColor.red.rawValue
 
     var body: some View {
         ZStack {
@@ -40,6 +39,10 @@ struct RootView: View {
                     .transition(.opacity)
             }
         }
+        .id(coverColor)
+        // A paper notebook looks the same in Dark Mode; the cover's colour instead of iOS blue for controls
+        .preferredColorScheme(.light)
+        .tint(Theme.accent)
         #if DEBUG
         .task {
             if ProcessInfo.processInfo.arguments.contains("--sample-data") {
