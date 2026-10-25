@@ -44,6 +44,7 @@
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
 		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
 		BB78ED30E9D56EB51C3A69C2 /* LifeStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679AA6F2257C2228E045E7F /* LifeStickers.swift */; };
+		C3400C3B4110D8E3E0587F75 /* Moods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D4A424A691E5742E11A50 /* Moods.swift */; };
 		CA6F165D5003D6BD21003FC6 /* StickerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */; };
 		D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */; };
 		D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45686A36B7F72E75004CFDE5 /* DayAgenda.swift */; };
@@ -52,6 +53,7 @@
 		D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365C3BEE813F4886FF60ADDB /* NotebookView.swift */; };
 		D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175E70D7A93D0DE220F4E6E3 /* Theme.swift */; };
 		DA653CAA3CA99917ABC222B2 /* PhotoCutout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21506043CFEC00E10FF1598A /* PhotoCutout.swift */; };
+		DD8E664D5340BA141EA5AB85 /* YearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8FD4050BC69B234BFB9FA /* YearView.swift */; };
 		DE2C781C67F23A899E90DFF7 /* BujoStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */; };
 		E042A96584A68D7702E5BBF2 /* MealEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A834ABA899341DBFF5624 /* MealEntry.swift */; };
 		E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B67464B0C01A407C165D896 /* TodayView.swift */; };
@@ -73,6 +75,7 @@
 		1B67464B0C01A407C165D896 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherTexture.swift; sourceTree = "<group>"; };
 		1E2C3BC7F4305F8D10F9E7E8 /* OutfitSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitSection.swift; sourceTree = "<group>"; };
+		1F6D4A424A691E5742E11A50 /* Moods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moods.swift; sourceTree = "<group>"; };
 		21506043CFEC00E10FF1598A /* PhotoCutout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCutout.swift; sourceTree = "<group>"; };
 		24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortugueseHolidays.swift; sourceTree = "<group>"; };
 		25FF75A703FAD381D19C8103 /* DayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPage.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		7B2E587CB9652567AA20C815 /* NewEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
+		87F8FD4050BC69B234BFB9FA /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
 		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
 		A679AA6F2257C2228E045E7F /* LifeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStickers.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				7B2E587CB9652567AA20C815 /* NewEventSheet.swift */,
 				24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */,
 				363EAE3B2F3F2318C244BBCE /* WeekView.swift */,
+				87F8FD4050BC69B234BFB9FA /* YearView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 			children = (
 				2EE892F9CE96993E0BEDD98B /* Components.swift */,
 				FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */,
+				1F6D4A424A691E5742E11A50 /* Moods.swift */,
 				3B4CE8760D86F9CF1995277C /* SoundEffects.swift */,
 				175E70D7A93D0DE220F4E6E3 /* Theme.swift */,
 			);
@@ -411,6 +417,7 @@
 				E042A96584A68D7702E5BBF2 /* MealEntry.swift in Sources */,
 				9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */,
 				F91BC574873F25A296149314 /* MonthView.swift in Sources */,
+				C3400C3B4110D8E3E0587F75 /* Moods.swift in Sources */,
 				A31921B064F7EA92777F501C /* MoreStickers.swift in Sources */,
 				9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */,
 				93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */,
@@ -435,6 +442,7 @@
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,
 				B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */,
 				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
+				DD8E664D5340BA141EA5AB85 /* YearView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

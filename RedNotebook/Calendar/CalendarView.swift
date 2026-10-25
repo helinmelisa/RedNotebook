@@ -10,7 +10,7 @@ struct CalendarView: View {
     @State private var showingNewEvent = false
 
     enum Mode: String, CaseIterable {
-        case month = "Month", week = "Week"
+        case month = "Month", week = "Week", year = "Year"
     }
 
     var body: some View {
@@ -37,6 +37,8 @@ struct CalendarView: View {
                     MonthView(selectedDay: $selectedDay, onOpenDay: onOpenDay)
                 case .week:
                     WeekView(selectedDay: $selectedDay, onOpenDay: onOpenDay)
+                case .year:
+                    YearView(selectedDay: $selectedDay, onOpenDay: onOpenDay)
                 }
             }
             .padding(.top, 20)
