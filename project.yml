@@ -15,6 +15,8 @@ targets:
     type: application
     platform: iOS
     sources: [RedNotebook]
+    dependencies:
+      - target: NotebookWidget
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.helinergezen.RedNotebook
@@ -26,4 +28,30 @@ targets:
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: helin's shows your calendar events in the agenda and can add new events you plan in the notebook.
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1"
+
+  NotebookWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - Widget
+      # Shared with the app: theme, fonts, the Portuguese words and the grid paper
+      - RedNotebook/Theme/Theme.swift
+      - RedNotebook/Theme/CoverColor.swift
+      - RedNotebook/Today/PortugueseWord.swift
+      - RedNotebook/Calendar/PortugueseHolidays.swift
+      - RedNotebook/Notebook/GridPaper.swift
+      - path: RedNotebook/Resources/Fonts
+        buildPhase: resources
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: "helin's"
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.helinergezen.RedNotebook.NotebookWidget
         TARGETED_DEVICE_FAMILY: "1"
