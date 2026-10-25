@@ -20,6 +20,8 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.helinergezen.RedNotebook
         GENERATE_INFOPLIST_FILE: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Ship the other cover colours as alternate icons
+        ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS: YES
         INFOPLIST_KEY_CFBundleDisplayName: "helin's"
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: helin's shows your calendar events in the agenda and can add new events you plan in the notebook.

@@ -75,6 +75,7 @@ struct CoverCustomizer: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         didPersonalize = true
+                        updateAppIcon()
                         dismiss()
                     }
                     .font(Theme.serif(16, .semibold))
@@ -84,5 +85,13 @@ struct CoverCustomizer: View {
         .tint(color.accent)
         .presentationDetents([.large])
         .onDisappear { didPersonalize = true }
+    }
+
+    /// Repaints the Home Screen icon in the cover colour. iOS confirms the change with a short message.
+    private func updateAppIcon() {
+        let wanted = color.iconName
+        guard UIApplication.shared.supportsAlternateIcons,
+              UIApplication.shared.alternateIconName != wanted else { return }
+        UIApplication.shared.setAlternateIconName(wanted)
     }
 }

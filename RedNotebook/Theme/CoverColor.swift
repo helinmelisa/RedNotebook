@@ -37,6 +37,11 @@ enum CoverColor: String, CaseIterable, Identifiable {
         }
     }
 
+    /// The Home Screen icon in this colour (nil = the main red one). Made by Scripts/make_app_icon.swift.
+    var iconName: String? {
+        self == .red ? nil : "AppIcon-\(rawValue)"
+    }
+
     var light: Color { base.mix(with: .white, by: 0.15) }
     var dark: Color { base.mix(with: .black, by: 0.42) }
 
