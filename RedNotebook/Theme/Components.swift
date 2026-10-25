@@ -71,7 +71,7 @@ struct SectionLabel<Trailing: View>: View {
                 .foregroundStyle(Theme.inkSecondary)
             Spacer(minLength: 0)
             trailing
-                .font(.system(size: 12, weight: .semibold, design: .serif))
+                .font(Theme.serif(12, .semibold))
                 .foregroundStyle(Theme.accent)
         }
     }

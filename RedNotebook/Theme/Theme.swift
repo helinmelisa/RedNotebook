@@ -2,10 +2,8 @@ import CoreText
 import SwiftUI
 
 enum Theme {
-    // Cover
-    static let coverRed = Color(red: 0.72, green: 0.09, blue: 0.11)
-    static let coverRedDark = Color(red: 0.45, green: 0.04, blue: 0.06)
-    static let coverRedLight = Color(red: 0.84, green: 0.18, blue: 0.18)
+    // Cover: the colour picked for the notebook (see CoverColor)
+    static var cover: CoverColor { CoverColor.current }
     static let stitch = Color(red: 0.95, green: 0.80, blue: 0.70).opacity(0.75)
     static let band = Color(red: 0.12, green: 0.10, blue: 0.10)
 
@@ -13,7 +11,7 @@ enum Theme {
     static let paper = Color(red: 0.98, green: 0.96, blue: 0.90)
     static let paperEdge = Color(red: 0.92, green: 0.89, blue: 0.81)
     static let grid = Color(red: 0.55, green: 0.65, blue: 0.75).opacity(0.22)
-    static let ribbon = Color(red: 0.78, green: 0.10, blue: 0.14)
+    static var ribbon: Color { cover.accent }
 
     // Ink: one colour in a few strengths, like a single pen pressed harder or softer
     static let ink = Color(red: 0.16, green: 0.16, blue: 0.20)
@@ -21,8 +19,11 @@ enum Theme {
     static let inkTertiary = ink.opacity(0.42)
     static let hairline = ink.opacity(0.14)
 
-    /// The notebook's one accent: the cover red, for today, links and highlights.
-    static let accent = coverRed
+    /// The notebook's one accent, taken from the cover: for today, links and highlights.
+    static var accent: Color { cover.accent }
+
+    /// A fixed red for stickers, which keep their colours whatever the cover.
+    static let red = Color(red: 0.72, green: 0.09, blue: 0.11)
 
     // Sticky notes
     static let stickyColors: [Color] = [
@@ -41,29 +42,36 @@ enum Theme {
     /// Space between sections on a page: two grid squares.
     static let sectionSpacing: CGFloat = 28
 
-    // Type: serif for printed text, Caveat for anything "handwritten"
+    // Type: Fraunces for printed text, Caveat for anything "handwritten"
+    /// Fraunces, a soft old-style serif, at any size and weight. Scales with the iPhone's text size setting.
+    static func serif(_ size: CGFloat, _ weight: Font.Weight = .regular, relativeTo style: Font.TextStyle = .body) -> Font {
+        .custom("Fraunces", size: size, relativeTo: style).weight(weight)
+    }
+
     /// Big page titles.
     static func display(_ size: CGFloat = 28) -> Font {
-        .system(size: size, weight: .semibold, design: .serif)
+        serif(size, .semibold, relativeTo: .title)
     }
 
     /// Small spaced capitals above titles and on section labels.
-    static let eyebrow = Font.system(size: 11, weight: .semibold, design: .serif)
+    static let eyebrow = serif(11, .semibold, relativeTo: .caption)
 
     /// Printed body text.
     static func text(_ size: CGFloat = 16) -> Font {
-        .system(size: size, design: .serif)
+        serif(size)
     }
 
     /// Caveat, a handwriting font, for the diary and sticky notes.
     static func handwriting(size: CGFloat) -> Font {
-        .custom("Caveat", size: size)
+        .custom("Caveat", size: size, relativeTo: .body)
     }
 
     /// Registers the bundled fonts. Call once at launch.
     static func registerFonts() {
-        guard let url = Bundle.main.url(forResource: "Caveat", withExtension: "ttf") else { return }
-        CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+        for name in ["Caveat", "Fraunces", "Fraunces-Italic"] {
+            guard let url = Bundle.main.url(forResource: name, withExtension: "ttf") else { continue }
+            CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+        }
     }
 }
 
