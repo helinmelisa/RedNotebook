@@ -27,12 +27,17 @@ private struct DayPageContent: View {
     @Binding var day: Date
 
     @Environment(\.modelContext) private var context
+    @Environment(CalendarStore.self) private var calendarStore
 
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
             DayHeader(page: page, day: $day)
 
             PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
+                // Events from the iPhone Calendar first, then the notebook's own bullets
+                ForEach(calendarStore.events(on: page.day), id: \.calendarItemIdentifier) { event in
+                    EventLine(event: event)
+                }
                 BulletList(page: page, onMigrate: migrate)
             }
 
@@ -107,4 +112,5 @@ private struct PageSection<Content: View>: View {
             .padding(.horizontal, 24)
     }
     .modelContainer(for: DayPage.self, inMemory: true)
+    .environment(CalendarStore())
 }

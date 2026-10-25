@@ -3,9 +3,12 @@ import SwiftData
 
 @main
 struct RedNotebookApp: App {
+    @State private var calendarStore = CalendarStore()
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environment(calendarStore)
         }
         .modelContainer(for: DayPage.self)
     }
@@ -16,6 +19,7 @@ struct RootView: View {
     /// Launch with `--open` to skip the cover (handy for previews and screenshots).
     @State private var isOpen = ProcessInfo.processInfo.arguments.contains("--open")
     @Environment(\.modelContext) private var context
+    @Environment(CalendarStore.self) private var calendarStore
 
     var body: some View {
         ZStack {
@@ -33,6 +37,7 @@ struct RootView: View {
         .task {
             if ProcessInfo.processInfo.arguments.contains("--sample-data") {
                 SampleData.fill(context)
+                await SampleData.fillCalendar(calendarStore)
             }
         }
         #endif

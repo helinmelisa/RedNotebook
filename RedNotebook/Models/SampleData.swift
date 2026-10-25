@@ -13,6 +13,16 @@ enum SampleData {
     }()
 
     static func fill(_ context: ModelContext) {
+        // A few earlier days so the calendar shows moods and dots
+        for (offset, mood) in [(-1, "🥰"), (-3, "😴"), (-6, "🙂")] {
+            guard let day = Calendar.current.date(byAdding: .day, value: offset, to: .now) else { continue }
+            let earlier = DayPage.page(for: day, in: context)
+            if earlier.isEmpty {
+                earlier.mood = mood
+                earlier.diaryText = "A good day."
+            }
+        }
+
         let page = DayPage.page(for: .now, in: context)
         guard page.isEmpty else { return }
 
@@ -35,6 +45,24 @@ enum SampleData {
         for (index, text) in ["Water the plants 🌱", "Book train tickets"].enumerated() {
             QuickNote(text: text, colorIndex: index).page = page
         }
+    }
+
+    /// Adds example events to the calendar, only on the simulator so a real calendar is never touched.
+    @MainActor
+    static func fillCalendar(_ store: CalendarStore) async {
+        #if targetEnvironment(simulator)
+        if store.canAsk { await store.requestAccess() }
+        guard store.hasAccess, store.events(on: .now).isEmpty else { return }
+
+        let calendar = Calendar.current
+        let examples: [(String, Int, Int)] = [("Dinner with Ana", 0, 19), ("Thesis meeting", 1, 10), ("Gym", 2, 18), ("Lunch with Bosch team", 4, 12)]
+        for (title, dayOffset, hour) in examples {
+            guard let day = calendar.date(byAdding: .day, value: dayOffset, to: .now),
+                  let start = calendar.date(bySettingHour: hour, minute: 0, second: 0, of: day) else { continue }
+            try? store.addEvent(title: title, start: start, end: start.addingTimeInterval(3600),
+                                isAllDay: false, calendar: nil)
+        }
+        #endif
     }
 }
 #endif

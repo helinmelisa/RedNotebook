@@ -4,8 +4,8 @@ import SwiftUI
 struct NotebookView: View {
     var onClose: () -> Void
 
-    @State private var section: NotebookSection = .today
-    /// The day shown on the Today page; the calendar will set this too.
+    @State private var section = NotebookView.launchSection
+    /// The day shown on the Today page and selected in the calendar.
     @State private var selectedDay = Date.now
 
     var body: some View {
@@ -49,10 +49,26 @@ struct NotebookView: View {
         switch section {
         case .today:
             TodayView(day: $selectedDay)
+        case .calendar:
+            CalendarView(selectedDay: $selectedDay, onOpenDay: openDay)
         default:
             SectionPlaceholder(section: section)
                 .padding(.top, 20)
         }
+    }
+
+    /// Flip to a day's page, e.g. from the calendar.
+    private func openDay(_ day: Date) {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        selectedDay = day
+        withAnimation(.easeInOut(duration: 0.3)) { section = .today }
+    }
+
+    /// Launch with `--tab calendar` (etc.) to start on a specific section.
+    private static var launchSection: NotebookSection {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: "--tab"), index + 1 < arguments.count else { return .today }
+        return NotebookSection(rawValue: arguments[index + 1]) ?? .today
     }
 }
 
@@ -159,4 +175,5 @@ private struct SectionPlaceholder: View {
         NotebookView(onClose: {})
     }
     .modelContainer(SampleData.container)
+    .environment(CalendarStore())
 }
