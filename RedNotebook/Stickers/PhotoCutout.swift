@@ -16,6 +16,20 @@ enum PhotoCutout {
         }.value
     }
 
+    /// A square, downscaled JPEG for a polaroid: the whole photo, cropped to its centre.
+    static func polaroidPhoto(from data: Data) async -> Data? {
+        await Task.detached(priority: .userInitiated) {
+            guard let image = UIImage(data: data)?.downscaled(maxSide: 900) else { return nil }
+            let side = min(image.size.width, image.size.height)
+            let format = UIGraphicsImageRendererFormat()
+            format.scale = 1
+            let square = UIGraphicsImageRenderer(size: CGSize(width: side, height: side), format: format).image { _ in
+                image.draw(at: CGPoint(x: (side - image.size.width) / 2, y: (side - image.size.height) / 2))
+            }
+            return square.jpegData(compressionQuality: 0.85)
+        }.value
+    }
+
     private static func liftSubject(from cgImage: CGImage) -> CGImage? {
         let request = VNGenerateForegroundInstanceMaskRequest()
         let handler = VNImageRequestHandler(cgImage: cgImage)

@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 enum StickerKind: String {
-    case emoji, drawn, photo
+    case emoji, drawn, photo, polaroid
 }
 
 /// Something you can stick on a page.
@@ -10,6 +10,8 @@ enum StickerChoice {
     case emoji(String)
     case drawn(DrawnSticker)
     case photo(PhotoSticker)
+    /// A photo of the day in a polaroid frame (JPEG data, not cut out).
+    case polaroid(Data)
 }
 
 /// A sticker stuck on a day page, with where it sits and how it's been resized and turned.
@@ -30,6 +32,8 @@ final class StickerPlacement {
     var createdAt: Date = Date.distantPast
     /// What's written on it (tapes, labels and notes).
     var text: String = ""
+    /// The photo, for polaroids.
+    @Attribute(.externalStorage) var imageData: Data?
     var page: DayPage?
     var photo: PhotoSticker?
 
@@ -44,6 +48,9 @@ final class StickerPlacement {
         case .photo(let photo):
             kindRaw = StickerKind.photo.rawValue
             self.photo = photo
+        case .polaroid(let data):
+            kindRaw = StickerKind.polaroid.rawValue
+            imageData = data
         }
         self.x = x
         self.y = y
@@ -53,7 +60,11 @@ final class StickerPlacement {
     }
 
     var isWritable: Bool {
-        StickerKind(rawValue: kindRaw) == .drawn && (DrawnSticker(rawValue: value)?.isWritable ?? false)
+        switch StickerKind(rawValue: kindRaw) {
+        case .drawn: DrawnSticker(rawValue: value)?.isWritable ?? false
+        case .polaroid: true
+        default: false
+        }
     }
 
     var choice: StickerChoice? {
@@ -61,6 +72,7 @@ final class StickerPlacement {
         case .emoji: .emoji(value)
         case .drawn: DrawnSticker(rawValue: value).map { .drawn($0) }
         case .photo: photo.map { .photo($0) }
+        case .polaroid: imageData.map { .polaroid($0) }
         case nil: nil
         }
     }
