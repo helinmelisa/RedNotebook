@@ -191,6 +191,8 @@ private struct DayPageContent: View {
                     .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.space)) } action: { notesFrame = $0 }
             }
 
+            PortugueseWordCard(day: page.day)
+
             quote
         }
         .padding(.top, 20)
