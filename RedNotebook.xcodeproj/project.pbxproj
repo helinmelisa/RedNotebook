@@ -78,6 +78,7 @@
 		F91BC574873F25A296149314 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717348824E1F5A8A3AD713B3 /* MonthView.swift */; };
 		FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */; };
 		FC5E8B843AFBA0E059D8F561 /* SoundEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4CE8760D86F9CF1995277C /* SoundEffects.swift */; };
+		FD62915744BC3A63787AEB0A /* VintageStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F81F330A865EB3A8A7F5D /* VintageStickers.swift */; };
 		FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2F4039960E975B17AB58D /* NotebookSection.swift */; };
 /* End PBXBuildFile section */
 
@@ -134,6 +135,7 @@
 		4D77C99D490B502BD78C9F5E /* FunStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunStickers.swift; sourceTree = "<group>"; };
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
 		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
+		675F81F330A865EB3A8A7F5D /* VintageStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VintageStickers.swift; sourceTree = "<group>"; };
 		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fraunces.ttf; sourceTree = "<group>"; };
 		74552C6D655B1FCD71EBBC41 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */,
 				FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */,
 				FAC37CDCAEC2F6EFE3C7BFA0 /* TravelStickers.swift */,
+				675F81F330A865EB3A8A7F5D /* VintageStickers.swift */,
 			);
 			path = Stickers;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,
 				B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */,
 				54D8393B772297A00A6B034C /* TravelStickers.swift in Sources */,
+				FD62915744BC3A63787AEB0A /* VintageStickers.swift in Sources */,
 				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
 				DD8E664D5340BA141EA5AB85 /* YearView.swift in Sources */,
 			);

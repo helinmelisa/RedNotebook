@@ -179,7 +179,7 @@ struct CoverFace: View {
     private func band(_ scale: CGFloat) -> some View {
         HStack {
             Spacer()
-            LinearGradient(colors: [Theme.band.opacity(0.9), Color(white: 0.25), Theme.band],
+            LinearGradient(colors: [color.band.mix(with: .black, by: 0.1), color.band.mix(with: .white, by: 0.18), color.band],
                            startPoint: .leading, endPoint: .trailing)
                 .frame(width: 13 * scale)
                 .shadow(color: .black.opacity(0.5), radius: 2 * scale, x: -scale, y: 0)

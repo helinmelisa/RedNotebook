@@ -41,6 +41,9 @@ enum CoverColor: String, CaseIterable, Identifiable {
         self == .red ? nil : "AppIcon-\(rawValue)"
     }
 
+    /// The elastic band: the cover colour, a couple of shades deeper.
+    var band: Color { base.mix(with: .black, by: 0.32) }
+
     var light: Color { base.mix(with: .white, by: 0.15) }
     var dark: Color { base.mix(with: .black, by: 0.42) }
 

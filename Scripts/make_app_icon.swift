@@ -17,6 +17,9 @@ let base = args.count >= 5 ? (Double(args[2])!, Double(args[3])!, Double(args[4]
 func mix(_ c: (Double, Double, Double), _ t: (Double, Double, Double), _ amount: Double) -> NSColor {
     NSColor(red: c.0 + (t.0 - c.0) * amount, green: c.1 + (t.1 - c.1) * amount, blue: c.2 + (t.2 - c.2) * amount, alpha: 1)
 }
+func mix3(_ c: (Double, Double, Double), _ t: (Double, Double, Double), _ amount: Double) -> (Double, Double, Double) {
+    (c.0 + (t.0 - c.0) * amount, c.1 + (t.1 - c.1) * amount, c.2 + (t.2 - c.2) * amount)
+}
 let colors = [mix(base, (1, 1, 1), 0.15).cgColor,
               mix(base, base, 0).cgColor,
               mix(base, (0, 0, 0), 0.42).cgColor] as CFArray
@@ -59,8 +62,9 @@ ctx.setLineDash(phase: 0, lengths: [])
 // Elastic band
 let bandX = size - 210.0
 let band = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
-                      colors: [NSColor(white: 0.10, alpha: 1).cgColor, NSColor(white: 0.26, alpha: 1).cgColor,
-                               NSColor(white: 0.08, alpha: 1).cgColor] as CFArray,
+                      // The band is the cover colour a couple of shades deeper (CoverColor.band)
+                      colors: [mix(base, (0, 0, 0), 0.40).cgColor, mix(mix3(base, (0, 0, 0), 0.32), (1, 1, 1), 0.18).cgColor,
+                               mix(base, (0, 0, 0), 0.34).cgColor] as CFArray,
                       locations: [0, 0.45, 1])!
 ctx.saveGState()
 ctx.setShadow(offset: CGSize(width: -6, height: 0), blur: 14, color: NSColor(white: 0, alpha: 0.5).cgColor)
