@@ -66,6 +66,7 @@ struct TodayView: View {
             if page == nil {
                 page = next
             } else {
+                SoundEffects.shared.play(.pageTurn)
                 withAnimation(.easeInOut(duration: 0.5)) { page = next }
             }
         }

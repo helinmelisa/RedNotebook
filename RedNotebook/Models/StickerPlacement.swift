@@ -26,6 +26,8 @@ final class StickerPlacement {
     /// Degrees.
     var rotation: Double = 0
     var z: Int = 0
+    /// When it was stuck on. Stickers from before this existed default to long ago, so they don't animate.
+    var createdAt: Date = Date.distantPast
     var page: DayPage?
     var photo: PhotoSticker?
 
@@ -45,6 +47,7 @@ final class StickerPlacement {
         self.y = y
         self.rotation = rotation
         self.z = z
+        self.createdAt = .now
     }
 
     var choice: StickerChoice? {

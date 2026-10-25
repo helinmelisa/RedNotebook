@@ -81,6 +81,7 @@ struct NotebookCoverView: View {
             try? await Task.sleep(for: .milliseconds(280))
 
             UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            SoundEffects.shared.play(.pageTurn)
             withAnimation(.easeIn(duration: 0.6)) { coverAngle = -90 }
             try? await Task.sleep(for: .milliseconds(620))
 

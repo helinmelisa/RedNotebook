@@ -63,6 +63,8 @@ private struct PlacedSticker: View {
     @GestureState private var drag: CGSize = .zero
     @GestureState private var pinch: CGFloat = 1
     @GestureState private var twist: Angle = .zero
+    /// Held up off the page, just peeled from the sheet
+    @State private var lifted = false
 
     var body: some View {
         StickerContent(choice: choice)
@@ -85,14 +87,30 @@ private struct PlacedSticker: View {
                     .accessibilityLabel("Remove sticker")
                 }
             }
-            .scaleEffect(placement.scale * pinch)
-            .rotationEffect(.degrees(placement.rotation) + twist)
+            .scaleEffect(placement.scale * pinch * (lifted ? 1.35 : 1))
+            .rotationEffect(.degrees(placement.rotation + (lifted ? 8 : 0)) + twist)
+            .shadow(color: .black.opacity(lifted ? 0.25 : 0), radius: lifted ? 14 : 0, x: 0, y: lifted ? 12 : 0)
             .offset(drag)
+            .onAppear(perform: dropIfNew)
             .onTapGesture(perform: onTap)
             .gesture(transform, including: isSelected ? .all : .subviews)
             .accessibilityElement(children: .contain)
             .accessibilityLabel("Sticker")
             .accessibilityHint(isSelected ? "Drag to move, pinch to resize, twist to rotate" : "Tap to select")
+    }
+
+    /// A sticker that was just added peels off, hangs in the air for a moment and presses down onto the page.
+    private func dropIfNew() {
+        guard Date.now.timeIntervalSince(placement.createdAt) < 2 else { return }
+        lifted = true
+        SoundEffects.shared.play(.peel)
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(120))
+            withAnimation(.spring(response: 0.38, dampingFraction: 0.62)) { lifted = false }
+            try? await Task.sleep(for: .milliseconds(220))
+            SoundEffects.shared.play(.stick)
+            UIImpactFeedbackGenerator(style: .soft).impactOccurred()
+        }
     }
 
     private var transform: some Gesture {
