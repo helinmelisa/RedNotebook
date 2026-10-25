@@ -89,13 +89,7 @@ struct StickerPicker: View {
 
     private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 6) {
-                RoundedRectangle(cornerRadius: 1.5).fill(NotebookSection.stickers.tabColor).frame(width: 14, height: 3)
-                Text(title.uppercased())
-                    .font(.system(size: 11, weight: .semibold, design: .serif))
-                    .tracking(1.5)
-                    .foregroundStyle(Theme.ink.opacity(0.6))
-            }
+            SectionLabel(title: title, color: NotebookSection.stickers.tabColor)
             content()
         }
     }

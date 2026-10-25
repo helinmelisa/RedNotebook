@@ -59,16 +59,8 @@ struct TodoView: View {
     }
 
     private func header(openCount: Int) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(openCount == 1 ? "1 OPEN" : "\(openCount) OPEN")
-                .font(.system(size: 11, weight: .semibold, design: .serif))
-                .tracking(2)
-                .foregroundStyle(Theme.coverRed)
-            Text("To-Do")
-                .font(.system(size: 28, weight: .semibold, design: .serif))
-                .foregroundStyle(Theme.ink)
-            Rectangle().fill(NotebookSection.todo.tabColor).frame(height: 2).padding(.top, 8)
-        }
+        PageTitle(eyebrow: openCount == 1 ? "1 open" : "\(openCount) open", title: "To-Do",
+                  color: NotebookSection.todo.tabColor)
     }
 
     private var addRow: some View {
@@ -194,17 +186,7 @@ private struct TaskGroup<Action: View>: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 6) {
-                RoundedRectangle(cornerRadius: 1.5).fill(color).frame(width: 14, height: 3)
-                Text("\(title.uppercased()) · \(tasks.count)")
-                    .font(.system(size: 11, weight: .semibold, design: .serif))
-                    .tracking(1.5)
-                    .foregroundStyle(Theme.ink.opacity(0.6))
-                Spacer()
-                action
-                    .font(.system(size: 12, weight: .semibold, design: .serif))
-                    .foregroundStyle(Theme.coverRed)
-            }
+            SectionLabel(title: title, color: color, count: tasks.count) { action }
             ForEach(tasks) { item in
                 TaskRow(item: item, showDate: showDates, onOpenDay: onOpenDay)
             }
@@ -238,6 +220,7 @@ private struct TaskRow: View {
 
             TextField("", text: $item.text, axis: .vertical)
                 .font(.system(size: 16, design: .serif))
+                .fixedSize(horizontal: false, vertical: true) // never clip a line that only just fits
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))
 
             if showDate, let day = item.page?.day {

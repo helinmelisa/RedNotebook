@@ -56,19 +56,8 @@ struct ClosetView: View {
     // MARK: - Header
 
     private var header: some View {
-        HStack(alignment: .firstTextBaseline) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(Calendar.current.isDateInToday(day)
-                     ? "TODAY'S OUTFIT"
-                     : day.formatted(.dateTime.day().month(.wide)).uppercased())
-                    .font(.system(size: 11, weight: .semibold, design: .serif))
-                    .tracking(2)
-                    .foregroundStyle(Theme.coverRed)
-                Text("Closet")
-                    .font(.system(size: 28, weight: .semibold, design: .serif))
-                    .foregroundStyle(Theme.ink)
-            }
-            Spacer()
+        PageTitle(eyebrow: Calendar.current.isDateInToday(day) ? "Today's outfit" : day.formatted(.dateTime.day().month(.wide)),
+                  title: "Closet", color: NotebookSection.closet.tabColor) {
             Menu {
                 PhotosPicker(selection: $bodyPhotoItem, matching: .images) {
                     Label(bodyPhotos.isEmpty ? "Add my body photo" : "Change my body photo", systemImage: "figure.stand")

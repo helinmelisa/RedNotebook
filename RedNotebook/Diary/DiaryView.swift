@@ -55,16 +55,8 @@ struct DiaryView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(pages.count == 1 ? "1 ENTRY" : "\(pages.count) ENTRIES")
-                .font(.system(size: 11, weight: .semibold, design: .serif))
-                .tracking(2)
-                .foregroundStyle(Theme.coverRed)
-            Text("Diary")
-                .font(.system(size: 28, weight: .semibold, design: .serif))
-                .foregroundStyle(Theme.ink)
-            Rectangle().fill(NotebookSection.diary.tabColor).frame(height: 2).padding(.top, 8)
-        }
+        PageTitle(eyebrow: pages.count == 1 ? "1 entry" : "\(pages.count) entries", title: "Diary",
+                  color: NotebookSection.diary.tabColor)
     }
 
     private var searchField: some View {

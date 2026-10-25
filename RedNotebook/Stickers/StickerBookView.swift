@@ -12,20 +12,8 @@ struct StickerBookView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("STICKER BOOK")
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
-                        .tracking(2)
-                        .foregroundStyle(Theme.coverRed)
-                    Text("Stickers")
-                        .font(.system(size: 28, weight: .semibold, design: .serif))
-                        .foregroundStyle(Theme.ink)
-                    Text("Tap a sticker to add it to \(dayName). Long-press your own stickers to delete them.")
-                        .font(.system(size: 13, design: .serif))
-                        .foregroundStyle(Theme.ink.opacity(0.55))
-                        .padding(.top, 4)
-                    Rectangle().fill(NotebookSection.stickers.tabColor).frame(height: 2).padding(.top, 8)
-                }
+                PageTitle(eyebrow: "Sticker book", title: "Stickers", color: NotebookSection.stickers.tabColor,
+                          subtitle: "Tap a sticker to add it to \(dayName). Long-press your own stickers to delete them.")
 
                 StickerPicker(onPick: add)
             }
