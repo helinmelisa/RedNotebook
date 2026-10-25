@@ -1,12 +1,13 @@
 #if DEBUG
 import Foundation
 import SwiftData
+import SwiftUI
 
 /// Example content for SwiftUI previews and screenshots (launch with `--sample-data`).
 enum SampleData {
     @MainActor
     static let container: ModelContainer = {
-        let container = try! ModelContainer(for: DayPage.self, PhotoSticker.self,
+        let container = try! ModelContainer(for: DayPage.self, PhotoSticker.self, ClothingItem.self, BodyPhoto.self,
                                             configurations: ModelConfiguration(isStoredInMemoryOnly: true))
         fill(container.mainContext)
         return container
@@ -77,6 +78,41 @@ enum SampleData {
         }
     }
 
+    /// A drawn figure and a few drawn clothes, so the closet can be tried without real photos.
+    @MainActor
+    static func fillCloset(_ context: ModelContext) {
+        guard (try? context.fetchCount(FetchDescriptor<ClothingItem>())) == 0 else { return }
+
+        func png<V: View>(_ view: V) -> Data? {
+            let renderer = ImageRenderer(content: view)
+            renderer.scale = 2
+            return renderer.uiImage?.pngData()
+        }
+
+        if let body = png(Image(systemName: "figure.stand").resizable().scaledToFit()
+            .foregroundStyle(Color(red: 0.87, green: 0.70, blue: 0.58)).frame(width: 180, height: 300)) {
+            context.insert(BodyPhoto(imageData: body))
+        }
+
+        let tee = png(TeeShape().fill(Color(red: 0.95, green: 0.55, blue: 0.65)).frame(width: 120, height: 90))
+        let stripes = png(TeeShape().fill(Color(red: 0.98, green: 0.97, blue: 0.92))
+            .overlay(TeeShape().stroke(Color(red: 0.2, green: 0.3, blue: 0.6), lineWidth: 2)).frame(width: 120, height: 90))
+        let skirt = png(SkirtShape().fill(Color(red: 0.35, green: 0.45, blue: 0.70)).frame(width: 90, height: 80))
+        let shoes = png(HStack(spacing: 16) {
+            Capsule().fill(Theme.coverRed).frame(width: 34, height: 14)
+            Capsule().fill(Theme.coverRed).frame(width: 34, height: 14)
+        })
+
+        let page = DayPage.page(for: .now, in: context)
+        for (data, category, wear) in [(tee, ClothingCategory.top, true), (stripes, .top, false),
+                                       (skirt, .bottom, true), (shoes, .shoes, true)] {
+            guard let data else { continue }
+            let piece = ClothingItem(imageData: data, category: category)
+            context.insert(piece)
+            if wear { page.outfitItems = (page.outfitItems ?? []) + [piece] }
+        }
+    }
+
     /// Adds example events to the calendar, only on the simulator so a real calendar is never touched.
     @MainActor
     static func fillCalendar(_ store: CalendarStore) async {
@@ -93,6 +129,36 @@ enum SampleData {
                                 isAllDay: false, calendar: nil)
         }
         #endif
+    }
+}
+
+private struct TeeShape: Shape {
+    func path(in r: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: r.width * 0.35, y: 0))
+        p.addQuadCurve(to: CGPoint(x: r.width * 0.65, y: 0), control: CGPoint(x: r.midX, y: r.height * 0.15))
+        p.addLine(to: CGPoint(x: r.width, y: r.height * 0.2))
+        p.addLine(to: CGPoint(x: r.width * 0.88, y: r.height * 0.42))
+        p.addLine(to: CGPoint(x: r.width * 0.76, y: r.height * 0.36))
+        p.addLine(to: CGPoint(x: r.width * 0.76, y: r.height))
+        p.addLine(to: CGPoint(x: r.width * 0.24, y: r.height))
+        p.addLine(to: CGPoint(x: r.width * 0.24, y: r.height * 0.36))
+        p.addLine(to: CGPoint(x: r.width * 0.12, y: r.height * 0.42))
+        p.addLine(to: CGPoint(x: 0, y: r.height * 0.2))
+        p.closeSubpath()
+        return p
+    }
+}
+
+private struct SkirtShape: Shape {
+    func path(in r: CGRect) -> Path {
+        var p = Path()
+        p.move(to: CGPoint(x: r.width * 0.2, y: 0))
+        p.addLine(to: CGPoint(x: r.width * 0.8, y: 0))
+        p.addLine(to: CGPoint(x: r.width, y: r.height))
+        p.addLine(to: CGPoint(x: 0, y: r.height))
+        p.closeSubpath()
+        return p
     }
 }
 #endif
