@@ -13,7 +13,9 @@ final class DayPage {
     /// SF Symbol name of the weather icon.
     var weather: String?
 
-    // What I ate
+    // What I ate. The four fixed lines are from before meals had times; MealsSection moves them into `meals`.
+    @Relationship(deleteRule: .cascade, inverse: \MealEntry.page)
+    var meals: [MealEntry]? = []
     var breakfast: String = ""
     var lunch: String = ""
     var dinner: String = ""
@@ -48,6 +50,10 @@ final class DayPage {
         (items ?? []).sorted { $0.order < $1.order }
     }
 
+    var sortedMeals: [MealEntry] {
+        (meals ?? []).sorted { $0.time < $1.time }
+    }
+
     var sortedNotes: [QuickNote] {
         (notes ?? []).sorted { $0.createdAt < $1.createdAt }
     }
@@ -65,7 +71,7 @@ final class DayPage {
         diaryText.isEmpty && mood == nil && weather == nil
             && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
             && [breakfast, lunch, dinner, snacks, outfitNote].allSatisfy(\.isEmpty) && outfitPhoto == nil
-            && (outfitItems ?? []).isEmpty && drawing == nil
+            && (outfitItems ?? []).isEmpty && drawing == nil && (meals ?? []).isEmpty
     }
 }
 

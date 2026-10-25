@@ -36,10 +36,14 @@ enum SampleData {
         }
 
         let page = DayPage.page(for: .now, in: context)
-        if page.breakfast.isEmpty && page.lunch.isEmpty {
-            page.breakfast = "Pastel de nata + galão"
-            page.lunch = "Francesinha with friends"
-            page.dinner = "Soup and bread"
+        if (page.meals ?? []).isEmpty && page.breakfast.isEmpty {
+            for (hour, minute, text) in [(8, 45, "Pastel de nata + galão"), (13, 15, "Francesinha with friends"),
+                                         (16, 30, "Apple"), (20, 0, "Soup and bread")] {
+                let time = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: page.day)!
+                let meal = MealEntry(time: time, text: text)
+                context.insert(meal)
+                meal.page = page
+            }
             page.outfitNote = "White shirt, mom jeans, red scarf"
         }
         if (page.stickers ?? []).isEmpty {
