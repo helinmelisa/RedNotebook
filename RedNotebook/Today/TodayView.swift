@@ -99,6 +99,14 @@ private struct DayPageContent: View {
                     .foregroundStyle(Theme.ink)
             }
 
+            PageSection(title: "Today's outfit", color: NotebookSection.stickers.tabColor) {
+                OutfitSection(page: page)
+            }
+
+            PageSection(title: "What I ate", color: NotebookSection.calendar.tabColor) {
+                MealsSection(page: page)
+            }
+
             PageSection(title: "Little notes", color: NotebookSection.today.tabColor) {
                 QuickNotesStrip(page: page)
                     .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.space)) } action: { notesFrame = $0 }

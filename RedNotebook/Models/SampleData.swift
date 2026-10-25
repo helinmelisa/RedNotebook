@@ -35,6 +35,12 @@ enum SampleData {
         }
 
         let page = DayPage.page(for: .now, in: context)
+        if page.breakfast.isEmpty && page.lunch.isEmpty {
+            page.breakfast = "Pastel de nata + galão"
+            page.lunch = "Francesinha with friends"
+            page.dinner = "Soup and bread"
+            page.outfitNote = "White shirt, mom jeans, red scarf"
+        }
         if (page.stickers ?? []).isEmpty {
             let examples: [(StickerChoice, Double, Double, Double)] = [
                 (.drawn(.washiPink), 0.45, 12, -4),
