@@ -14,6 +14,8 @@ let ctx = NSGraphicsContext.current!.cgContext
 // light = 15% towards white, dark = 42% towards black.
 let args = CommandLine.arguments
 let base = args.count >= 5 ? (Double(args[2])!, Double(args[3])!, Double(args[4])!) : (0.72, 0.09, 0.11)
+// "soft" (for pastels) keeps shadows light so the colour doesn't turn grey; matches CoverColor.depth
+let depth = args.dropFirst(5).contains("soft") ? 0.4 : 1.0
 func mix(_ c: (Double, Double, Double), _ t: (Double, Double, Double), _ amount: Double) -> NSColor {
     NSColor(red: c.0 + (t.0 - c.0) * amount, green: c.1 + (t.1 - c.1) * amount, blue: c.2 + (t.2 - c.2) * amount, alpha: 1)
 }
@@ -22,7 +24,7 @@ func mix3(_ c: (Double, Double, Double), _ t: (Double, Double, Double), _ amount
 }
 let colors = [mix(base, (1, 1, 1), 0.15).cgColor,
               mix(base, base, 0).cgColor,
-              mix(base, (0, 0, 0), 0.42).cgColor] as CFArray
+              mix(base, (0, 0, 0), 0.42 * depth).cgColor] as CFArray
 let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors, locations: [0, 0.5, 1])!
 ctx.drawLinearGradient(gradient, start: CGPoint(x: 0, y: size), end: CGPoint(x: size, y: 0), options: [])
 
@@ -36,7 +38,7 @@ for _ in 0..<26000 {
 }
 
 // Glossy covers (pass "glossy" after the colour): a lacquer shine instead of leather grain
-if args.count >= 6 && args[5] == "glossy" {
+if args.dropFirst(5).contains("glossy") {
     let shine = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                            colors: [NSColor(white: 1, alpha: 0.42).cgColor, NSColor(white: 1, alpha: 0.06).cgColor,
                                     NSColor(white: 1, alpha: 0).cgColor, NSColor(white: 1, alpha: 0.18).cgColor,
@@ -63,8 +65,8 @@ ctx.setLineDash(phase: 0, lengths: [])
 let bandX = size - 210.0
 let band = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
                       // The band is the cover colour a couple of shades deeper (CoverColor.band)
-                      colors: [mix(base, (0, 0, 0), 0.40).cgColor, mix(mix3(base, (0, 0, 0), 0.32), (1, 1, 1), 0.18).cgColor,
-                               mix(base, (0, 0, 0), 0.34).cgColor] as CFArray,
+                      colors: [mix(base, (0, 0, 0), 0.40 * depth).cgColor, mix(mix3(base, (0, 0, 0), 0.32 * depth), (1, 1, 1), 0.18).cgColor,
+                               mix(base, (0, 0, 0), 0.34 * depth).cgColor] as CFArray,
                       locations: [0, 0.45, 1])!
 ctx.saveGState()
 ctx.setShadow(offset: CGSize(width: -6, height: 0), blur: 14, color: NSColor(white: 0, alpha: 0.5).cgColor)
@@ -84,7 +86,7 @@ func drawTitle(_ color: NSColor, dx: CGFloat, dy: CGFloat) {
 }
 drawTitle(NSColor(white: 1, alpha: 0.22), dx: 4, dy: -4)
 drawTitle(NSColor(white: 0, alpha: 0.35), dx: -3, dy: 3)
-drawTitle(mix(base, (0, 0, 0), 0.38), dx: 0, dy: 0)
+drawTitle(mix(base, (0, 0, 0), 0.38 * depth), dx: 0, dy: 0)
 
 NSGraphicsContext.current?.flushGraphics()
 try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: CommandLine.arguments[1]))
