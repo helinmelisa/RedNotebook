@@ -87,7 +87,7 @@ struct BujoStickerView: View {
             Highlighter(color: Color(red: 1.0, green: 0.55, blue: 0.70))
 
         default:
-            EmptyView()
+            MoreStickerView(sticker: sticker)
         }
     }
 

@@ -33,6 +33,7 @@
 		9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */; };
 		9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E587CB9652567AA20C815 /* NewEventSheet.swift */; };
 		9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */; };
+		A31921B064F7EA92777F501C /* MoreStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */; };
 		AD427AC12ABEAA3F126A3927 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF040617BA6AFBFD07BF0E /* ClosetView.swift */; };
 		B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552C6D655B1FCD71EBBC41 /* TodoView.swift */; };
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
@@ -86,6 +87,7 @@
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
+		AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreStickers.swift; sourceTree = "<group>"; };
 		AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHeader.swift; sourceTree = "<group>"; };
 		B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBookView.swift; sourceTree = "<group>"; };
 		B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedNotebookApp.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */,
 				7619AFA459ED5027E674AB77 /* DrawnSticker.swift */,
+				AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */,
 				21506043CFEC00E10FF1598A /* PhotoCutout.swift */,
 				B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */,
 				E35E6A0058041DA2C3004F1B /* StickerContent.swift */,
@@ -373,6 +376,7 @@
 				E042A96584A68D7702E5BBF2 /* MealEntry.swift in Sources */,
 				9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */,
 				F91BC574873F25A296149314 /* MonthView.swift in Sources */,
+				A31921B064F7EA92777F501C /* MoreStickers.swift in Sources */,
 				9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */,
 				93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */,
 				FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */,

@@ -13,6 +13,16 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
          speech, lightbulb, moonStars, coffee, envelope, paperclip, pin
     // Dividers & markers
     case dividerWavy, dividerDots, dividerHeart, highlighterYellow, highlighterPink
+    // Portugal
+    case azulejo, sardine, pastelDeNata, tram, stampPortugal, stampPorto, vianaHeart
+    // Paper & scraps
+    case polaroid, ticket, tornNote, indexFlags, gridNote
+    // Words
+    case wordYay, wordLove, wordOmg, wordThankYou, wordGoodDay, wordButFirstCoffee
+    // More cute
+    case strawberry, cherries, mushroom, rainbow, catFace, bow
+    // Weekdays
+    case weekdayMon, weekdayTue, weekdayWed, weekdayThu, weekdayFri, weekdaySat, weekdaySun
 
     var id: Self { self }
 
@@ -21,6 +31,10 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case labels = "Banners & labels"
         case doodles = "Ink doodles"
         case dividers = "Dividers & markers"
+        case portugal = "Portugal 🇵🇹"
+        case paper = "Paper & scraps"
+        case words = "Words"
+        case weekdays = "Weekdays"
     }
 
     var category: Category {
@@ -34,6 +48,16 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
             .doodles
         case .dividerWavy, .dividerDots, .dividerHeart, .highlighterYellow, .highlighterPink:
             .dividers
+        case .azulejo, .sardine, .pastelDeNata, .tram, .stampPortugal, .stampPorto, .vianaHeart:
+            .portugal
+        case .polaroid, .ticket, .tornNote, .indexFlags, .gridNote:
+            .paper
+        case .wordYay, .wordLove, .wordOmg, .wordThankYou, .wordGoodDay, .wordButFirstCoffee:
+            .words
+        case .strawberry, .cherries, .mushroom, .rainbow, .catFace, .bow:
+            .cute
+        case .weekdayMon, .weekdayTue, .weekdayWed, .weekdayThu, .weekdayFri, .weekdaySat, .weekdaySun:
+            .weekdays
         }
     }
 
@@ -73,6 +97,37 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .dividerHeart: "Heart divider"
         case .highlighterYellow: "Yellow highlighter"
         case .highlighterPink: "Pink highlighter"
+        case .azulejo: "Azulejo tile"
+        case .sardine: "Sardine"
+        case .pastelDeNata: "Pastel de nata"
+        case .tram: "Tram"
+        case .stampPortugal: "Portugal stamp"
+        case .stampPorto: "Porto stamp"
+        case .vianaHeart: "Viana heart"
+        case .polaroid: "Polaroid"
+        case .ticket: "Ticket"
+        case .tornNote: "Torn note"
+        case .indexFlags: "Index flags"
+        case .gridNote: "Grid note"
+        case .wordYay: "Yay!"
+        case .wordLove: "Love"
+        case .wordOmg: "OMG"
+        case .wordThankYou: "Thank you"
+        case .wordGoodDay: "Good day"
+        case .wordButFirstCoffee: "But first, coffee"
+        case .strawberry: "Strawberry"
+        case .cherries: "Cherries"
+        case .mushroom: "Mushroom"
+        case .rainbow: "Rainbow"
+        case .catFace: "Cat"
+        case .bow: "Bow"
+        case .weekdayMon: "Monday"
+        case .weekdayTue: "Tuesday"
+        case .weekdayWed: "Wednesday"
+        case .weekdayThu: "Thursday"
+        case .weekdayFri: "Friday"
+        case .weekdaySat: "Saturday"
+        case .weekdaySun: "Sunday"
         }
     }
 }
