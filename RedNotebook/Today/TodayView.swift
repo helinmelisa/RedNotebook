@@ -1,3 +1,4 @@
+import PhotosUI
 import SwiftUI
 import SwiftData
 
@@ -12,6 +13,7 @@ struct TodayView: View {
     @State private var showingStickers = false
     @State private var turningForward = true
     @State private var isDrawing = false
+    @State private var polaroidItem: PhotosPickerItem?
 
     var body: some View {
         ScrollView {
@@ -56,6 +58,10 @@ struct TodayView: View {
                 selectedSticker = placement.persistentModelID
             }
         }
+        .onChange(of: polaroidItem) { _, item in
+            guard let item else { return }
+            Task { await addPolaroid(from: item) }
+        }
         .onChange(of: day) { oldDay, newDay in
             turningForward = newDay > oldDay
         }
@@ -72,10 +78,19 @@ struct TodayView: View {
         }
     }
 
-    /// Floating tools for decorating the page: stickers and the pen.
+    /// Floating tools for decorating the page: stickers, a photo of the day and the pen.
     private var toolDock: some View {
         HStack(spacing: 4) {
             dockButton("star.bubble", label: "Add sticker") { showingStickers = true }
+            Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
+            PhotosPicker(selection: $polaroidItem, matching: .images) {
+                Image(systemName: "photo.on.rectangle")
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundStyle(Theme.ink)
+                    .frame(width: 40, height: 36)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Add a photo of the day")
             Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
             dockButton("pencil.tip", label: "Draw") {
                 selectedSticker = nil
@@ -90,6 +105,16 @@ struct TodayView: View {
         .frame(maxWidth: .infinity, alignment: .trailing)
         .padding(.bottom, 18)
         .transition(.scale(scale: 0.8).combined(with: .opacity))
+    }
+
+    /// A photo of the day lands on the page as a polaroid, selected so a caption can be written on it.
+    private func addPolaroid(from item: PhotosPickerItem) async {
+        defer { polaroidItem = nil }
+        guard let page,
+              let data = try? await item.loadTransferable(type: Data.self),
+              let jpeg = await PhotoCutout.polaroidPhoto(from: data) else { return }
+        let placement = page.addSticker(.polaroid(jpeg), in: context)
+        selectedSticker = placement.persistentModelID
     }
 
     private func dockButton(_ systemImage: String, label: String, action: @escaping () -> Void) -> some View {
