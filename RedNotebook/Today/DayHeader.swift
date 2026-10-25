@@ -4,6 +4,7 @@ import SwiftUI
 struct DayHeader: View {
     @Bindable var page: DayPage
     @Binding var day: Date
+    var onAddSticker: () -> Void
 
     private static let moods = ["🥰", "😊", "🙂", "😐", "😔", "😢", "😡", "😴"]
     private static let weathers = ["sun.max", "cloud.sun", "cloud", "cloud.rain", "cloud.bolt", "snowflake", "wind"]
@@ -42,6 +43,8 @@ struct DayHeader: View {
 
     private var dayArrows: some View {
         HStack(spacing: 14) {
+            Button(action: onAddSticker) { Image(systemName: "star.bubble") }
+                .accessibilityLabel("Add sticker")
             Button { flip(by: -1) } label: { Image(systemName: "chevron.left") }
                 .accessibilityLabel("Previous day")
             Button { flip(by: 1) } label: { Image(systemName: "chevron.right") }

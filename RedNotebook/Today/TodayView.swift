@@ -7,16 +7,41 @@ struct TodayView: View {
 
     @Environment(\.modelContext) private var context
     @State private var page: DayPage?
+    @State private var selectedSticker: PersistentIdentifier?
+    @State private var showingStickers = false
 
     var body: some View {
         ScrollView {
             if let page {
-                DayPageContent(page: page, day: $day)
+                DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
+                               onAddSticker: { showingStickers = true })
             }
         }
         .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.interactively)
+        // While a sticker is selected, drags move the sticker instead of scrolling
+        .scrollDisabled(selectedSticker != nil)
+        .overlay(alignment: .bottom) {
+            if selectedSticker != nil {
+                Button("Done") { withAnimation(.snappy) { selectedSticker = nil } }
+                    .font(.system(size: 14, weight: .semibold, design: .serif))
+                    .foregroundStyle(Theme.paper)
+                    .padding(.horizontal, 22)
+                    .padding(.vertical, 9)
+                    .background(Capsule().fill(Theme.coverRed))
+                    .padding(.bottom, 20)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+        }
+        .sheet(isPresented: $showingStickers) {
+            StickerDrawer { choice in
+                guard let page else { return }
+                let placement = page.addSticker(choice, in: context)
+                selectedSticker = placement.persistentModelID
+            }
+        }
         .task(id: day) {
+            selectedSticker = nil
             page = DayPage.page(for: day, in: context)
         }
     }
@@ -25,13 +50,15 @@ struct TodayView: View {
 private struct DayPageContent: View {
     @Bindable var page: DayPage
     @Binding var day: Date
+    @Binding var selectedSticker: PersistentIdentifier?
+    var onAddSticker: () -> Void
 
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
 
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
-            DayHeader(page: page, day: $day)
+            DayHeader(page: page, day: $day, onAddSticker: onAddSticker)
 
             PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
                 // Events from the iPhone Calendar first, then the notebook's own bullets
@@ -57,6 +84,9 @@ private struct DayPageContent: View {
         }
         .padding(.top, 20)
         .padding(.bottom, 40)
+        .overlay {
+            StickerLayer(page: page, selection: $selectedSticker)
+        }
     }
 
     private var quote: some View {
@@ -107,6 +137,6 @@ private struct PageSection<Content: View>: View {
         TodayView(day: $day)
             .padding(.horizontal, 24)
     }
-    .modelContainer(for: DayPage.self, inMemory: true)
+    .modelContainer(SampleData.container)
     .environment(CalendarStore())
 }

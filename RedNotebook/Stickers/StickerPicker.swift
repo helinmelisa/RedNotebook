@@ -1,0 +1,142 @@
+import PhotosUI
+import SwiftData
+import SwiftUI
+
+/// All stickers: your own from photos, the drawn pack and emoji. Tap one to pick it.
+struct StickerPicker: View {
+    var onPick: (StickerChoice) -> Void
+
+    @Environment(\.modelContext) private var context
+    @Query(sort: \PhotoSticker.createdAt, order: .reverse) private var photoStickers: [PhotoSticker]
+
+    @State private var photoItem: PhotosPickerItem?
+    @State private var isCutting = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 22) {
+            section("My stickers") {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 76), spacing: 12)], spacing: 12) {
+                    addFromPhotos
+                    ForEach(photoStickers) { sticker in
+                        tile(.photo(sticker), size: 76)
+                            .contextMenu {
+                                Button("Delete sticker", systemImage: "trash", role: .destructive) {
+                                    withAnimation(.snappy) { context.delete(sticker) }
+                                }
+                            }
+                    }
+                }
+            }
+
+            section("Drawn") {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 12)], spacing: 16) {
+                    ForEach(DrawnSticker.allCases) { drawn in
+                        tile(.drawn(drawn), size: 70)
+                            .accessibilityLabel(drawn.name)
+                    }
+                }
+            }
+
+            section("Emoji") {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 48), spacing: 6)], spacing: 6) {
+                    ForEach(StickerEmoji.all, id: \.self) { emoji in
+                        Button { pick(.emoji(emoji)) } label: {
+                            Text(emoji).font(.system(size: 32)).frame(width: 48, height: 48)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+        .onChange(of: photoItem) { _, item in
+            guard let item else { return }
+            Task { await makeSticker(from: item) }
+        }
+    }
+
+    private var addFromPhotos: some View {
+        PhotosPicker(selection: $photoItem, matching: .images) {
+            VStack(spacing: 4) {
+                if isCutting {
+                    ProgressView()
+                    Text("Cutting…")
+                } else {
+                    Image(systemName: "photo.badge.plus").font(.system(size: 20))
+                    Text("From Photos")
+                }
+            }
+            .font(.system(size: 11, design: .serif))
+            .foregroundStyle(Theme.ink.opacity(0.55))
+            .frame(width: 76, height: 76)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .strokeBorder(Theme.ink.opacity(0.25), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+            )
+        }
+        .disabled(isCutting)
+    }
+
+    private func tile(_ choice: StickerChoice, size: CGFloat) -> some View {
+        Button { pick(choice) } label: {
+            StickerContent(choice: choice)
+                .scaleEffect(0.75)
+                .frame(minWidth: size, minHeight: size)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 6) {
+                RoundedRectangle(cornerRadius: 1.5).fill(NotebookSection.stickers.tabColor).frame(width: 14, height: 3)
+                Text(title.uppercased())
+                    .font(.system(size: 11, weight: .semibold, design: .serif))
+                    .tracking(1.5)
+                    .foregroundStyle(Theme.ink.opacity(0.6))
+            }
+            content()
+        }
+    }
+
+    private func pick(_ choice: StickerChoice) {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        onPick(choice)
+    }
+
+    private func makeSticker(from item: PhotosPickerItem) async {
+        isCutting = true
+        defer { isCutting = false; photoItem = nil }
+        guard let data = try? await item.loadTransferable(type: Data.self),
+              let png = await PhotoCutout.makeSticker(from: data) else { return }
+        withAnimation(.snappy) { context.insert(PhotoSticker(imageData: png)) }
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+    }
+}
+
+/// Sheet version of the picker, opened from a day page.
+struct StickerDrawer: View {
+    var onPick: (StickerChoice) -> Void
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                StickerPicker { choice in
+                    onPick(choice)
+                    dismiss()
+                }
+                .padding(20)
+            }
+            .background(GridPaper().ignoresSafeArea())
+            .navigationTitle("Stickers")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Close") { dismiss() }
+                }
+            }
+        }
+        .tint(Theme.coverRed)
+        .presentationDetents([.medium, .large])
+    }
+}
