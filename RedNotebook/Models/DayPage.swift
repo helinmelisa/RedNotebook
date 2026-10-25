@@ -13,6 +13,17 @@ final class DayPage {
     /// SF Symbol name of the weather icon.
     var weather: String?
 
+    // What I ate
+    var breakfast: String = ""
+    var lunch: String = ""
+    var dinner: String = ""
+    var snacks: String = ""
+
+    // Today's outfit
+    /// Transparent PNG of the outfit, cut out of its background.
+    @Attribute(.externalStorage) var outfitPhoto: Data?
+    var outfitNote: String = ""
+
     @Relationship(deleteRule: .cascade, inverse: \BulletItem.page)
     var items: [BulletItem]? = []
 
@@ -41,6 +52,7 @@ final class DayPage {
     var isEmpty: Bool {
         diaryText.isEmpty && mood == nil && weather == nil
             && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
+            && [breakfast, lunch, dinner, snacks, outfitNote].allSatisfy(\.isEmpty) && outfitPhoto == nil
     }
 }
 
