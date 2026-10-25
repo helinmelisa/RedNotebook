@@ -31,10 +31,21 @@ struct BulletList: View {
                     }
                 }
             } label: {
-                Text(symbol(for: newKind))
+                if newKind == .task {
+                    Text("•")
                     .font(.system(size: 18, weight: .bold))
-                    .frame(width: 18)
-                    .foregroundStyle(Theme.ink.opacity(0.35))
+                    .opacity(0)
+                    .frame(width: 20)
+                    .overlay {
+                        HandDrawnBox().stroke(Theme.inkTertiary, style: StrokeStyle(lineWidth: 1.2, dash: [2.5, 2]))
+                            .frame(width: 15, height: 15).offset(y: 1)
+                    }
+                } else {
+                    Text(symbol(for: newKind))
+                        .font(.system(size: 18, weight: .bold))
+                        .frame(width: 20)
+                        .foregroundStyle(Theme.ink.opacity(0.35))
+                }
             }
             .accessibilityLabel("Bullet kind: \(newKind.name)")
 
@@ -48,7 +59,7 @@ struct BulletList: View {
 
     private func symbol(for kind: BulletKind) -> String {
         switch kind {
-        case .task: "•"
+        case .task: "☐"
         case .event: "○"
         case .note: "–"
         }
@@ -86,7 +97,7 @@ private struct BulletRow: View {
             TextField("", text: $item.text, axis: .vertical)
                 .font(Theme.serif(16))
                 .fixedSize(horizontal: false, vertical: true) // never clip a line that only just fits
-                .strikethrough(item.state == .cancelled)
+                .strikethrough(item.state == .cancelled || item.state == .done, color: Theme.inkTertiary)
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))
         }
         .contextMenu {

@@ -67,8 +67,12 @@ struct TodoView: View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Text("•")
                 .font(.system(size: 18, weight: .bold))
-                .frame(width: 18)
-                .foregroundStyle(Theme.ink.opacity(0.35))
+                .opacity(0)
+                .frame(width: 20)
+                .overlay {
+                    HandDrawnBox().stroke(Theme.inkTertiary, style: StrokeStyle(lineWidth: 1.2, dash: [2.5, 2]))
+                        .frame(width: 15, height: 15).offset(y: 1)
+                }
             TextField("New task…", text: $newText)
                 .font(Theme.serif(16))
                 .focused($isAdding)
@@ -218,6 +222,7 @@ private struct TaskRow: View {
             TextField("", text: $item.text, axis: .vertical)
                 .font(Theme.serif(16))
                 .fixedSize(horizontal: false, vertical: true) // never clip a line that only just fits
+                .strikethrough(item.state == .done, color: Theme.inkTertiary)
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))
 
             if showDate, let day = item.page?.day {
