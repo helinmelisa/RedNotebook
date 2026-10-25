@@ -5,6 +5,8 @@ struct NotebookView: View {
     var onClose: () -> Void
 
     @State private var section: NotebookSection = .today
+    /// The day shown on the Today page; the calendar will set this too.
+    @State private var selectedDay = Date.now
 
     var body: some View {
         HStack(spacing: 0) {
@@ -27,10 +29,9 @@ struct NotebookView: View {
                 .frame(width: 22)
                 .allowsHitTesting(false)
 
-            SectionPlaceholder(section: section)
+            sectionContent
                 .padding(.leading, 28)
                 .padding(.trailing, 44) // keep text clear of the ribbon
-                .padding(.top, 20)
                 .id(section)
                 .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
                                         removal: .opacity))
@@ -41,6 +42,17 @@ struct NotebookView: View {
         }
         .clipShape(shape)
         .shadow(color: .black.opacity(0.25), radius: 10, x: 2, y: 6)
+    }
+
+    @ViewBuilder
+    private var sectionContent: some View {
+        switch section {
+        case .today:
+            TodayView(day: $selectedDay)
+        default:
+            SectionPlaceholder(section: section)
+                .padding(.top, 20)
+        }
     }
 }
 
@@ -146,4 +158,5 @@ private struct SectionPlaceholder: View {
         Theme.desk.ignoresSafeArea()
         NotebookView(onClose: {})
     }
+    .modelContainer(SampleData.container)
 }

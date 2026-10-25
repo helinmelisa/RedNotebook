@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct RedNotebookApp: App {
@@ -6,6 +7,7 @@ struct RedNotebookApp: App {
         WindowGroup {
             RootView()
         }
+        .modelContainer(for: DayPage.self)
     }
 }
 
@@ -13,6 +15,7 @@ struct RedNotebookApp: App {
 struct RootView: View {
     /// Launch with `--open` to skip the cover (handy for previews and screenshots).
     @State private var isOpen = ProcessInfo.processInfo.arguments.contains("--open")
+    @Environment(\.modelContext) private var context
 
     var body: some View {
         ZStack {
@@ -26,5 +29,12 @@ struct RootView: View {
                     .transition(.opacity)
             }
         }
+        #if DEBUG
+        .task {
+            if ProcessInfo.processInfo.arguments.contains("--sample-data") {
+                SampleData.fill(context)
+            }
+        }
+        #endif
     }
 }
