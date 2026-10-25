@@ -89,6 +89,7 @@ private struct BulletRow: View {
 
             TextField("", text: $item.text, axis: .vertical)
                 .font(.system(size: 16, design: .serif))
+                .fixedSize(horizontal: false, vertical: true) // never clip a line that only just fits
                 .strikethrough(item.state == .cancelled)
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))
         }

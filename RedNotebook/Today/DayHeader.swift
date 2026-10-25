@@ -1,83 +1,109 @@
 import SwiftUI
 
-/// Date at the top of the page, with arrows to flip days and a mood/weather row.
+/// Hobonichi-style date block: a big red day number with the weekday, month and year beside it,
+/// arrows to flip days, and the mood/weather row.
 struct DayHeader: View {
     @Bindable var page: DayPage
     @Binding var day: Date
-    var onAddSticker: () -> Void
 
     private static let moods = ["🥰", "😊", "🙂", "😐", "😔", "😢", "😡", "😴"]
     private static let weathers = ["sun.max", "cloud.sun", "cloud", "cloud.rain", "cloud.bolt", "snowflake", "wind"]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .center, spacing: 12) {
+                Text(page.day.formatted(.dateTime.day()))
+                    .font(.system(size: 54, weight: .bold, design: .serif))
+                    .monospacedDigit()
+                    .foregroundStyle(Theme.accent)
+                    .frame(minWidth: 62, alignment: .leading)
+
                 VStack(alignment: .leading, spacing: 2) {
                     Text(page.day.formatted(.dateTime.weekday(.wide)).uppercased())
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
-                        .tracking(2)
-                        .foregroundStyle(Theme.coverRed)
-                    Text(page.day.formatted(.dateTime.day().month(.wide)))
-                        .font(.system(size: 28, weight: .semibold, design: .serif))
+                        .font(Theme.eyebrow)
+                        .tracking(2.5)
                         .foregroundStyle(Theme.ink)
+                    Text(page.day.formatted(.dateTime.month(.wide).year()))
+                        .font(Theme.text(17))
+                        .foregroundStyle(Theme.inkSecondary)
+                    HStack(spacing: 8) {
+                        Text(dayOfYearLabel)
+                            .foregroundStyle(Theme.inkTertiary)
+                        if !Calendar.current.isDateInToday(page.day) {
+                            Button("Today") { flip(to: .now) }
+                                .font(.system(size: 11, weight: .semibold, design: .serif))
+                                .foregroundStyle(Theme.accent)
+                                .padding(.horizontal, 7)
+                                .padding(.vertical, 1)
+                                .background(Capsule().stroke(Theme.accent.opacity(0.5), lineWidth: 1))
+                                .accessibilityLabel("Back to today")
+                        }
+                    }
+                    .font(Theme.text(11))
                 }
-                Spacer()
+
+                Spacer(minLength: 0)
                 dayArrows
             }
 
-            HStack(spacing: 10) {
-                Text(dayOfYearLabel)
-                if !Calendar.current.isDateInToday(page.day) {
-                    Button("Back to today") { flip(to: .now) }
-                        .foregroundStyle(Theme.coverRed)
-                }
-            }
-            .font(.system(size: 11, design: .serif))
-            .foregroundStyle(Theme.ink.opacity(0.5))
-
-            Rectangle().fill(NotebookSection.today.tabColor).frame(height: 2)
+            Rule(color: NotebookSection.today.tabColor)
 
             moodAndWeather
         }
     }
 
     private var dayArrows: some View {
-        HStack(spacing: 14) {
-            Button(action: onAddSticker) { Image(systemName: "star.bubble") }
-                .accessibilityLabel("Add sticker")
-            Button { flip(by: -1) } label: { Image(systemName: "chevron.left") }
-                .accessibilityLabel("Previous day")
-            Button { flip(by: 1) } label: { Image(systemName: "chevron.right") }
-                .accessibilityLabel("Next day")
+        VStack(spacing: 6) {
+            arrow("chevron.up", label: "Previous day") { flip(by: -1) }
+            arrow("chevron.down", label: "Next day") { flip(by: 1) }
         }
-        .font(.system(size: 15, weight: .semibold))
-        .foregroundStyle(Theme.ink.opacity(0.5))
+    }
+
+    private func arrow(_ systemImage: String, label: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 12, weight: .bold))
+                .foregroundStyle(Theme.inkSecondary)
+                .frame(width: 28, height: 26)
+                .background(Circle().fill(Theme.ink.opacity(0.05)))
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 
     private var moodAndWeather: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 4) {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 2) {
                 ForEach(Self.moods, id: \.self) { mood in
+                    let selected = page.mood == mood
                     Button { toggle(\.mood, mood) } label: {
                         Text(mood)
-                            .font(.system(size: 18))
-                            .frame(width: 30, height: 30)
-                            .background(Circle().fill(page.mood == mood ? NotebookSection.today.tabColor.opacity(0.6) : .clear))
-                            .opacity(page.mood == nil || page.mood == mood ? 1 : 0.4)
+                            .font(.system(size: 19))
+                            .frame(width: 32, height: 32)
+                            .background(Circle().fill(selected ? NotebookSection.today.tabColor.opacity(0.55) : .clear))
+                            .overlay(Circle().stroke(selected ? NotebookSection.today.tabColor : .clear, lineWidth: 1.5))
+                            .scaleEffect(selected ? 1.08 : 1)
+                            .opacity(page.mood == nil || selected ? 1 : 0.35)
+                            .saturation(page.mood == nil || selected ? 1 : 0.3)
                     }
                     .accessibilityLabel("Mood \(mood)")
+                    .accessibilityAddTraits(selected ? .isSelected : [])
                 }
             }
-            HStack(spacing: 4) {
+            HStack(spacing: 2) {
                 ForEach(Self.weathers, id: \.self) { weather in
+                    let selected = page.weather == weather
                     Button { toggle(\.weather, weather) } label: {
-                        Image(systemName: weather)
-                            .font(.system(size: 14))
-                            .frame(width: 30, height: 26)
-                            .foregroundStyle(Theme.ink.opacity(page.weather == weather ? 0.9 : 0.35))
-                            .background(Capsule().fill(page.weather == weather ? NotebookSection.calendar.tabColor.opacity(0.5) : .clear))
+                        // Selected weather turns colourful; snowflake and wind have no filled variant
+                        Image(systemName: selected && !["snowflake", "wind"].contains(weather) ? "\(weather).fill" : weather)
+                            .symbolRenderingMode(selected ? .multicolor : .monochrome)
+                            .font(.system(size: 15))
+                            .frame(width: 32, height: 26)
+                            .foregroundStyle(selected ? Theme.ink : Theme.inkTertiary)
+                            .background(Capsule().fill(selected ? NotebookSection.calendar.tabColor.opacity(0.35) : .clear))
                     }
                     .accessibilityLabel("Weather \(weather)")
+                    .accessibilityAddTraits(selected ? .isSelected : [])
                 }
             }
         }
