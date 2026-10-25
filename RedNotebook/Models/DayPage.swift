@@ -24,6 +24,10 @@ final class DayPage {
     @Attribute(.externalStorage) var outfitPhoto: Data?
     var outfitNote: String = ""
 
+    /// Clothes from the closet worn on this day.
+    @Relationship(deleteRule: .nullify, inverse: \ClothingItem.days)
+    var outfitItems: [ClothingItem]? = []
+
     @Relationship(deleteRule: .cascade, inverse: \BulletItem.page)
     var items: [BulletItem]? = []
 
@@ -49,10 +53,16 @@ final class DayPage {
         (stickers ?? []).sorted { $0.z < $1.z }
     }
 
+    /// Worn clothes in the order they're layered on the body.
+    var wornItems: [ClothingItem] {
+        (outfitItems ?? []).sorted { $0.category.layer < $1.category.layer }
+    }
+
     var isEmpty: Bool {
         diaryText.isEmpty && mood == nil && weather == nil
             && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
             && [breakfast, lunch, dinner, snacks, outfitNote].allSatisfy(\.isEmpty) && outfitPhoto == nil
+            && (outfitItems ?? []).isEmpty
     }
 }
 

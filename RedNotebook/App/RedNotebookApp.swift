@@ -14,7 +14,7 @@ struct RedNotebookApp: App {
             RootView()
                 .environment(calendarStore)
         }
-        .modelContainer(for: [DayPage.self, PhotoSticker.self])
+        .modelContainer(for: [DayPage.self, PhotoSticker.self, ClothingItem.self, BodyPhoto.self])
     }
 }
 
@@ -41,6 +41,7 @@ struct RootView: View {
         .task {
             if ProcessInfo.processInfo.arguments.contains("--sample-data") {
                 SampleData.fill(context)
+                SampleData.fillCloset(context)
                 await SampleData.fillCalendar(calendarStore)
             }
         }
