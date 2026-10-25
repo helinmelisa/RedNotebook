@@ -7,6 +7,8 @@ struct StickerLayer: View {
     @Binding var selection: PersistentIdentifier?
 
     @Environment(\.modelContext) private var context
+    @State private var writingOn: StickerPlacement?
+    @State private var draft = ""
 
     var body: some View {
         GeometryReader { geo in
@@ -15,10 +17,19 @@ struct StickerLayer: View {
                     PlacedSticker(placement: placement, choice: choice, pageWidth: geo.size.width,
                                   isSelected: selection == placement.persistentModelID,
                                   onTap: { toggleSelection(placement) },
+                                  onWrite: { startWriting(on: placement) },
                                   onDelete: { delete(placement) })
                         .position(x: placement.x * geo.size.width, y: placement.y)
                 }
             }
+        }
+        .alert("Write on it", isPresented: Binding(get: { writingOn != nil }, set: { if !$0 { writingOn = nil } })) {
+            TextField("A word or two", text: $draft)
+            Button("Done") {
+                writingOn?.text = draft.trimmingCharacters(in: .whitespacesAndNewlines)
+                writingOn = nil
+            }
+            Button("Cancel", role: .cancel) { writingOn = nil }
         }
     }
 
@@ -30,6 +41,11 @@ struct StickerLayer: View {
             placement.z = (page.sortedStickers.last?.z ?? 0) + 1 // bring to front
             selection = placement.persistentModelID
         }
+    }
+
+    private func startWriting(on placement: StickerPlacement) {
+        draft = placement.text
+        writingOn = placement
     }
 
     private func delete(_ placement: StickerPlacement) {
@@ -58,6 +74,7 @@ private struct PlacedSticker: View {
     let pageWidth: CGFloat
     let isSelected: Bool
     var onTap: () -> Void
+    var onWrite: () -> Void
     var onDelete: () -> Void
 
     @GestureState private var drag: CGSize = .zero
@@ -67,7 +84,7 @@ private struct PlacedSticker: View {
     @State private var lifted = false
 
     var body: some View {
-        StickerContent(choice: choice)
+        StickerContent(choice: choice, text: placement.text)
             .padding(8)
             .overlay {
                 if isSelected {
@@ -85,6 +102,18 @@ private struct PlacedSticker: View {
                     }
                     .offset(x: 10, y: -10)
                     .accessibilityLabel("Remove sticker")
+                }
+            }
+            .overlay(alignment: .topLeading) {
+                if isSelected && placement.isWritable {
+                    Button(action: onWrite) {
+                        Image(systemName: "pencil.circle.fill")
+                            .font(.system(size: 20))
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.white, Theme.ink)
+                    }
+                    .offset(x: -10, y: -10)
+                    .accessibilityLabel("Write on sticker")
                 }
             }
             .scaleEffect(placement.scale * pinch * (lifted ? 1.35 : 1))

@@ -3,6 +3,7 @@ import SwiftUI
 /// Bullet journal style stickers: ink doodles, header banners, labels, dividers and highlighter strokes.
 struct BujoStickerView: View {
     let sticker: DrawnSticker
+    var text: String = ""
 
     private static let ink = Color(red: 0.18, green: 0.18, blue: 0.22)
     private static let doodleStroke = StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round)
@@ -11,15 +12,15 @@ struct BujoStickerView: View {
         switch sticker {
         // Banners & labels
         case .bannerToday:
-            Banner(text: "TODAY", color: Color(red: 0.96, green: 0.76, blue: 0.78))
+            Banner(text: text.isEmpty ? "TODAY" : text.uppercased(), color: Color(red: 0.96, green: 0.76, blue: 0.78))
         case .bannerNotes:
-            Banner(text: "NOTES", color: Color(red: 0.72, green: 0.85, blue: 0.93))
+            Banner(text: text.isEmpty ? "NOTES" : text.uppercased(), color: Color(red: 0.72, green: 0.85, blue: 0.93))
         case .labelTodo:
-            PaperLabel(text: "to do", color: Color(red: 0.80, green: 0.90, blue: 0.78))
+            PaperLabel(text: text.isEmpty ? "to do" : text, color: Color(red: 0.80, green: 0.90, blue: 0.78))
         case .labelGoals:
-            PaperLabel(text: "goals", color: Color(red: 1.0, green: 0.90, blue: 0.62))
+            PaperLabel(text: text.isEmpty ? "goals" : text, color: Color(red: 1.0, green: 0.90, blue: 0.62))
         case .labelMemo:
-            PaperLabel(text: "memo", color: Color(red: 0.88, green: 0.82, blue: 0.95))
+            PaperLabel(text: text.isEmpty ? "memo" : text, color: Color(red: 0.88, green: 0.82, blue: 0.95))
         case .flagImportant:
             ImportantFlag()
 
@@ -82,12 +83,12 @@ struct BujoStickerView: View {
                 Rectangle().fill(Self.ink.opacity(0.7)).frame(width: 42, height: 1.5)
             }
         case .highlighterYellow:
-            Highlighter(color: Color(red: 1.0, green: 0.90, blue: 0.20))
+            Highlighter(color: Color(red: 1.0, green: 0.90, blue: 0.20)).writing(text, size: 18)
         case .highlighterPink:
-            Highlighter(color: Color(red: 1.0, green: 0.55, blue: 0.70))
+            Highlighter(color: Color(red: 1.0, green: 0.55, blue: 0.70)).writing(text, size: 18)
 
         default:
-            MoreStickerView(sticker: sticker)
+            MoreStickerView(sticker: sticker, text: text)
         }
     }
 
@@ -115,6 +116,9 @@ private struct Banner: View {
             Text(text)
                 .font(Theme.serif(14, .bold))
                 .tracking(3)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .padding(.horizontal, 6)
                 .foregroundStyle(Color(red: 0.25, green: 0.20, blue: 0.22))
                 .frame(width: 110, height: 28)
                 .background(Rectangle().fill(color))
@@ -147,6 +151,9 @@ private struct PaperLabel: View {
     var body: some View {
         Text(text)
             .font(Theme.handwriting(size: 24))
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            .padding(.horizontal, 6)
             .foregroundStyle(Color(red: 0.22, green: 0.20, blue: 0.22))
             .frame(width: 96, height: 36)
             .background(RoundedRectangle(cornerRadius: 5).fill(color))

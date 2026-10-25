@@ -3,6 +3,7 @@ import SwiftUI
 /// Portugal pack, paper scraps, lettering, more cute things and weekday badges.
 struct MoreStickerView: View {
     let sticker: DrawnSticker
+    var text: String = ""
 
     var body: some View {
         switch sticker {
@@ -26,11 +27,11 @@ struct MoreStickerView: View {
         case .vianaHeart: VianaHeart().frame(width: 54, height: 50).stickerOutline()
 
         // Paper & scraps
-        case .polaroid: Polaroid()
-        case .ticket: Ticket()
-        case .tornNote: TornNote()
+        case .polaroid: Polaroid(caption: text)
+        case .ticket: Ticket(text: text.isEmpty ? "ADMIT ONE" : text.uppercased())
+        case .tornNote: TornNote().writing(text, size: 17, lines: 3)
         case .indexFlags: IndexFlags()
-        case .gridNote: GridNote()
+        case .gridNote: GridNote().writing(text, size: 16, lines: 3)
 
         // Words
         case .wordYay: Lettering(text: "yay!", color: Color(red: 0.95, green: 0.40, blue: 0.60))
@@ -57,7 +58,7 @@ struct MoreStickerView: View {
         case .weekdaySat: WeekdayBadge(text: "SAT", color: Color(red: 0.65, green: 0.58, blue: 0.85))
         case .weekdaySun: WeekdayBadge(text: "SUN", color: Color(red: 0.90, green: 0.55, blue: 0.75))
 
-        default: LifeStickerView(sticker: sticker)
+        default: LifeStickerView(sticker: sticker, text: text)
         }
     }
 }
@@ -272,6 +273,8 @@ struct HeartShape: Shape {
 // MARK: - Paper & scraps
 
 private struct Polaroid: View {
+    let caption: String
+
     var body: some View {
         VStack(spacing: 0) {
             ZStack(alignment: .topTrailing) {
@@ -287,7 +290,12 @@ private struct Polaroid: View {
             }
             .frame(width: 58, height: 58)
             .clipped()
-            Spacer().frame(height: 18)
+            Text(caption.isEmpty ? " " : caption)
+                .font(Theme.handwriting(size: 13).weight(.semibold))
+                .foregroundStyle(Theme.ink.opacity(0.8))
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .frame(width: 58, height: 18)
         }
         .padding(.horizontal, 6)
         .padding(.top, 6)
@@ -298,11 +306,16 @@ private struct Polaroid: View {
 }
 
 private struct Ticket: View {
+    let text: String
+
     var body: some View {
         HStack(spacing: 0) {
-            Text("ADMIT ONE")
+            Text(text)
                 .font(Theme.serif(11, .bold))
                 .tracking(1.5)
+                .lineLimit(2)
+                .minimumScaleFactor(0.6)
+                .multilineTextAlignment(.center)
                 .frame(width: 76)
             Rectangle().fill(.clear).frame(width: 1)
                 .overlay(Rectangle().stroke(style: StrokeStyle(lineWidth: 1, dash: [3, 2])).foregroundStyle(.white.opacity(0.8)))

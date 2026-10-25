@@ -3,6 +3,7 @@ import SwiftUI
 /// Draws any sticker at its natural size.
 struct StickerContent: View {
     let choice: StickerChoice
+    var text: String = ""
 
     var body: some View {
         switch choice {
@@ -11,7 +12,7 @@ struct StickerContent: View {
                 .font(.system(size: 48))
                 .stickerOutline()
         case .drawn(let drawn):
-            DrawnStickerView(sticker: drawn)
+            DrawnStickerView(sticker: drawn, text: text)
         case .photo(let photo):
             if let image = photo.image {
                 Image(uiImage: image)

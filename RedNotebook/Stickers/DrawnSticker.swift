@@ -52,6 +52,17 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case weekdays = "Weekdays"
     }
 
+    /// Tapes, labels and notes you can write on.
+    var isWritable: Bool {
+        switch self {
+        case .washiPink, .washiMint, .washiDots, .tag, .bannerToday, .bannerNotes, .labelTodo, .labelGoals, .labelMemo,
+             .highlighterYellow, .highlighterPink, .polaroid, .ticket, .tornNote, .gridNote, .labelDeadline, .labelExam:
+            true
+        default:
+            false
+        }
+    }
+
     var category: Category {
         switch self {
         case .washiPink, .washiMint, .washiDots, .star, .heart, .flower, .sparkles, .sun, .cloud, .tag:
@@ -189,15 +200,17 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
 
 struct DrawnStickerView: View {
     let sticker: DrawnSticker
+    /// What's written on it, for writable stickers. Empty shows the sticker's own wording, if it has one.
+    var text: String = ""
 
     var body: some View {
         switch sticker {
         case .washiPink:
-            WashiTape(color: Color(red: 0.96, green: 0.70, blue: 0.75), pattern: .stripes)
+            WashiTape(color: Color(red: 0.96, green: 0.70, blue: 0.75), pattern: .stripes).writing(text)
         case .washiMint:
-            WashiTape(color: Color(red: 0.62, green: 0.85, blue: 0.76), pattern: .grid)
+            WashiTape(color: Color(red: 0.62, green: 0.85, blue: 0.76), pattern: .grid).writing(text)
         case .washiDots:
-            WashiTape(color: Color(red: 0.98, green: 0.85, blue: 0.55), pattern: .dots)
+            WashiTape(color: Color(red: 0.98, green: 0.85, blue: 0.55), pattern: .dots).writing(text)
         case .star:
             StarShape()
                 .fill(Color(red: 1.0, green: 0.82, blue: 0.30))
@@ -215,9 +228,9 @@ struct DrawnStickerView: View {
         case .cloud:
             symbol("cloud.fill", Color(red: 0.62, green: 0.78, blue: 0.95))
         case .tag:
-            Tag()
+            Tag(text: text.isEmpty ? "♡ today" : text)
         default:
-            BujoStickerView(sticker: sticker)
+            BujoStickerView(sticker: sticker, text: text)
         }
     }
 
@@ -230,6 +243,21 @@ struct DrawnStickerView: View {
 }
 
 extension View {
+    /// Handwriting in ink across a sticker, for tapes and notes you've written on.
+    func writing(_ text: String, size: CGFloat = 19, lines: Int = 1) -> some View {
+        overlay {
+            if !text.isEmpty {
+                Text(text)
+                    .font(Theme.handwriting(size: size).weight(.semibold))
+                    .foregroundStyle(Theme.ink.opacity(0.85))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(lines)
+                    .minimumScaleFactor(0.4)
+                    .padding(.horizontal, 10)
+            }
+        }
+    }
+
     /// White die-cut border and a soft shadow, like a real sticker.
     func stickerOutline(_ width: CGFloat = 2) -> some View {
         self
@@ -348,14 +376,18 @@ private struct Flower: View {
 }
 
 private struct Tag: View {
+    let text: String
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color(red: 0.93, green: 0.86, blue: 0.72))
             HStack(spacing: 6) {
                 Circle().stroke(Color(red: 0.55, green: 0.45, blue: 0.35), lineWidth: 1.2).frame(width: 7, height: 7)
-                Text("♡ today")
+                Text(text)
                     .font(Theme.serif(13, .medium))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                     .foregroundStyle(Color(red: 0.40, green: 0.30, blue: 0.22))
             }
         }

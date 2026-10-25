@@ -3,6 +3,7 @@ import SwiftUI
 /// Seasons & holidays, study & work, self-care, travel, and a few more from Portugal.
 struct LifeStickerView: View {
     let sticker: DrawnSticker
+    var text: String = ""
 
     var body: some View {
         switch sticker {
@@ -24,8 +25,8 @@ struct LifeStickerView: View {
         case .gradCap: symbol("graduationcap.fill", Color(red: 0.20, green: 0.20, blue: 0.28))
         case .laptop: palette("laptopcomputer", Color(red: 0.55, green: 0.58, blue: 0.65), Color(red: 0.62, green: 0.80, blue: 0.95))
         case .alarmClock: palette("alarm.fill", Theme.red, Color(red: 0.98, green: 0.95, blue: 0.88))
-        case .labelDeadline: TapeLabel(text: "deadline!", color: Theme.red, textColor: .white)
-        case .labelExam: TapeLabel(text: "exam", color: Color(red: 1.0, green: 0.85, blue: 0.35), textColor: Theme.ink)
+        case .labelDeadline: TapeLabel(text: text.isEmpty ? "deadline!" : text, color: Theme.red, textColor: .white)
+        case .labelExam: TapeLabel(text: text.isEmpty ? "exam" : text, color: Color(red: 1.0, green: 0.85, blue: 0.35), textColor: Theme.ink)
 
         // Self-care
         case .waterGlass: WaterGlass().frame(width: 38, height: 52).stickerOutline()
