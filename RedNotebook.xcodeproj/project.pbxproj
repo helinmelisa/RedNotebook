@@ -54,6 +54,7 @@
 		DE2C781C67F23A899E90DFF7 /* BujoStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */; };
 		E042A96584A68D7702E5BBF2 /* MealEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A834ABA899341DBFF5624 /* MealEntry.swift */; };
 		E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B67464B0C01A407C165D896 /* TodayView.swift */; };
+		E2BF58A01F65CDB727E3D75A /* BulletMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC635937986DF1B57FCB52A /* BulletMark.swift */; };
 		E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */; };
 		EEF02E1A0044CB524AEDD9E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F31EAF5D06AE9354D5832BBF /* Assets.xcassets */; };
 		F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF75A703FAD381D19C8103 /* DayPage.swift */; };
@@ -99,6 +100,7 @@
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
+		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
 		A679AA6F2257C2228E045E7F /* LifeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStickers.swift; sourceTree = "<group>"; };
 		AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreStickers.swift; sourceTree = "<group>"; };
 		AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHeader.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				78B96FEC539EE00FA3A10302 /* BulletList.swift */,
+				9CC635937986DF1B57FCB52A /* BulletMark.swift */,
 				0B91D0224EBFFC32859A1120 /* DailyQuote.swift */,
 				AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */,
 				F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */,
@@ -382,6 +385,7 @@
 				DE2C781C67F23A899E90DFF7 /* BujoStickers.swift in Sources */,
 				1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */,
 				0250820A8412D1278045E60A /* BulletList.swift in Sources */,
+				E2BF58A01F65CDB727E3D75A /* BulletMark.swift in Sources */,
 				D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */,
 				BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */,
 				02BA8C8D7615A57BC73A31F2 /* CalendarView.swift in Sources */,

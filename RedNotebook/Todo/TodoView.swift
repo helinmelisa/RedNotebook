@@ -210,10 +210,7 @@ private struct TaskRow: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Button(action: toggleDone) {
-                Text(item.symbol)
-                    .font(.system(size: 18, weight: .bold))
-                    .frame(width: 18)
-                    .foregroundStyle(item.state == .done ? Theme.accent : Theme.ink)
+                BulletMark(item: item)
             }
             .buttonStyle(.plain)
             .accessibilityLabel(item.state == .done ? "Mark not done" : "Mark done")
@@ -264,6 +261,7 @@ private struct TaskRow: View {
 
     private func toggleDone() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        if item.state != .done { SoundEffects.shared.play(.tick) }
         withAnimation(.snappy) {
             item.state = item.state == .done ? .open : .done
         }

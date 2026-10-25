@@ -77,11 +77,7 @@ private struct BulletRow: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Button(action: toggleDone) {
-                Text(item.symbol)
-                    .font(.system(size: 18, weight: .bold))
-                    .frame(width: 18)
-                    .foregroundStyle(item.kind == .task && item.state == .done ? Theme.accent : Theme.ink)
-                    .contentTransition(.numericText())
+                BulletMark(item: item)
             }
             .buttonStyle(.plain)
             .disabled(item.kind != .task)
@@ -111,6 +107,7 @@ private struct BulletRow: View {
 
     private func toggleDone() {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        if item.state != .done { SoundEffects.shared.play(.tick) }
         withAnimation(.snappy) {
             item.state = item.state == .done ? .open : .done
         }
