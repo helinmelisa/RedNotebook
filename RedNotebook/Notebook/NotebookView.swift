@@ -41,6 +41,7 @@ struct NotebookView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .clipShape(shape)
+        .background(PageStack())
         .shadow(color: .black.opacity(0.25), radius: 10, x: 2, y: 6)
     }
 
@@ -159,7 +160,7 @@ private struct IndexTabs: View {
 
 #Preview {
     ZStack {
-        Theme.desk.ignoresSafeArea()
+        DeskBackground()
         NotebookView(onClose: {})
     }
     .modelContainer(SampleData.container)

@@ -11,9 +11,18 @@ enum Theme {
 
     // Pages
     static let paper = Color(red: 0.98, green: 0.96, blue: 0.90)
+    static let paperEdge = Color(red: 0.92, green: 0.89, blue: 0.81)
     static let grid = Color(red: 0.55, green: 0.65, blue: 0.75).opacity(0.22)
-    static let ink = Color(red: 0.16, green: 0.16, blue: 0.20)
     static let ribbon = Color(red: 0.78, green: 0.10, blue: 0.14)
+
+    // Ink: one colour in a few strengths, like a single pen pressed harder or softer
+    static let ink = Color(red: 0.16, green: 0.16, blue: 0.20)
+    static let inkSecondary = ink.opacity(0.62)
+    static let inkTertiary = ink.opacity(0.42)
+    static let hairline = ink.opacity(0.14)
+
+    /// The notebook's one accent: the cover red, for today, links and highlights.
+    static let accent = coverRed
 
     // Sticky notes
     static let stickyColors: [Color] = [
@@ -29,6 +38,22 @@ enum Theme {
 
     /// Hobonichi's 3.7 mm grid, roughly in points on an iPhone.
     static let gridSpacing: CGFloat = 14
+    /// Space between sections on a page: two grid squares.
+    static let sectionSpacing: CGFloat = 28
+
+    // Type: serif for printed text, Caveat for anything "handwritten"
+    /// Big page titles.
+    static func display(_ size: CGFloat = 28) -> Font {
+        .system(size: size, weight: .semibold, design: .serif)
+    }
+
+    /// Small spaced capitals above titles and on section labels.
+    static let eyebrow = Font.system(size: 11, weight: .semibold, design: .serif)
+
+    /// Printed body text.
+    static func text(_ size: CGFloat = 16) -> Font {
+        .system(size: size, design: .serif)
+    }
 
     /// Caveat, a handwriting font, for the diary and sticky notes.
     static func handwriting(size: CGFloat) -> Font {

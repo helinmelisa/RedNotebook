@@ -20,6 +20,16 @@ struct GridPaper: View {
                 y += spacing
             }
             context.stroke(lines, with: .color(Theme.grid), lineWidth: 0.5)
+
+            // Faint fibres so the paper doesn't look like a flat screen colour
+            var rng = SeededRandom(seed: 11)
+            for _ in 0..<Int(size.width * size.height / 140) {
+                let x = Double.random(in: 0...size.width, using: &rng)
+                let y = Double.random(in: 0...size.height, using: &rng)
+                let r = Double.random(in: 0.4...1.0, using: &rng)
+                context.fill(Path(ellipseIn: CGRect(x: x, y: y, width: r, height: r)),
+                             with: .color(Color(red: 0.55, green: 0.45, blue: 0.30).opacity(0.07)))
+            }
         }
         .background(Theme.paper)
         .allowsHitTesting(false)

@@ -13,6 +13,9 @@ struct RedNotebookApp: App {
         WindowGroup {
             RootView()
                 .environment(calendarStore)
+                // A paper notebook looks the same in Dark Mode; red instead of iOS blue for controls
+                .preferredColorScheme(.light)
+                .tint(Theme.accent)
         }
         .modelContainer(for: [DayPage.self, PhotoSticker.self, ClothingItem.self, BodyPhoto.self])
     }
@@ -27,7 +30,7 @@ struct RootView: View {
 
     var body: some View {
         ZStack {
-            Theme.desk.ignoresSafeArea()
+            DeskBackground()
 
             if isOpen {
                 NotebookView(onClose: { withAnimation(.easeInOut(duration: 0.4)) { isOpen = false } })
