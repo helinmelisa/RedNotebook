@@ -12,11 +12,7 @@ struct DayHeader: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center, spacing: 12) {
-                Text(page.day.formatted(.dateTime.day()))
-                    .font(Theme.serif(54, .bold))
-                    .monospacedDigit()
-                    .foregroundStyle(Theme.accent)
-                    .frame(minWidth: 62, alignment: .leading)
+                HankoDate(number: page.day.formatted(.dateTime.day()))
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(page.day.formatted(.dateTime.weekday(.wide)).uppercased())
@@ -77,8 +73,8 @@ struct DayHeader: View {
                 ForEach(Self.moods, id: \.self) { mood in
                     let selected = page.mood == mood
                     Button { toggle(\.mood, mood) } label: {
-                        Text(mood)
-                            .font(.system(size: 19))
+                        MoodFace(mood: mood)
+                            .frame(width: 24, height: 24)
                             .frame(width: 32, height: 32)
                             .background(Circle().fill(selected ? NotebookSection.today.tabColor.opacity(0.55) : .clear))
                             .overlay(Circle().stroke(selected ? NotebookSection.today.tabColor : .clear, lineWidth: 1.5))
@@ -133,5 +129,46 @@ struct DayHeader: View {
     private func flip(to target: Date) {
         UISelectionFeedbackGenerator().selectionChanged()
         withAnimation(.easeInOut(duration: 0.25)) { day = target }
+    }
+}
+
+/// The day number as a red hanko seal: a double ring, slightly tilted, with ink that didn't take everywhere.
+private struct HankoDate: View {
+    let number: String
+
+    var body: some View {
+        ZStack {
+            Circle().stroke(Theme.accent, lineWidth: 2.6)
+            Circle().stroke(Theme.accent, lineWidth: 0.9).padding(4.5)
+            Text(number)
+                .font(Theme.serif(34, .bold))
+                .monospacedDigit()
+                .foregroundStyle(Theme.accent)
+        }
+        .frame(width: 70, height: 70)
+        .mask(StampInk())
+        .rotationEffect(.degrees(-7))
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// Mask with small gaps and lighter patches, like ink from a rubber stamp.
+private struct StampInk: View {
+    var body: some View {
+        Canvas { context, size in
+            context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.black))
+            var rng = SeededRandom(seed: 21)
+            context.blendMode = .destinationOut
+            for _ in 0..<70 {
+                let x = Double.random(in: 0...size.width, using: &rng)
+                let y = Double.random(in: 0...size.height, using: &rng)
+                let r = Double.random(in: 0.5...2.2, using: &rng)
+                context.fill(Path(ellipseIn: CGRect(x: x, y: y, width: r, height: r * 0.8)),
+                             with: .color(.black.opacity(Double.random(in: 0.4...0.9, using: &rng))))
+            }
+            // One side pressed a little lighter
+            context.fill(Path(CGRect(x: size.width * 0.62, y: 0, width: size.width * 0.38, height: size.height)),
+                         with: .color(.black.opacity(0.12)))
+        }
     }
 }

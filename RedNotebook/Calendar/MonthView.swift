@@ -129,7 +129,7 @@ private struct DayCell: View {
                     .background { if isToday { Circle().fill(Theme.accent) } }
                 Spacer(minLength: 0)
                 if let mood {
-                    Text(mood).font(.system(size: 9))
+                    MoodFace(mood: mood).frame(width: 12, height: 12)
                 }
             }
 

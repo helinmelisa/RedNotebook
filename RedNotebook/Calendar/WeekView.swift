@@ -96,7 +96,7 @@ private struct WeekDayRow: View {
                 Text(day.formatted(.dateTime.day()))
                     .font(Theme.serif(20, .semibold))
                 if let mood = page?.mood {
-                    Text(mood).font(.system(size: 12))
+                    MoodFace(mood: mood).frame(width: 16, height: 16)
                 }
             }
             .foregroundStyle(isToday ? Theme.accent : Theme.ink)

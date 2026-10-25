@@ -96,7 +96,7 @@ private struct DiaryEntry: View {
                     Image(systemName: weather).font(.system(size: 13)).foregroundStyle(Theme.ink.opacity(0.5))
                 }
                 if let mood = page.mood {
-                    Text(mood).font(.system(size: 16))
+                    MoodFace(mood: mood).frame(width: 20, height: 20)
                 }
             }
             .foregroundStyle(Theme.ink)
