@@ -11,6 +11,7 @@
 		02BA8C8D7615A57BC73A31F2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BFB9BA002835C6D93AAEC /* CalendarView.swift */; };
 		035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B91D0224EBFFC32859A1120 /* DailyQuote.swift */; };
 		06CC6C8082F36D1D61884501 /* QuickNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6B4E136C2B183144635B4 /* QuickNote.swift */; };
+		1173DF56981D114DEEA1038C /* FunStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77C99D490B502BD78C9F5E /* FunStickers.swift */; };
 		1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */; };
 		1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7619AFA459ED5027E674AB77 /* DrawnSticker.swift */; };
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
@@ -87,6 +88,7 @@
 		4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletItem.swift; sourceTree = "<group>"; };
 		4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCoverView.swift; sourceTree = "<group>"; };
 		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
+		4D77C99D490B502BD78C9F5E /* FunStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunStickers.swift; sourceTree = "<group>"; };
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
 		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
 		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */,
 				7619AFA459ED5027E674AB77 /* DrawnSticker.swift */,
+				4D77C99D490B502BD78C9F5E /* FunStickers.swift */,
 				A679AA6F2257C2228E045E7F /* LifeStickers.swift */,
 				AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */,
 				21506043CFEC00E10FF1598A /* PhotoCutout.swift */,
@@ -401,6 +404,7 @@
 				4365403B37113BE1C22FCEFE /* DiaryView.swift in Sources */,
 				3327FC883547FB5CC2B25F6D /* DrawingCanvas.swift in Sources */,
 				1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */,
+				1173DF56981D114DEEA1038C /* FunStickers.swift in Sources */,
 				74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */,
 				E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */,
 				BB78ED30E9D56EB51C3A69C2 /* LifeStickers.swift in Sources */,

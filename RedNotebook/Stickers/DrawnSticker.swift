@@ -33,6 +33,16 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     case plane, suitcase, mapPin, camera, globe
     // More Portugal
     case andorinha, portWine, stampLisboa
+    // Food & café
+    case croissant, boba, iceCream, donut, avocado, pizza, lemon, sushi
+    // Animals
+    case bunny, bear, frog, chick, bee, ladybug
+    // Sky & dreamy
+    case shootingStar, saturn, twinkle, cuteMoon, rainCloud
+    // Mood faces
+    case faceHappy, faceLove, faceSleepy, faceSad, faceAngry, faceExcited
+    // Türkiye
+    case nazar, cay, simit, lokum
 
     var id: Self { self }
 
@@ -41,6 +51,11 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case cute = "Tape & cute"
         case words = "Words"
         case portugal = "Portugal 🇵🇹"
+        case turkiye = "Türkiye 🇹🇷"
+        case food = "Food & café"
+        case animals = "Animals"
+        case faces = "Mood faces"
+        case sky = "Sky & dreamy"
         case seasons = "Seasons & holidays"
         case study = "Study & work"
         case selfCare = "Self-care"
@@ -94,6 +109,16 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
             .travel
         case .andorinha, .portWine, .stampLisboa:
             .portugal
+        case .croissant, .boba, .iceCream, .donut, .avocado, .pizza, .lemon, .sushi:
+            .food
+        case .bunny, .bear, .frog, .chick, .bee, .ladybug:
+            .animals
+        case .shootingStar, .saturn, .twinkle, .cuteMoon, .rainCloud:
+            .sky
+        case .faceHappy, .faceLove, .faceSleepy, .faceSad, .faceAngry, .faceExcited:
+            .faces
+        case .nazar, .cay, .simit, .lokum:
+            .turkiye
         }
     }
 
@@ -194,6 +219,35 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .andorinha: "Swallow"
         case .portWine: "Port wine"
         case .stampLisboa: "Lisboa stamp"
+        case .croissant: "Croissant"
+        case .boba: "Bubble tea"
+        case .iceCream: "Ice cream"
+        case .donut: "Donut"
+        case .avocado: "Avocado"
+        case .pizza: "Pizza"
+        case .lemon: "Lemon"
+        case .sushi: "Sushi"
+        case .bunny: "Bunny"
+        case .bear: "Bear"
+        case .frog: "Frog"
+        case .chick: "Chick"
+        case .bee: "Bee"
+        case .ladybug: "Ladybug"
+        case .shootingStar: "Shooting star"
+        case .saturn: "Planet"
+        case .twinkle: "Twinkle"
+        case .cuteMoon: "Sleepy moon face"
+        case .rainCloud: "Rain cloud"
+        case .faceHappy: "Happy face"
+        case .faceLove: "In love face"
+        case .faceSleepy: "Sleepy face"
+        case .faceSad: "Sad face"
+        case .faceAngry: "Angry face"
+        case .faceExcited: "Excited face"
+        case .nazar: "Nazar"
+        case .cay: "Turkish tea"
+        case .simit: "Simit"
+        case .lokum: "Lokum"
         }
     }
 }
