@@ -136,6 +136,11 @@ struct CoverFace: View {
 
                 spine(scale)
                 titleBlock(scale)
+                // Drawn before the band, so the band holds it down
+                SeasonalCharm(scale: scale)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .padding(.top, 70 * scale)
+                    .padding(.trailing, 16 * scale)
                 band(scale)
             }
             .clipShape(shape)

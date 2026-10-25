@@ -29,6 +29,7 @@
 		3327FC883547FB5CC2B25F6D /* DrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */; };
 		3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */; };
 		4365403B37113BE1C22FCEFE /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF157F404FEEC1AE4716E /* DiaryView.swift */; };
+		496CB8ED900CDD1F7083CA76 /* Seasons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E015E2082AC15B0D8B9A97C /* Seasons.swift */; };
 		499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE9BC272B1E886102676AB /* PhotoSticker.swift */; };
 		4A155A953CA6B57408902ED1 /* Fraunces-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 365034170459575EB351A501 /* Fraunces-OFL.txt */; };
 		4BE5E5FA701240E487740662 /* CoverColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */; };
@@ -122,6 +123,7 @@
 		24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortugueseHolidays.swift; sourceTree = "<group>"; };
 		25FF75A703FAD381D19C8103 /* DayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPage.swift; sourceTree = "<group>"; };
 		28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BujoStickers.swift; sourceTree = "<group>"; };
+		2E015E2082AC15B0D8B9A97C /* Seasons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seasons.swift; sourceTree = "<group>"; };
 		2EE892F9CE96993E0BEDD98B /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		363EAE3B2F3F2318C244BBCE /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		365034170459575EB351A501 /* Fraunces-OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Fraunces-OFL.txt"; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				2EE892F9CE96993E0BEDD98B /* Components.swift */,
 				FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */,
 				1F6D4A424A691E5742E11A50 /* Moods.swift */,
+				2E015E2082AC15B0D8B9A97C /* Seasons.swift */,
 				3B4CE8760D86F9CF1995277C /* SoundEffects.swift */,
 				175E70D7A93D0DE220F4E6E3 /* Theme.swift */,
 			);
@@ -549,6 +552,7 @@
 				2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */,
 				53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */,
 				7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */,
+				496CB8ED900CDD1F7083CA76 /* Seasons.swift in Sources */,
 				FC5E8B843AFBA0E059D8F561 /* SoundEffects.swift in Sources */,
 				2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */,
 				D3523B9D490455D99B596C7B /* StickerContent.swift in Sources */,

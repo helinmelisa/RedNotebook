@@ -110,6 +110,7 @@ struct DeskBackground: View {
                              with: .color(.black.opacity(0.05)))
             }
         }
+        .overlay { SeasonalDesk() }
         .ignoresSafeArea()
         .allowsHitTesting(false)
     }
