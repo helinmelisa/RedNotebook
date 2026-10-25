@@ -28,11 +28,13 @@ struct StickerPicker: View {
                 }
             }
 
-            section("Drawn") {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 12)], spacing: 16) {
-                    ForEach(DrawnSticker.allCases) { drawn in
-                        tile(.drawn(drawn), size: 70)
-                            .accessibilityLabel(drawn.name)
+            ForEach(DrawnSticker.Category.allCases, id: \.self) { category in
+                section(category.rawValue) {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 12)], spacing: 16) {
+                        ForEach(DrawnSticker.allCases.filter { $0.category == category }) { drawn in
+                            tile(.drawn(drawn), size: 70)
+                                .accessibilityLabel(drawn.name)
+                        }
                     }
                 }
             }

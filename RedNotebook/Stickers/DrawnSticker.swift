@@ -1,10 +1,41 @@
 import SwiftUI
 
 /// Stickers drawn in code, so they stay crisp at any size.
+///
+/// Raw values are stored in the database, so existing cases must never be renamed.
 enum DrawnSticker: String, CaseIterable, Identifiable {
+    // Tape & cute
     case washiPink, washiMint, washiDots, star, heart, flower, sparkles, sun, cloud, tag
+    // Banners & labels
+    case bannerToday, bannerNotes, labelTodo, labelGoals, labelMemo, flagImportant
+    // Ink doodles
+    case arrowCurly, checkbox, starOutline, heartOutline, circleDoodle, sprig,
+         speech, lightbulb, moonStars, coffee, envelope, paperclip, pin
+    // Dividers & markers
+    case dividerWavy, dividerDots, dividerHeart, highlighterYellow, highlighterPink
 
     var id: Self { self }
+
+    enum Category: String, CaseIterable {
+        case cute = "Tape & cute"
+        case labels = "Banners & labels"
+        case doodles = "Ink doodles"
+        case dividers = "Dividers & markers"
+    }
+
+    var category: Category {
+        switch self {
+        case .washiPink, .washiMint, .washiDots, .star, .heart, .flower, .sparkles, .sun, .cloud, .tag:
+            .cute
+        case .bannerToday, .bannerNotes, .labelTodo, .labelGoals, .labelMemo, .flagImportant:
+            .labels
+        case .arrowCurly, .checkbox, .starOutline, .heartOutline, .circleDoodle, .sprig,
+             .speech, .lightbulb, .moonStars, .coffee, .envelope, .paperclip, .pin:
+            .doodles
+        case .dividerWavy, .dividerDots, .dividerHeart, .highlighterYellow, .highlighterPink:
+            .dividers
+        }
+    }
 
     var name: String {
         switch self {
@@ -18,6 +49,30 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .sun: "Sun"
         case .cloud: "Cloud"
         case .tag: "Tag"
+        case .bannerToday: "Today banner"
+        case .bannerNotes: "Notes banner"
+        case .labelTodo: "To do label"
+        case .labelGoals: "Goals label"
+        case .labelMemo: "Memo label"
+        case .flagImportant: "Important flag"
+        case .arrowCurly: "Curly arrow"
+        case .checkbox: "Ticked box"
+        case .starOutline: "Doodle star"
+        case .heartOutline: "Doodle heart"
+        case .circleDoodle: "Hand-drawn circle"
+        case .sprig: "Leaf sprig"
+        case .speech: "Speech bubble"
+        case .lightbulb: "Idea bulb"
+        case .moonStars: "Moon and stars"
+        case .coffee: "Coffee cup"
+        case .envelope: "Envelope"
+        case .paperclip: "Paperclip"
+        case .pin: "Pin"
+        case .dividerWavy: "Wavy divider"
+        case .dividerDots: "Dotted divider"
+        case .dividerHeart: "Heart divider"
+        case .highlighterYellow: "Yellow highlighter"
+        case .highlighterPink: "Pink highlighter"
         }
     }
 }
@@ -51,6 +106,8 @@ struct DrawnStickerView: View {
             symbol("cloud.fill", Color(red: 0.62, green: 0.78, blue: 0.95))
         case .tag:
             Tag()
+        default:
+            BujoStickerView(sticker: sticker)
         }
     }
 
@@ -146,7 +203,7 @@ private struct ZigzagEnds: Shape {
     }
 }
 
-private struct StarShape: Shape {
+struct StarShape: Shape {
     func path(in rect: CGRect) -> Path {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let outer = min(rect.width, rect.height) / 2
