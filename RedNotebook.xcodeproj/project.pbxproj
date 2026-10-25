@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0250820A8412D1278045E60A /* BulletList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B96FEC539EE00FA3A10302 /* BulletList.swift */; };
+		02BA8C8D7615A57BC73A31F2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BFB9BA002835C6D93AAEC /* CalendarView.swift */; };
 		035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B91D0224EBFFC32859A1120 /* DailyQuote.swift */; };
 		06CC6C8082F36D1D61884501 /* QuickNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6B4E136C2B183144635B4 /* QuickNote.swift */; };
 		1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */; };
@@ -17,26 +18,39 @@
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
 		93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */; };
+		9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E587CB9652567AA20C815 /* NewEventSheet.swift */; };
+		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
+		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
+		D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */; };
+		D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45686A36B7F72E75004CFDE5 /* DayAgenda.swift */; };
 		D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365C3BEE813F4886FF60ADDB /* NotebookView.swift */; };
 		D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175E70D7A93D0DE220F4E6E3 /* Theme.swift */; };
 		E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B67464B0C01A407C165D896 /* TodayView.swift */; };
 		E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */; };
 		F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF75A703FAD381D19C8103 /* DayPage.swift */; };
+		F91BC574873F25A296149314 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717348824E1F5A8A3AD713B3 /* MonthView.swift */; };
 		FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2F4039960E975B17AB58D /* NotebookSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		009BFB9BA002835C6D93AAEC /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		0B91D0224EBFFC32859A1120 /* DailyQuote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyQuote.swift; sourceTree = "<group>"; };
 		175E70D7A93D0DE220F4E6E3 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		1B67464B0C01A407C165D896 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherTexture.swift; sourceTree = "<group>"; };
 		25FF75A703FAD381D19C8103 /* DayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPage.swift; sourceTree = "<group>"; };
+		363EAE3B2F3F2318C244BBCE /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		365C3BEE813F4886FF60ADDB /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		3C03AF13F69E5A73BA5C9EA6 /* RedNotebook.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = RedNotebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelpers.swift; sourceTree = "<group>"; };
 		4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletItem.swift; sourceTree = "<group>"; };
 		4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCoverView.swift; sourceTree = "<group>"; };
+		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
+		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		78B96FEC539EE00FA3A10302 /* BulletList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletList.swift; sourceTree = "<group>"; };
+		7B2E587CB9652567AA20C815 /* NewEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
 		AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHeader.swift; sourceTree = "<group>"; };
 		B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedNotebookApp.swift; sourceTree = "<group>"; };
 		BDF2F4039960E975B17AB58D /* NotebookSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookSection.swift; sourceTree = "<group>"; };
@@ -60,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				6FFA7123CCCA0E31C3A60DF2 /* App */,
+				5ECD0194119FD2EF7541CF08 /* Calendar */,
 				D5B9385A2D4B4265DA9AAC87 /* Cover */,
 				C906808771CE0B8D63C75709 /* Models */,
 				01BC9BECCCE545A0977A9081 /* Notebook */,
@@ -67,6 +82,20 @@
 				C3DC9405E9AA6D3A9189F396 /* Today */,
 			);
 			path = RedNotebook;
+			sourceTree = "<group>";
+		};
+		5ECD0194119FD2EF7541CF08 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */,
+				7C9300B14907F57F2D942E6F /* CalendarStore.swift */,
+				009BFB9BA002835C6D93AAEC /* CalendarView.swift */,
+				45686A36B7F72E75004CFDE5 /* DayAgenda.swift */,
+				717348824E1F5A8A3AD713B3 /* MonthView.swift */,
+				7B2E587CB9652567AA20C815 /* NewEventSheet.swift */,
+				363EAE3B2F3F2318C244BBCE /* WeekView.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		6FFA7123CCCA0E31C3A60DF2 /* App */ = {
@@ -190,11 +219,17 @@
 			files = (
 				1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */,
 				0250820A8412D1278045E60A /* BulletList.swift in Sources */,
+				D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */,
+				BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */,
+				02BA8C8D7615A57BC73A31F2 /* CalendarView.swift in Sources */,
 				035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */,
+				D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */,
 				3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */,
 				F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */,
 				74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */,
 				E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */,
+				F91BC574873F25A296149314 /* MonthView.swift in Sources */,
+				9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */,
 				93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */,
 				FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */,
 				D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */,
@@ -204,6 +239,7 @@
 				7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */,
 				D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */,
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,
+				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +318,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Red Notebook";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Red Notebook shows your calendar events in the agenda and can add new events you plan in the notebook.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -301,6 +338,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Red Notebook";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Red Notebook shows your calendar events in the agenda and can add new events you plan in the notebook.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
