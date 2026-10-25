@@ -10,7 +10,6 @@ struct StickerPicker: View {
     @Query(sort: \PhotoSticker.createdAt, order: .reverse) private var photoStickers: [PhotoSticker]
 
     @State private var photoItem: PhotosPickerItem?
-    @State private var polaroidItem: PhotosPickerItem?
     @State private var isCutting = false
 
     var body: some View {
@@ -38,7 +37,6 @@ struct StickerPicker: View {
                                 .accessibilityLabel(drawn.name)
                         }
                     }
-                    .stickerSheet()
                 }
             }
 
@@ -57,10 +55,7 @@ struct StickerPicker: View {
             guard let item else { return }
             Task { await makeSticker(from: item) }
         }
-        .onChange(of: polaroidItem) { _, item in
-            guard let item else { return }
-            Task { await makePolaroid(from: item) }
-        }
+
     }
 
     private var addFromPhotos: some View {
@@ -85,12 +80,12 @@ struct StickerPicker: View {
         .disabled(isCutting)
     }
 
-    /// A photo of the day, framed as a polaroid (the whole photo, not cut out).
+    /// Photos of the day in a frame: polaroid, instax, film strip or photo-booth strip.
     private var addPolaroid: some View {
-        PhotosPicker(selection: $polaroidItem, matching: .images) {
+        PhotoFramePicker(onPick: pick) {
             VStack(spacing: 4) {
                 Image(systemName: "photo.on.rectangle").font(.system(size: 20))
-                Text("Polaroid")
+                Text("Photo frame")
             }
             .font(Theme.serif(11))
             .foregroundStyle(Theme.inkSecondary)
@@ -102,17 +97,9 @@ struct StickerPicker: View {
             .rotationEffect(.degrees(-3))
         }
         .disabled(isCutting)
-        .accessibilityLabel("Add a photo as a polaroid")
+        .accessibilityLabel("Add photos in a frame")
     }
 
-    private func makePolaroid(from item: PhotosPickerItem) async {
-        defer { polaroidItem = nil }
-        guard let data = try? await item.loadTransferable(type: Data.self),
-              let jpeg = await PhotoCutout.polaroidPhoto(from: data) else { return }
-        pick(.polaroid(jpeg))
-    }
-
-    /// A fixed-size cell, so wide stickers like tapes shrink to fit instead of stretching the grid.
     private func tile(_ choice: StickerChoice, size: CGFloat) -> some View {
         Button { pick(choice) } label: {
             StickerContent(choice: choice)
@@ -170,17 +157,5 @@ struct StickerDrawer: View {
         }
         .tint(Theme.red)
         .presentationDetents([.medium, .large])
-    }
-}
-
-private extension View {
-    /// A sheet of stickers: off-white backing paper with a soft edge, like the ones sold in stationery shops.
-    func stickerSheet() -> some View {
-        padding(10)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(red: 0.995, green: 0.99, blue: 0.975))
-                    .shadow(color: Color(red: 0.35, green: 0.25, blue: 0.15).opacity(0.14), radius: 3, x: 0, y: 1.5)
-            )
     }
 }
