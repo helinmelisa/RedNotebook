@@ -61,7 +61,10 @@ private struct DayPageContent: View {
             DayHeader(page: page, day: $day, onAddSticker: onAddSticker)
 
             PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
-                // Events from the iPhone Calendar first, then the notebook's own bullets
+                // Holiday and iPhone Calendar events first, then the notebook's own bullets
+                if let holiday = PortugueseHolidays.holiday(on: page.day) {
+                    HolidayLine(holiday: holiday)
+                }
                 ForEach(calendarStore.events(on: page.day), id: \.calendarItemIdentifier) { event in
                     EventLine(event: event)
                 }

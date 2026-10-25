@@ -82,9 +82,12 @@ private struct MonthGrid: View {
                 if let day = cells[index] {
                     let end = calendar.date(byAdding: .day, value: 1, to: day)!
                     let dayEvents = events.filter { $0.startDate < end && $0.endDate > day }
+                    let holiday = PortugueseHolidays.holiday(on: day)
                     DayCell(day: day,
                             page: pagesByDay[day],
-                            eventColors: dayEvents.prefix(3).map(\.color),
+                            isHoliday: holiday != nil,
+                            eventColors: (holiday.map { _ in [PortugueseHolidays.color] } ?? [])
+                                + dayEvents.prefix(holiday == nil ? 3 : 2).map(\.color),
                             isSelected: calendar.isDate(day, inSameDayAs: selectedDay))
                         .onTapGesture { select(day) }
                 } else {
@@ -108,6 +111,7 @@ private struct MonthGrid: View {
 private struct DayCell: View {
     let day: Date
     let page: DayPage?
+    let isHoliday: Bool
     let eventColors: [Color]
     let isSelected: Bool
 
@@ -117,7 +121,7 @@ private struct DayCell: View {
         VStack(spacing: 2) {
             Text(day.formatted(.dateTime.day()))
                 .font(.system(size: 14, weight: isToday ? .bold : .regular, design: .serif))
-                .foregroundStyle(isToday ? Theme.coverRed : Theme.ink)
+                .foregroundStyle(isToday ? Theme.coverRed : isHoliday ? PortugueseHolidays.color : Theme.ink)
                 .frame(width: 26, height: 26)
                 .overlay {
                     if isToday { Circle().stroke(Theme.coverRed, lineWidth: 1.2) }

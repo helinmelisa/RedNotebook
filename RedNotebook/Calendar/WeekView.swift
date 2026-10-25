@@ -103,6 +103,9 @@ private struct WeekDayRow: View {
             .frame(width: 40)
 
             VStack(alignment: .leading, spacing: 4) {
+                if let holiday = PortugueseHolidays.holiday(on: day) {
+                    HolidayLine(holiday: holiday)
+                }
                 ForEach(events, id: \.calendarItemIdentifier) { event in
                     EventLine(event: event)
                 }

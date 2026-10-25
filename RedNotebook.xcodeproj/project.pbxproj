@@ -33,6 +33,7 @@
 		CA6F165D5003D6BD21003FC6 /* StickerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */; };
 		D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */; };
 		D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45686A36B7F72E75004CFDE5 /* DayAgenda.swift */; };
+		D31273FAA4DE67580BA426FC /* PortugueseHolidays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */; };
 		D3523B9D490455D99B596C7B /* StickerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35E6A0058041DA2C3004F1B /* StickerContent.swift */; };
 		D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365C3BEE813F4886FF60ADDB /* NotebookView.swift */; };
 		D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175E70D7A93D0DE220F4E6E3 /* Theme.swift */; };
@@ -52,6 +53,7 @@
 		1B67464B0C01A407C165D896 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeatherTexture.swift; sourceTree = "<group>"; };
 		21506043CFEC00E10FF1598A /* PhotoCutout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCutout.swift; sourceTree = "<group>"; };
+		24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortugueseHolidays.swift; sourceTree = "<group>"; };
 		25FF75A703FAD381D19C8103 /* DayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPage.swift; sourceTree = "<group>"; };
 		363EAE3B2F3F2318C244BBCE /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
 		365C3BEE813F4886FF60ADDB /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				45686A36B7F72E75004CFDE5 /* DayAgenda.swift */,
 				717348824E1F5A8A3AD713B3 /* MonthView.swift */,
 				7B2E587CB9652567AA20C815 /* NewEventSheet.swift */,
+				24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */,
 				363EAE3B2F3F2318C244BBCE /* WeekView.swift */,
 			);
 			path = Calendar;
@@ -326,6 +329,7 @@
 				D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */,
 				DA653CAA3CA99917ABC222B2 /* PhotoCutout.swift in Sources */,
 				499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */,
+				D31273FAA4DE67580BA426FC /* PortugueseHolidays.swift in Sources */,
 				06CC6C8082F36D1D61884501 /* QuickNote.swift in Sources */,
 				2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */,
 				53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */,

@@ -20,6 +20,7 @@ struct CalendarView: View {
                     modePicker
                     Spacer()
                     if calendarStore.hasAccess {
+                        CalendarVisibilityMenu()
                         Button { showingNewEvent = true } label: {
                             Image(systemName: "plus")
                                 .font(.system(size: 15, weight: .semibold))
@@ -102,5 +103,32 @@ private struct CalendarAccessBanner: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(NotebookSection.calendar.tabColor.opacity(0.25), in: RoundedRectangle(cornerRadius: 6))
         }
+    }
+}
+
+/// Lets you switch calendars on and off in the notebook, e.g. to hide another country's holidays.
+private struct CalendarVisibilityMenu: View {
+    @Environment(CalendarStore.self) private var calendarStore
+
+    var body: some View {
+        Menu {
+            Section("Show in notebook") {
+                ForEach(calendarStore.allCalendars, id: \.calendarIdentifier) { calendar in
+                    Toggle(calendar.title, isOn: Binding(
+                        get: { calendarStore.isVisible(calendar) },
+                        set: { calendarStore.setVisible($0, calendar) }
+                    ))
+                }
+            }
+            Section {
+                Text("🇵🇹 Portuguese holidays are built in")
+            }
+        } label: {
+            Image(systemName: "line.3.horizontal.decrease.circle")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(Theme.ink.opacity(0.55))
+                .padding(.trailing, 10)
+        }
+        .accessibilityLabel("Choose calendars")
     }
 }

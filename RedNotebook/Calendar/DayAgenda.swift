@@ -20,6 +20,7 @@ struct DayAgenda: View {
     var body: some View {
         let events = calendarStore.events(on: day)
         let items = pages.first?.sortedItems ?? []
+        let holiday = PortugueseHolidays.holiday(on: day)
 
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
@@ -36,7 +37,11 @@ struct DayAgenda: View {
             }
             Rectangle().fill(Theme.ink.opacity(0.15)).frame(height: 0.5)
 
-            if events.isEmpty && items.isEmpty {
+            if let holiday {
+                HolidayLine(holiday: holiday)
+            }
+
+            if events.isEmpty && items.isEmpty && holiday == nil {
                 Text("Nothing planned")
                     .font(.system(size: 14, design: .serif).italic())
                     .foregroundStyle(Theme.ink.opacity(0.45))
