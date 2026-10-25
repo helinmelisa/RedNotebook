@@ -14,6 +14,15 @@ enum Theme {
     static let ink = Color(red: 0.16, green: 0.16, blue: 0.20)
     static let ribbon = Color(red: 0.78, green: 0.10, blue: 0.14)
 
+    // Sticky notes
+    static let stickyColors: [Color] = [
+        Color(red: 1.00, green: 0.93, blue: 0.60),
+        Color(red: 1.00, green: 0.80, blue: 0.82),
+        Color(red: 0.78, green: 0.90, blue: 0.80),
+        Color(red: 0.78, green: 0.87, blue: 0.97),
+    ]
+    static let stickyColorNames = ["Yellow", "Pink", "Green", "Blue"]
+
     // Background behind the notebook
     static let desk = Color(red: 0.86, green: 0.82, blue: 0.76)
 
