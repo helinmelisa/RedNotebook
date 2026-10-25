@@ -48,13 +48,15 @@ struct NotebookView: View {
     private var sectionContent: some View {
         switch section {
         case .today:
-            TodayView(day: $selectedDay)
+            TodayView(day: $selectedDay, onDressUp: { withAnimation(.easeInOut(duration: 0.3)) { section = .closet } })
         case .calendar:
             CalendarView(selectedDay: $selectedDay, onOpenDay: openDay)
         case .todo:
             TodoView(onOpenDay: openDay)
         case .diary:
             DiaryView(onOpenDay: openDay)
+        case .closet:
+            ClosetView(day: selectedDay)
         case .stickers:
             StickerBookView(day: selectedDay, onOpenDay: openDay)
         }
@@ -123,7 +125,7 @@ private struct IndexTabs: View {
                             .frame(width: 16, height: 58)
                     }
                     .foregroundStyle(Theme.ink.opacity(selected ? 0.9 : 0.6))
-                    .frame(width: selected ? 34 : 28, height: 96)
+                    .frame(width: selected ? 34 : 28, height: 84)
                     .background(
                         UnevenRoundedRectangle(bottomTrailingRadius: 7, topTrailingRadius: 7)
                             .fill(section.tabColor.opacity(selected ? 1 : 0.75))

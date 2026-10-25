@@ -15,12 +15,14 @@
 		1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7619AFA459ED5027E674AB77 /* DrawnSticker.swift */; };
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
 		1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
+		1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */; };
 		2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331087EAB51100176211A0D /* QuickNotesStrip.swift */; };
 		2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */; };
 		3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */; };
 		4365403B37113BE1C22FCEFE /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF157F404FEEC1AE4716E /* DiaryView.swift */; };
 		499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE9BC272B1E886102676AB /* PhotoSticker.swift */; };
 		53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */; };
+		65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */; };
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
 		8797399104C8768C4ABB3389 /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */; };
@@ -29,6 +31,7 @@
 		9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */; };
 		9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E587CB9652567AA20C815 /* NewEventSheet.swift */; };
 		9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */; };
+		AD427AC12ABEAA3F126A3927 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF040617BA6AFBFD07BF0E /* ClosetView.swift */; };
 		B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552C6D655B1FCD71EBBC41 /* TodoView.swift */; };
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
 		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
@@ -69,8 +72,10 @@
 		4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCoverView.swift; sourceTree = "<group>"; };
 		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
+		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
 		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		74552C6D655B1FCD71EBBC41 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCanvas.swift; sourceTree = "<group>"; };
 		7619AFA459ED5027E674AB77 /* DrawnSticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawnSticker.swift; sourceTree = "<group>"; };
 		78B96FEC539EE00FA3A10302 /* BulletList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletList.swift; sourceTree = "<group>"; };
 		7B2E587CB9652567AA20C815 /* NewEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		C331087EAB51100176211A0D /* QuickNotesStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNotesStrip.swift; sourceTree = "<group>"; };
 		DE931863901B96C7EE8DC80E /* GridPaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPaper.swift; sourceTree = "<group>"; };
 		E35E6A0058041DA2C3004F1B /* StickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerContent.swift; sourceTree = "<group>"; };
+		E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
 		E8D6B4E136C2B183144635B4 /* QuickNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNote.swift; sourceTree = "<group>"; };
 		F31EAF5D06AE9354D5832BBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 			children = (
 				6FFA7123CCCA0E31C3A60DF2 /* App */,
 				5ECD0194119FD2EF7541CF08 /* Calendar */,
+				8B42C915EA8DFE6380737A2C /* Closet */,
 				D5B9385A2D4B4265DA9AAC87 /* Cover */,
 				DC8FED3D05502620396A0CDA /* Diary */,
 				C906808771CE0B8D63C75709 /* Models */,
@@ -185,6 +192,15 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		8B42C915EA8DFE6380737A2C /* Closet */ = {
+			isa = PBXGroup;
+			children = (
+				65DF040617BA6AFBFD07BF0E /* ClosetView.swift */,
+				755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */,
+			);
+			path = Closet;
+			sourceTree = "<group>";
+		};
 		92B960F0D8D8159FE2637BD6 = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */,
+				E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */,
 				25FF75A703FAD381D19C8103 /* DayPage.swift */,
 				B8AE9BC272B1E886102676AB /* PhotoSticker.swift */,
 				E8D6B4E136C2B183144635B4 /* QuickNote.swift */,
@@ -328,6 +345,8 @@
 				D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */,
 				BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */,
 				02BA8C8D7615A57BC73A31F2 /* CalendarView.swift in Sources */,
+				AD427AC12ABEAA3F126A3927 /* ClosetView.swift in Sources */,
+				1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */,
 				035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */,
 				D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */,
 				3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */,
@@ -342,6 +361,7 @@
 				93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */,
 				FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */,
 				D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */,
+				65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */,
 				9A170195B9383BCD870C0E1C /* OutfitSection.swift in Sources */,
 				DA653CAA3CA99917ABC222B2 /* PhotoCutout.swift in Sources */,
 				499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */,

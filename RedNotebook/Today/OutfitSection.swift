@@ -1,9 +1,13 @@
 import PhotosUI
+import SwiftData
 import SwiftUI
 
-/// "Today's outfit": a photo cut out like a sticker, with a handwritten note beside it.
+/// "Today's outfit": the outfit from the closet or a photo, with a handwritten note beside it.
 struct OutfitSection: View {
     @Bindable var page: DayPage
+    var onDressUp: () -> Void
+
+    @Query(sort: \BodyPhoto.createdAt, order: .reverse) private var bodyPhotos: [BodyPhoto]
 
     @State private var photoItem: PhotosPickerItem?
     @State private var isCutting = false
@@ -25,7 +29,16 @@ struct OutfitSection: View {
 
     @ViewBuilder
     private var photo: some View {
-        if let data = page.outfitPhoto, let image = UIImage(data: data) {
+        if !page.wornItems.isEmpty {
+            // Dressed up in the closet: show the outfit on you, tap to change it
+            Button(action: onDressUp) {
+                OutfitCanvas(bodyImage: bodyPhotos.first?.image, items: page.wornItems)
+                    .frame(width: 110)
+                    .stickerOutline(2)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Outfit from the closet. Open closet")
+        } else if let data = page.outfitPhoto, let image = UIImage(data: data) {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFit()
@@ -42,27 +55,36 @@ struct OutfitSection: View {
                 }
                 .accessibilityLabel("Outfit photo")
         } else {
-            PhotosPicker(selection: $photoItem, matching: .images) {
-                VStack(spacing: 6) {
+            VStack(spacing: 8) {
+                Button(action: onDressUp) {
+                    placeholderLabel("Dress up", systemImage: "hanger")
+                }
+                .buttonStyle(.plain)
+                PhotosPicker(selection: $photoItem, matching: .images) {
                     if isCutting {
-                        ProgressView()
-                        Text("Cutting out…")
+                        placeholderLabel("Cutting out…", systemImage: "hourglass")
                     } else {
-                        Image(systemName: "tshirt").font(.system(size: 24))
-                        Text("Add outfit photo")
-                            .multilineTextAlignment(.center)
+                        placeholderLabel("Add photo", systemImage: "photo")
                     }
                 }
-                .font(.system(size: 11, design: .serif))
-                .foregroundStyle(Theme.ink.opacity(0.5))
-                .frame(width: 100, height: 130)
-                .background(
-                    RoundedRectangle(cornerRadius: 6)
-                        .strokeBorder(Theme.ink.opacity(0.25), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
-                )
+                .disabled(isCutting)
             }
-            .disabled(isCutting)
+            .frame(width: 100)
         }
+    }
+
+    private func placeholderLabel(_ title: String, systemImage: String) -> some View {
+        VStack(spacing: 4) {
+            Image(systemName: systemImage).font(.system(size: 18))
+            Text(title)
+        }
+        .font(.system(size: 11, design: .serif))
+        .foregroundStyle(Theme.ink.opacity(0.55))
+        .frame(width: 100, height: 62)
+        .background(
+            RoundedRectangle(cornerRadius: 6)
+                .strokeBorder(Theme.ink.opacity(0.25), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+        )
     }
 
     private func setPhoto(from item: PhotosPickerItem) async {

@@ -2,7 +2,7 @@ import SwiftUI
 
 /// The index tabs along the right edge of the notebook.
 enum NotebookSection: String, CaseIterable, Identifiable {
-    case today, calendar, todo, diary, stickers
+    case today, calendar, todo, diary, closet, stickers
 
     var id: Self { self }
 
@@ -12,6 +12,7 @@ enum NotebookSection: String, CaseIterable, Identifiable {
         case .calendar: "Calendar"
         case .todo: "To-Do"
         case .diary: "Diary"
+        case .closet: "Closet"
         case .stickers: "Stickers"
         }
     }
@@ -22,6 +23,7 @@ enum NotebookSection: String, CaseIterable, Identifiable {
         case .calendar: "calendar"
         case .todo: "checklist"
         case .diary: "book.closed"
+        case .closet: "hanger"
         case .stickers: "star"
         }
     }
@@ -33,6 +35,7 @@ enum NotebookSection: String, CaseIterable, Identifiable {
         case .calendar: Color(red: 0.55, green: 0.72, blue: 0.80)
         case .todo: Color(red: 0.62, green: 0.78, blue: 0.60)
         case .diary: Color(red: 0.88, green: 0.62, blue: 0.62)
+        case .closet: Color(red: 0.95, green: 0.70, blue: 0.55)
         case .stickers: Color(red: 0.74, green: 0.66, blue: 0.84)
         }
     }

@@ -4,6 +4,7 @@ import SwiftData
 /// The "1 day 1 page" spread: header, bullets, diary, sticky notes and the quote of the day.
 struct TodayView: View {
     @Binding var day: Date
+    var onDressUp: () -> Void = {}
 
     @Environment(\.modelContext) private var context
     @State private var page: DayPage?
@@ -17,7 +18,7 @@ struct TodayView: View {
             ZStack(alignment: .top) {
                 if let page {
                     DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
-                                   onAddSticker: { showingStickers = true })
+                                   onAddSticker: { showingStickers = true }, onDressUp: onDressUp)
                         // Paper behind the page so it looks solid while turning, lined up with the notebook's grid
                         .background(GridPaper().padding(.leading, -28).padding(.trailing, -44))
                         .id(page.persistentModelID)
@@ -70,6 +71,7 @@ private struct DayPageContent: View {
     @Binding var day: Date
     @Binding var selectedSticker: PersistentIdentifier?
     var onAddSticker: () -> Void
+    var onDressUp: () -> Void
 
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
@@ -100,7 +102,7 @@ private struct DayPageContent: View {
             }
 
             PageSection(title: "Today's outfit", color: NotebookSection.stickers.tabColor) {
-                OutfitSection(page: page)
+                OutfitSection(page: page, onDressUp: onDressUp)
             }
 
             PageSection(title: "What I ate", color: NotebookSection.calendar.tabColor) {
