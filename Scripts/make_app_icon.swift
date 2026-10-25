@@ -10,9 +10,16 @@ NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
 let ctx = NSGraphicsContext.current!.cgContext
 
 // Leather gradient
-let colors = [NSColor(red: 0.86, green: 0.20, blue: 0.20, alpha: 1).cgColor,
-              NSColor(red: 0.70, green: 0.09, blue: 0.11, alpha: 1).cgColor,
-              NSColor(red: 0.45, green: 0.04, blue: 0.06, alpha: 1).cgColor] as CFArray
+// Cover colour from the command line (base r g b, 0–1), red by default. Matches CoverColor in the app:
+// light = 15% towards white, dark = 42% towards black.
+let args = CommandLine.arguments
+let base = args.count >= 5 ? (Double(args[2])!, Double(args[3])!, Double(args[4])!) : (0.72, 0.09, 0.11)
+func mix(_ c: (Double, Double, Double), _ t: (Double, Double, Double), _ amount: Double) -> NSColor {
+    NSColor(red: c.0 + (t.0 - c.0) * amount, green: c.1 + (t.1 - c.1) * amount, blue: c.2 + (t.2 - c.2) * amount, alpha: 1)
+}
+let colors = [mix(base, (1, 1, 1), 0.15).cgColor,
+              mix(base, base, 0).cgColor,
+              mix(base, (0, 0, 0), 0.42).cgColor] as CFArray
 let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: colors, locations: [0, 0.5, 1])!
 ctx.drawLinearGradient(gradient, start: CGPoint(x: 0, y: size), end: CGPoint(x: size, y: 0), options: [])
 
@@ -63,7 +70,7 @@ func drawTitle(_ color: NSColor, dx: CGFloat, dy: CGFloat) {
 }
 drawTitle(NSColor(white: 1, alpha: 0.22), dx: 4, dy: -4)
 drawTitle(NSColor(white: 0, alpha: 0.35), dx: -3, dy: 3)
-drawTitle(NSColor(red: 0.48, green: 0.05, blue: 0.07, alpha: 1), dx: 0, dy: 0)
+drawTitle(mix(base, (0, 0, 0), 0.38), dx: 0, dy: 0)
 
 NSGraphicsContext.current?.flushGraphics()
 try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: CommandLine.arguments[1]))
