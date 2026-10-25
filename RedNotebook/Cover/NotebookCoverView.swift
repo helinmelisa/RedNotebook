@@ -89,9 +89,9 @@ struct NotebookCoverView: View {
     /// Debossed title, pressed into the leather.
     private var title: some View {
         VStack(spacing: 10) {
-            Text("NOTEBOOK")
-                .font(.system(size: 26, weight: .semibold, design: .serif))
-                .tracking(6)
+            Text("HME")
+                .font(.system(size: 34, weight: .semibold, design: .serif))
+                .tracking(10)
             Rectangle().frame(width: 40, height: 1)
             Text(String(year))
                 .font(.system(size: 15, weight: .medium, design: .serif))
