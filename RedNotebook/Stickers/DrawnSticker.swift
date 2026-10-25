@@ -49,6 +49,10 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     case chestnuts, rainBoots, snowman, mitten, hotChocolate, sakura, watermelon, seashell, icePop, scarf
     // More food
     case onigiri, dango, matchaLatte, ramen, baklava, pancakes, cookie, cakeSlice
+    // Vintage ephemera
+    case waxSealRose, waxSealSprig, envelopeHeart, stampLavender, stampFern, newspaperScrap, musicSheet, kraftPaper,
+         butterflyNight, butterflyCream, driedLavender, daisy, typewriter, satinBow, plasterTape, quoteStrip, pressedFlower,
+         typedWords
 
     var id: Self { self }
 
@@ -56,6 +60,7 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     enum Category: String, CaseIterable {
         case cute = "Tape & cute"
         case words = "Words"
+        case vintage = "Vintage"
         case portugal = "Portugal 🇵🇹"
         case turkiye = "Türkiye 🇹🇷"
         case antalya = "Antalya ☀️"
@@ -78,7 +83,8 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     var isWritable: Bool {
         switch self {
         case .washiPink, .washiMint, .washiDots, .tag, .bannerToday, .bannerNotes, .labelTodo, .labelGoals, .labelMemo,
-             .highlighterYellow, .highlighterPink, .polaroid, .ticket, .tornNote, .gridNote, .labelDeadline, .labelExam:
+             .highlighterYellow, .highlighterPink, .polaroid, .ticket, .tornNote, .gridNote, .labelDeadline, .labelExam,
+             .newspaperScrap, .kraftPaper, .quoteStrip, .typedWords, .envelopeHeart:
             true
         default:
             false
@@ -132,6 +138,10 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
             .seasons
         case .onigiri, .dango, .matchaLatte, .ramen, .baklava, .pancakes, .cookie, .cakeSlice:
             .food
+        case .waxSealRose, .waxSealSprig, .envelopeHeart, .stampLavender, .stampFern, .newspaperScrap, .musicSheet, .kraftPaper,
+             .butterflyNight, .butterflyCream, .driedLavender, .daisy, .typewriter, .satinBow, .plasterTape, .quoteStrip,
+             .pressedFlower, .typedWords:
+            .vintage
         }
     }
 
@@ -287,6 +297,24 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .pancakes: "Pancakes"
         case .cookie: "Cookie"
         case .cakeSlice: "Cake slice"
+        case .waxSealRose: "Wax seal with a rose"
+        case .waxSealSprig: "Wax seal with a sprig"
+        case .envelopeHeart: "Envelope with a heart"
+        case .stampLavender: "Lavender stamp"
+        case .stampFern: "Fern stamp"
+        case .newspaperScrap: "Newspaper scrap"
+        case .musicSheet: "Sheet music scrap"
+        case .kraftPaper: "Kraft paper"
+        case .butterflyNight: "Night butterfly"
+        case .butterflyCream: "Cream butterfly"
+        case .driedLavender: "Dried lavender"
+        case .daisy: "Daisy"
+        case .typewriter: "Typewriter"
+        case .satinBow: "Satin bow"
+        case .plasterTape: "Plaster tape"
+        case .quoteStrip: "Typed quote"
+        case .pressedFlower: "Pressed flower"
+        case .typedWords: "Typed words"
         }
     }
 }

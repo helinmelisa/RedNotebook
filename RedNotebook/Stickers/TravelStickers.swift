@@ -3,6 +3,7 @@ import SwiftUI
 /// Antalya, more seasons and more food.
 struct TravelStickerView: View {
     let sticker: DrawnSticker
+    var text: String = ""
 
     var body: some View {
         switch sticker {
@@ -37,7 +38,7 @@ struct TravelStickerView: View {
         case .cookie: Cookie().frame(width: 50, height: 50).stickerOutline()
         case .cakeSlice: CakeSlice().frame(width: 58, height: 52).stickerOutline()
 
-        default: EmptyView()
+        default: VintageStickerView(sticker: sticker, text: text)
         }
     }
 }

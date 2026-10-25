@@ -3,6 +3,7 @@ import SwiftUI
 /// Food & café, animals, sky & dreamy, mood faces and a little Türkiye pack.
 struct FunStickerView: View {
     let sticker: DrawnSticker
+    var text: String = ""
 
     var body: some View {
         switch sticker {
@@ -45,7 +46,7 @@ struct FunStickerView: View {
         case .simit: Simit().frame(width: 58, height: 58).stickerOutline()
         case .lokum: Lokum().stickerOutline()
 
-        default: TravelStickerView(sticker: sticker)
+        default: TravelStickerView(sticker: sticker, text: text)
         }
     }
 }

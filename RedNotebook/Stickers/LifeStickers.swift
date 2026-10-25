@@ -47,7 +47,7 @@ struct LifeStickerView: View {
         case .andorinha: symbol("bird.fill", Color(red: 0.12, green: 0.15, blue: 0.30)).rotationEffect(.degrees(-12))
         case .portWine: palette("wineglass.fill", Color(red: 0.55, green: 0.08, blue: 0.18), Color(red: 0.85, green: 0.88, blue: 0.92))
 
-        default: FunStickerView(sticker: sticker)
+        default: FunStickerView(sticker: sticker, text: text)
         }
     }
 
