@@ -82,7 +82,7 @@ struct HolidayLine: View {
                 .font(.system(size: 12))
                 .frame(width: 56, alignment: .leading)
             Text(holiday.name)
-                .font(.system(size: 14, design: .serif).italic())
+                .font(Theme.serif(14).italic())
                 .foregroundStyle(PortugueseHolidays.color)
         }
         .accessibilityElement(children: .combine)

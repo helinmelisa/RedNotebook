@@ -13,11 +13,11 @@ struct MonthView: View {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(month.formatted(.dateTime.year()))
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
+                        .font(Theme.serif(11, .semibold))
                         .tracking(2)
-                        .foregroundStyle(Theme.coverRed)
+                        .foregroundStyle(Theme.accent)
                     Text(month.formatted(.dateTime.month(.wide)))
-                        .font(.system(size: 28, weight: .semibold, design: .serif))
+                        .font(Theme.serif(28, .semibold))
                         .foregroundStyle(Theme.ink)
                 }
                 Spacer()
@@ -73,7 +73,7 @@ private struct MonthGrid: View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 0), count: 7), spacing: 2) {
             ForEach(Array(calendar.orderedWeekdaySymbols.enumerated()), id: \.offset) { _, symbol in
                 Text(symbol)
-                    .font(.system(size: 11, weight: .semibold, design: .serif))
+                    .font(Theme.serif(11, .semibold))
                     .foregroundStyle(Theme.ink.opacity(0.45))
                     .padding(.bottom, 4)
             }
@@ -120,11 +120,11 @@ private struct DayCell: View {
 
         VStack(spacing: 2) {
             Text(day.formatted(.dateTime.day()))
-                .font(.system(size: 14, weight: isToday ? .bold : .regular, design: .serif))
-                .foregroundStyle(isToday ? Theme.coverRed : isHoliday ? PortugueseHolidays.color : Theme.ink)
+                .font(Theme.serif(14, isToday ? .bold : .regular))
+                .foregroundStyle(isToday ? Theme.accent : isHoliday ? PortugueseHolidays.color : Theme.ink)
                 .frame(width: 26, height: 26)
                 .overlay {
-                    if isToday { Circle().stroke(Theme.coverRed, lineWidth: 1.2) }
+                    if isToday { Circle().stroke(Theme.accent, lineWidth: 1.2) }
                 }
 
             // Mood if the day has one, otherwise a small dot when something was written
@@ -132,7 +132,7 @@ private struct DayCell: View {
                 if let mood = page?.mood {
                     Text(mood).font(.system(size: 10))
                 } else if let page, !page.isEmpty {
-                    Circle().fill(Theme.coverRed.opacity(0.6)).frame(width: 4, height: 4)
+                    Circle().fill(Theme.accent.opacity(0.6)).frame(width: 4, height: 4)
                 } else {
                     Color.clear
                 }

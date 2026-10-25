@@ -355,7 +355,7 @@ private struct Tag: View {
             HStack(spacing: 6) {
                 Circle().stroke(Color(red: 0.55, green: 0.45, blue: 0.35), lineWidth: 1.2).frame(width: 7, height: 7)
                 Text("♡ today")
-                    .font(.system(size: 13, weight: .medium, design: .serif))
+                    .font(Theme.serif(13, .medium))
                     .foregroundStyle(Color(red: 0.40, green: 0.30, blue: 0.22))
             }
         }

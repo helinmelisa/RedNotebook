@@ -103,8 +103,8 @@ enum SampleData {
             .overlay(TeeShape().stroke(Color(red: 0.2, green: 0.3, blue: 0.6), lineWidth: 2)).frame(width: 120, height: 90))
         let skirt = png(SkirtShape().fill(Color(red: 0.35, green: 0.45, blue: 0.70)).frame(width: 90, height: 80))
         let shoes = png(HStack(spacing: 16) {
-            Capsule().fill(Theme.coverRed).frame(width: 34, height: 14)
-            Capsule().fill(Theme.coverRed).frame(width: 34, height: 14)
+            Capsule().fill(Theme.red).frame(width: 34, height: 14)
+            Capsule().fill(Theme.red).frame(width: 34, height: 14)
         })
 
         let page = DayPage.page(for: .now, in: context)

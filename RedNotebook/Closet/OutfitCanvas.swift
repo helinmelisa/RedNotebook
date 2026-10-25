@@ -71,7 +71,7 @@ private struct ClothingLayer: View {
                 .overlay {
                     if isSelected {
                         Rectangle()
-                            .stroke(Theme.coverRed.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                            .stroke(Theme.accent.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
                     }
                 }
                 .position(x: item.fitX * canvas.width + drag.width,

@@ -67,7 +67,7 @@ struct StickerPicker: View {
                     Text("From Photos")
                 }
             }
-            .font(.system(size: 11, design: .serif))
+            .font(Theme.serif(11))
             .foregroundStyle(Theme.ink.opacity(0.55))
             .frame(width: 76, height: 76)
             .background(
@@ -132,7 +132,7 @@ struct StickerDrawer: View {
                 }
             }
         }
-        .tint(Theme.coverRed)
+        .tint(Theme.red)
         .presentationDetents([.medium, .large])
     }
 }

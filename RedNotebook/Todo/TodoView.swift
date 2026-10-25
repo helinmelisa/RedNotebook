@@ -25,12 +25,12 @@ struct TodoView: View {
 
                 if groups.openCount == 0 {
                     Text("All clear ✨")
-                        .font(.system(size: 16, design: .serif).italic())
+                        .font(Theme.serif(16).italic())
                         .foregroundStyle(Theme.ink.opacity(0.5))
                 }
 
                 if !groups.overdue.isEmpty {
-                    TaskGroup(title: "Overdue", color: Theme.coverRed, tasks: groups.overdue,
+                    TaskGroup(title: "Overdue", color: Theme.accent, tasks: groups.overdue,
                               showDates: true, onOpenDay: onOpenDay) {
                         Button("Move all to today", action: { moveAllToToday(groups.overdue) })
                     }
@@ -70,7 +70,7 @@ struct TodoView: View {
                 .frame(width: 18)
                 .foregroundStyle(Theme.ink.opacity(0.35))
             TextField("New task…", text: $newText)
-                .font(.system(size: 16, design: .serif))
+                .font(Theme.serif(16))
                 .focused($isAdding)
                 .submitLabel(.next)
                 .onSubmit(add)
@@ -79,7 +79,7 @@ struct TodoView: View {
                 addToSomeday.toggle()
             } label: {
                 Text(addToSomeday ? "Someday" : "Today")
-                    .font(.system(size: 12, weight: .semibold, design: .serif))
+                    .font(Theme.serif(12, .semibold))
                     .foregroundStyle(Theme.ink.opacity(0.7))
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
@@ -101,7 +101,7 @@ struct TodoView: View {
                         .font(.system(size: 10, weight: .bold))
                         .rotationEffect(.degrees(showDone ? 90 : 0))
                     Text("DONE THIS WEEK · \(done.count)")
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
+                        .font(Theme.serif(11, .semibold))
                         .tracking(1.5)
                 }
                 .foregroundStyle(Theme.ink.opacity(0.5))
@@ -213,20 +213,20 @@ private struct TaskRow: View {
                 Text(item.symbol)
                     .font(.system(size: 18, weight: .bold))
                     .frame(width: 18)
-                    .foregroundStyle(item.state == .done ? Theme.coverRed : Theme.ink)
+                    .foregroundStyle(item.state == .done ? Theme.accent : Theme.ink)
             }
             .buttonStyle(.plain)
             .accessibilityLabel(item.state == .done ? "Mark not done" : "Mark done")
 
             TextField("", text: $item.text, axis: .vertical)
-                .font(.system(size: 16, design: .serif))
+                .font(Theme.serif(16))
                 .fixedSize(horizontal: false, vertical: true) // never clip a line that only just fits
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))
 
             if showDate, let day = item.page?.day {
                 Button { onOpenDay(day) } label: {
                     Text(dateLabel(day))
-                        .font(.system(size: 11, design: .serif))
+                        .font(Theme.serif(11))
                         .foregroundStyle(Theme.ink.opacity(0.5))
                 }
                 .buttonStyle(.plain)

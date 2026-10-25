@@ -24,7 +24,7 @@ struct CalendarView: View {
                         Button { showingNewEvent = true } label: {
                             Image(systemName: "plus")
                                 .font(.system(size: 15, weight: .semibold))
-                                .foregroundStyle(Theme.coverRed)
+                                .foregroundStyle(Theme.accent)
                         }
                         .accessibilityLabel("New event")
                     }
@@ -57,7 +57,7 @@ struct CalendarView: View {
                     withAnimation(.snappy) { mode = option }
                 } label: {
                     Text(option.rawValue.uppercased())
-                        .font(.system(size: 12, weight: .semibold, design: .serif))
+                        .font(Theme.serif(12, .semibold))
                         .tracking(1.5)
                         .foregroundStyle(Theme.ink.opacity(mode == option ? 0.9 : 0.4))
                         .padding(.bottom, 4)
@@ -82,11 +82,11 @@ private struct CalendarAccessBanner: View {
         if !calendarStore.hasAccess {
             VStack(alignment: .leading, spacing: 8) {
                 Label("iPhone Calendar", systemImage: "calendar")
-                    .font(.system(size: 14, weight: .semibold, design: .serif))
+                    .font(Theme.serif(14, .semibold))
                 Text(calendarStore.canAsk
                      ? "Connect your calendar to see your events here and add new ones."
                      : "Calendar access is off. Turn it on in Settings to see your events.")
-                    .font(.system(size: 13, design: .serif))
+                    .font(Theme.serif(13))
                     .foregroundStyle(Theme.ink.opacity(0.7))
                 Button(calendarStore.canAsk ? "Connect" : "Open Settings") {
                     if calendarStore.canAsk {
@@ -95,8 +95,8 @@ private struct CalendarAccessBanner: View {
                         openURL(url)
                     }
                 }
-                .font(.system(size: 13, weight: .semibold, design: .serif))
-                .foregroundStyle(Theme.coverRed)
+                .font(Theme.serif(13, .semibold))
+                .foregroundStyle(Theme.accent)
             }
             .foregroundStyle(Theme.ink)
             .padding(12)

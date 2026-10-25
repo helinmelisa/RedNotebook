@@ -25,15 +25,15 @@ struct DayAgenda: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
                 Text(day.formatted(.dateTime.weekday(.wide).day().month(.wide)))
-                    .font(.system(size: 16, weight: .semibold, design: .serif))
+                    .font(Theme.serif(16, .semibold))
                     .foregroundStyle(Theme.ink)
                 Spacer()
                 Button { onOpenDay(day) } label: {
                     Label("Open page", systemImage: "arrow.right")
                         .labelStyle(TrailingIconLabelStyle())
                 }
-                .font(.system(size: 13, weight: .semibold, design: .serif))
-                .foregroundStyle(Theme.coverRed)
+                .font(Theme.serif(13, .semibold))
+                .foregroundStyle(Theme.accent)
             }
             Rectangle().fill(Theme.ink.opacity(0.15)).frame(height: 0.5)
 
@@ -43,7 +43,7 @@ struct DayAgenda: View {
 
             if events.isEmpty && items.isEmpty && holiday == nil {
                 Text("Nothing planned")
-                    .font(.system(size: 14, design: .serif).italic())
+                    .font(Theme.serif(14).italic())
                     .foregroundStyle(Theme.ink.opacity(0.45))
             }
 
@@ -57,7 +57,7 @@ struct DayAgenda: View {
                         .font(.system(size: 15, weight: .bold))
                         .frame(width: 16)
                     Text(item.text)
-                        .font(.system(size: 14, design: .serif))
+                        .font(Theme.serif(14))
                         .strikethrough(item.state == .cancelled)
                 }
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))
@@ -78,11 +78,11 @@ struct EventLine: View {
                 .fill(event.color)
                 .frame(width: 3, height: 14)
             Text(event.timeLabel)
-                .font(.system(size: 12, design: .serif).monospacedDigit())
+                .font(Theme.serif(12).monospacedDigit())
                 .foregroundStyle(Theme.ink.opacity(0.55))
                 .frame(width: 56, alignment: .leading)
             Text(event.title ?? "")
-                .font(.system(size: 14, design: .serif))
+                .font(Theme.serif(14))
                 .foregroundStyle(Theme.ink)
         }
         .contextMenu {

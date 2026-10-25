@@ -120,7 +120,7 @@ private struct IndexTabs: View {
                         Image(systemName: section.icon)
                             .font(.system(size: 12, weight: .semibold))
                         Text(section.title)
-                            .font(.system(size: 11, weight: .semibold, design: .serif))
+                            .font(Theme.serif(11, .semibold))
                             .fixedSize()
                             .rotationEffect(.degrees(90))
                             .frame(width: 16, height: 58)
@@ -147,7 +147,7 @@ private struct IndexTabs: View {
                     .foregroundStyle(Theme.paper)
                     .frame(width: 30, height: 40)
                     .background(UnevenRoundedRectangle(bottomTrailingRadius: 7, topTrailingRadius: 7)
-                        .fill(Theme.coverRed))
+                        .fill(Theme.accent))
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Close notebook")

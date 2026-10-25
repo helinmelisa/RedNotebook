@@ -39,7 +39,7 @@ struct BulletList: View {
             .accessibilityLabel("Bullet kind: \(newKind.name)")
 
             TextField(newKind.placeholder, text: $newText)
-                .font(.system(size: 16, design: .serif))
+                .font(Theme.serif(16))
                 .focused($isAdding)
                 .submitLabel(.next)
                 .onSubmit(add)
@@ -80,7 +80,7 @@ private struct BulletRow: View {
                 Text(item.symbol)
                     .font(.system(size: 18, weight: .bold))
                     .frame(width: 18)
-                    .foregroundStyle(item.kind == .task && item.state == .done ? Theme.coverRed : Theme.ink)
+                    .foregroundStyle(item.kind == .task && item.state == .done ? Theme.accent : Theme.ink)
                     .contentTransition(.numericText())
             }
             .buttonStyle(.plain)
@@ -88,7 +88,7 @@ private struct BulletRow: View {
             .accessibilityLabel(item.state == .done ? "Mark not done" : "Mark done")
 
             TextField("", text: $item.text, axis: .vertical)
-                .font(.system(size: 16, design: .serif))
+                .font(Theme.serif(16))
                 .fixedSize(horizontal: false, vertical: true) // never clip a line that only just fits
                 .strikethrough(item.state == .cancelled)
                 .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 1))

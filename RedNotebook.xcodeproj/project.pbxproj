@@ -16,13 +16,17 @@
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
 		1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
 		1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */; };
+		2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB1D85FB3DE3714E7A592F /* CoverCustomizer.swift */; };
+		2A3ADB2B35284E5280C7E6AB /* Fraunces.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */; };
 		2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331087EAB51100176211A0D /* QuickNotesStrip.swift */; };
 		2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */; };
 		3327FC883547FB5CC2B25F6D /* DrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */; };
 		3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */; };
 		4365403B37113BE1C22FCEFE /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6AF157F404FEEC1AE4716E /* DiaryView.swift */; };
 		499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AE9BC272B1E886102676AB /* PhotoSticker.swift */; };
+		4A155A953CA6B57408902ED1 /* Fraunces-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 365034170459575EB351A501 /* Fraunces-OFL.txt */; };
 		53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */; };
+		5BC5A7588050C475C9473FA9 /* Fraunces-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */; };
 		65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */; };
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
@@ -54,6 +58,8 @@
 		EEF02E1A0044CB524AEDD9E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F31EAF5D06AE9354D5832BBF /* Assets.xcassets */; };
 		F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF75A703FAD381D19C8103 /* DayPage.swift */; };
 		F91BC574873F25A296149314 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717348824E1F5A8A3AD713B3 /* MonthView.swift */; };
+		FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */; };
+		FC5E8B843AFBA0E059D8F561 /* SoundEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B4CE8760D86F9CF1995277C /* SoundEffects.swift */; };
 		FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2F4039960E975B17AB58D /* NotebookSection.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,8 +77,11 @@
 		28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BujoStickers.swift; sourceTree = "<group>"; };
 		2EE892F9CE96993E0BEDD98B /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		363EAE3B2F3F2318C244BBCE /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
+		365034170459575EB351A501 /* Fraunces-OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Fraunces-OFL.txt"; sourceTree = "<group>"; };
 		365C3BEE813F4886FF60ADDB /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
+		3B4CE8760D86F9CF1995277C /* SoundEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffects.swift; sourceTree = "<group>"; };
 		3C03AF13F69E5A73BA5C9EA6 /* RedNotebook.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = RedNotebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fraunces-Italic.ttf"; sourceTree = "<group>"; };
 		40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelpers.swift; sourceTree = "<group>"; };
 		4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletItem.swift; sourceTree = "<group>"; };
 		4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCoverView.swift; sourceTree = "<group>"; };
@@ -80,10 +89,12 @@
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
 		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
 		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
+		73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fraunces.ttf; sourceTree = "<group>"; };
 		74552C6D655B1FCD71EBBC41 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutfitCanvas.swift; sourceTree = "<group>"; };
 		7619AFA459ED5027E674AB77 /* DrawnSticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawnSticker.swift; sourceTree = "<group>"; };
 		78B96FEC539EE00FA3A10302 /* BulletList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletList.swift; sourceTree = "<group>"; };
+		78FB1D85FB3DE3714E7A592F /* CoverCustomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCustomizer.swift; sourceTree = "<group>"; };
 		7B2E587CB9652567AA20C815 /* NewEventSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventSheet.swift; sourceTree = "<group>"; };
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
@@ -106,6 +117,7 @@
 		F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvas.swift; sourceTree = "<group>"; };
 		F31EAF5D06AE9354D5832BBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
+		FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverColor.swift; sourceTree = "<group>"; };
 		FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +180,9 @@
 			children = (
 				0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */,
 				F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */,
+				3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */,
+				365034170459575EB351A501 /* Fraunces-OFL.txt */,
+				73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -263,6 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				2EE892F9CE96993E0BEDD98B /* Components.swift */,
+				FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */,
+				3B4CE8760D86F9CF1995277C /* SoundEffects.swift */,
 				175E70D7A93D0DE220F4E6E3 /* Theme.swift */,
 			);
 			path = Theme;
@@ -271,6 +288,7 @@
 		D5B9385A2D4B4265DA9AAC87 /* Cover */ = {
 			isa = PBXGroup;
 			children = (
+				78FB1D85FB3DE3714E7A592F /* CoverCustomizer.swift */,
 				1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */,
 				4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */,
 			);
@@ -348,6 +366,9 @@
 				EEF02E1A0044CB524AEDD9E4 /* Assets.xcassets in Resources */,
 				1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */,
 				8797399104C8768C4ABB3389 /* Caveat.ttf in Resources */,
+				5BC5A7588050C475C9473FA9 /* Fraunces-Italic.ttf in Resources */,
+				4A155A953CA6B57408902ED1 /* Fraunces-OFL.txt in Resources */,
+				2A3ADB2B35284E5280C7E6AB /* Fraunces.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +388,8 @@
 				AD427AC12ABEAA3F126A3927 /* ClosetView.swift in Sources */,
 				1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */,
 				995E4699691492A30C5FE070 /* Components.swift in Sources */,
+				FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */,
+				2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */,
 				035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */,
 				D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */,
 				3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */,
@@ -394,6 +417,7 @@
 				2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */,
 				53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */,
 				7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */,
+				FC5E8B843AFBA0E059D8F561 /* SoundEffects.swift in Sources */,
 				2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */,
 				D3523B9D490455D99B596C7B /* StickerContent.swift in Sources */,
 				9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */,
@@ -482,8 +506,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Red Notebook";
-				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Red Notebook shows your calendar events in the agenda and can add new events you plan in the notebook.";
+				INFOPLIST_KEY_CFBundleDisplayName = "helin's";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "helin's shows your calendar events in the agenda and can add new events you plan in the notebook.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -502,8 +526,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Red Notebook";
-				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Red Notebook shows your calendar events in the agenda and can add new events you plan in the notebook.";
+				INFOPLIST_KEY_CFBundleDisplayName = "helin's";
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "helin's shows your calendar events in the agenda and can add new events you plan in the notebook.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (

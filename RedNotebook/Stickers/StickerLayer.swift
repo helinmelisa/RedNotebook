@@ -70,7 +70,7 @@ private struct PlacedSticker: View {
             .overlay {
                 if isSelected {
                     RoundedRectangle(cornerRadius: 6)
-                        .stroke(Theme.coverRed.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                        .stroke(Theme.red.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
                 }
             }
             .overlay(alignment: .topTrailing) {
@@ -79,7 +79,7 @@ private struct PlacedSticker: View {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 20))
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(.white, Theme.coverRed)
+                            .foregroundStyle(.white, Theme.red)
                     }
                     .offset(x: 10, y: -10)
                     .accessibilityLabel("Remove sticker")

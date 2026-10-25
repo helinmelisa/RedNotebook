@@ -29,7 +29,7 @@ struct NewEventSheet: View {
         NavigationStack {
             Form {
                 TextField("Title", text: $title)
-                    .font(.system(size: 17, design: .serif))
+                    .font(Theme.serif(17))
 
                 Section {
                     Toggle("All day", isOn: $isAllDay)
@@ -75,7 +75,7 @@ struct NewEventSheet: View {
                 end = newStart.addingTimeInterval(end.timeIntervalSince(oldStart))
             }
         }
-        .tint(Theme.coverRed)
+        .tint(Theme.accent)
         .presentationDetents([.medium, .large])
     }
 

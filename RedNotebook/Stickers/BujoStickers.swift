@@ -29,7 +29,7 @@ struct BujoStickerView: View {
         case .checkbox:
             ZStack {
                 RoundedRectangle(cornerRadius: 4).stroke(Self.ink, style: Self.doodleStroke).frame(width: 28, height: 28)
-                Tick().stroke(Theme.coverRed, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                Tick().stroke(Theme.red, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
                     .frame(width: 34, height: 30).offset(x: 4, y: -4)
             }
             .frame(width: 44, height: 44)
@@ -41,8 +41,8 @@ struct BujoStickerView: View {
             inkSymbol("heart")
         case .circleDoodle:
             ZStack {
-                Ellipse().stroke(Theme.coverRed, style: Self.doodleStroke)
-                Ellipse().trim(from: 0, to: 0.35).stroke(Theme.coverRed, style: Self.doodleStroke)
+                Ellipse().stroke(Theme.red, style: Self.doodleStroke)
+                Ellipse().trim(from: 0, to: 0.35).stroke(Theme.red, style: Self.doodleStroke)
                     .rotationEffect(.degrees(8)).scaleEffect(1.06)
             }
             .frame(width: 70, height: 44)
@@ -64,7 +64,7 @@ struct BujoStickerView: View {
         case .pin:
             Image(systemName: "pin.fill")
                 .font(.system(size: 30))
-                .foregroundStyle(Theme.coverRed)
+                .foregroundStyle(Theme.red)
                 .rotationEffect(.degrees(25))
                 .shadow(color: .black.opacity(0.25), radius: 1.5, x: 2, y: 2)
 
@@ -78,7 +78,7 @@ struct BujoStickerView: View {
         case .dividerHeart:
             HStack(spacing: 8) {
                 Rectangle().fill(Self.ink.opacity(0.7)).frame(width: 42, height: 1.5)
-                Image(systemName: "heart.fill").font(.system(size: 11)).foregroundStyle(Theme.coverRed)
+                Image(systemName: "heart.fill").font(.system(size: 11)).foregroundStyle(Theme.red)
                 Rectangle().fill(Self.ink.opacity(0.7)).frame(width: 42, height: 1.5)
             }
         case .highlighterYellow:
@@ -113,7 +113,7 @@ private struct Banner: View {
             }
             .offset(y: 7)
             Text(text)
-                .font(.system(size: 14, weight: .bold, design: .serif))
+                .font(Theme.serif(14, .bold))
                 .tracking(3)
                 .foregroundStyle(Color(red: 0.25, green: 0.20, blue: 0.22))
                 .frame(width: 110, height: 28)
@@ -164,9 +164,9 @@ private struct ImportantFlag: View {
         HStack(spacing: 0) {
             Rectangle().fill(Color(red: 0.35, green: 0.30, blue: 0.28)).frame(width: 2.5, height: 46)
             Pennant()
-                .fill(Theme.coverRed)
+                .fill(Theme.red)
                 .frame(width: 34, height: 26)
-                .overlay(Text("!").font(.system(size: 15, weight: .black, design: .serif)).foregroundStyle(.white).offset(x: -5))
+                .overlay(Text("!").font(Theme.serif(15, .black)).foregroundStyle(.white).offset(x: -5))
                 .offset(y: -10)
         }
         .stickerOutline(1.5)

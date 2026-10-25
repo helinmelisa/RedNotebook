@@ -107,7 +107,7 @@ struct TodayView: View {
 
     private func doneButton(_ action: @escaping () -> Void) -> some View {
         Button("Done") { withAnimation(.snappy) { action() } }
-            .font(.system(size: 14, weight: .semibold, design: .serif))
+            .font(Theme.serif(14, .semibold))
             .foregroundStyle(Theme.paper)
             .padding(.horizontal, 22)
             .padding(.vertical, 9)
@@ -201,9 +201,9 @@ private struct DayPageContent: View {
         return VStack(alignment: .leading, spacing: 4) {
             Rectangle().fill(Theme.ink.opacity(0.15)).frame(height: 0.5)
             Text("“\(quote.text)”")
-                .font(.system(size: 12, design: .serif).italic())
+                .font(Theme.serif(12).italic())
             Text("— \(quote.author)")
-                .font(.system(size: 10, design: .serif))
+                .font(Theme.serif(10))
         }
         .foregroundStyle(Theme.ink.opacity(0.55))
         .padding(.top, 10)

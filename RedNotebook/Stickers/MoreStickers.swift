@@ -34,7 +34,7 @@ struct MoreStickerView: View {
 
         // Words
         case .wordYay: Lettering(text: "yay!", color: Color(red: 0.95, green: 0.40, blue: 0.60))
-        case .wordLove: Lettering(text: "love", color: Theme.accent)
+        case .wordLove: Lettering(text: "love", color: Theme.red)
         case .wordOmg: Lettering(text: "omg", color: Color(red: 0.55, green: 0.40, blue: 0.80))
         case .wordThankYou: Lettering(text: "thank you", color: Color(red: 0.20, green: 0.55, blue: 0.55))
         case .wordGoodDay: Lettering(text: "good day ☀︎", color: Color(red: 0.95, green: 0.55, blue: 0.15))
@@ -196,9 +196,9 @@ private struct Stamp<Picture: View>: View {
             Perforated().fill(Color(red: 0.99, green: 0.98, blue: 0.95), style: FillStyle(eoFill: true))
             VStack(spacing: 3) {
                 picture
-                Text(title).font(.system(size: 8, weight: .heavy, design: .serif)).tracking(0.5)
+                Text(title).font(Theme.serif(8, .heavy)).tracking(0.5)
                     .lineLimit(1).minimumScaleFactor(0.7)
-                Text(value).font(.system(size: 8, weight: .semibold, design: .serif))
+                Text(value).font(Theme.serif(8, .semibold))
             }
             .foregroundStyle(.white)
             .frame(width: 50, height: 56)
@@ -301,12 +301,12 @@ private struct Ticket: View {
     var body: some View {
         HStack(spacing: 0) {
             Text("ADMIT ONE")
-                .font(.system(size: 11, weight: .bold, design: .serif))
+                .font(Theme.serif(11, .bold))
                 .tracking(1.5)
                 .frame(width: 76)
             Rectangle().fill(.clear).frame(width: 1)
                 .overlay(Rectangle().stroke(style: StrokeStyle(lineWidth: 1, dash: [3, 2])).foregroundStyle(.white.opacity(0.8)))
-            Text("Nº 25").font(.system(size: 9, weight: .semibold, design: .serif)).frame(width: 34)
+            Text("Nº 25").font(Theme.serif(9, .semibold)).frame(width: 34)
         }
         .foregroundStyle(Color(red: 0.25, green: 0.30, blue: 0.32))
         .frame(height: 40)
@@ -570,7 +570,7 @@ private struct WeekdayBadge: View {
             .overlay(Circle().stroke(.white.opacity(0.7), style: StrokeStyle(lineWidth: 1, dash: [2, 2])).padding(3))
             .overlay(
                 Text(text)
-                    .font(.system(size: 12, weight: .heavy, design: .serif))
+                    .font(Theme.serif(12, .heavy))
                     .tracking(0.5)
                     .foregroundStyle(.white)
             )

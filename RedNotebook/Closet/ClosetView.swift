@@ -27,7 +27,7 @@ struct ClosetView: View {
                 Text(selectedPiece == nil
                      ? "Tap a piece on you to move or resize it. It remembers the fit."
                      : "Drag to move, pinch to resize. Tap it again when it fits.")
-                    .font(.system(size: 11, design: .serif).italic())
+                    .font(Theme.serif(11).italic())
                     .foregroundStyle(Theme.ink.opacity(0.5))
             }
             .padding(.top, 20)
@@ -104,17 +104,17 @@ struct ClosetView: View {
                     if bodyPhotos.isEmpty {
                         PhotosPicker(selection: $bodyPhotoItem, matching: .images) {
                             Label("Add your full-length photo", systemImage: "camera")
-                                .font(.system(size: 12, weight: .semibold, design: .serif))
+                                .font(Theme.serif(12, .semibold))
                                 .foregroundStyle(Theme.paper)
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 8)
-                                .background(Capsule().fill(Theme.coverRed))
+                                .background(Capsule().fill(Theme.accent))
                         }
                     }
                     if let cuttingMessage {
                         VStack(spacing: 6) {
                             ProgressView()
-                            Text(cuttingMessage).font(.system(size: 12, design: .serif))
+                            Text(cuttingMessage).font(Theme.serif(12))
                         }
                         .padding(14)
                         .background(RoundedRectangle(cornerRadius: 10).fill(.ultraThinMaterial))
@@ -155,7 +155,7 @@ struct ClosetView: View {
                         withAnimation(.snappy) { category = option }
                     } label: {
                         Text("\(option.emoji) \(option.title)")
-                            .font(.system(size: 12, weight: .semibold, design: .serif))
+                            .font(Theme.serif(12, .semibold))
                             .foregroundStyle(Theme.ink.opacity(category == option ? 0.9 : 0.55))
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
@@ -176,7 +176,7 @@ struct ClosetView: View {
                 PhotosPicker(selection: $clothingPhoto, matching: .images) {
                     VStack(spacing: 4) {
                         Image(systemName: "plus").font(.system(size: 18, weight: .medium))
-                        Text("Add").font(.system(size: 10, design: .serif))
+                        Text("Add").font(Theme.serif(10))
                     }
                     .foregroundStyle(Theme.ink.opacity(0.5))
                     .frame(width: 64, height: 72)
@@ -188,7 +188,7 @@ struct ClosetView: View {
 
                 if inCategory.isEmpty {
                     Text("No \(category.title.lowercased()) yet. Add a photo of one, ideally laid flat on a plain background.")
-                        .font(.system(size: 12, design: .serif).italic())
+                        .font(Theme.serif(12).italic())
                         .foregroundStyle(Theme.ink.opacity(0.5))
                         .frame(width: 210, alignment: .leading)
                 }
@@ -204,7 +204,7 @@ struct ClosetView: View {
                         .frame(width: 64, height: 72)
                         .background(RoundedRectangle(cornerRadius: 8).fill(.white.opacity(0.6)))
                         .overlay(RoundedRectangle(cornerRadius: 8)
-                            .stroke(isWorn ? Theme.coverRed : Theme.ink.opacity(0.1), lineWidth: isWorn ? 2 : 1))
+                            .stroke(isWorn ? Theme.accent : Theme.ink.opacity(0.1), lineWidth: isWorn ? 2 : 1))
                     }
                     .buttonStyle(.plain)
                     .accessibilityLabel(isWorn ? "Take off" : "Wear")

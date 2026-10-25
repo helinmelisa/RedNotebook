@@ -13,7 +13,7 @@ struct DayHeader: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .center, spacing: 12) {
                 Text(page.day.formatted(.dateTime.day()))
-                    .font(.system(size: 54, weight: .bold, design: .serif))
+                    .font(Theme.serif(54, .bold))
                     .monospacedDigit()
                     .foregroundStyle(Theme.accent)
                     .frame(minWidth: 62, alignment: .leading)
@@ -31,7 +31,7 @@ struct DayHeader: View {
                             .foregroundStyle(Theme.inkTertiary)
                         if !Calendar.current.isDateInToday(page.day) {
                             Button("Today") { flip(to: .now) }
-                                .font(.system(size: 11, weight: .semibold, design: .serif))
+                                .font(Theme.serif(11, .semibold))
                                 .foregroundStyle(Theme.accent)
                                 .padding(.horizontal, 7)
                                 .padding(.vertical, 1)

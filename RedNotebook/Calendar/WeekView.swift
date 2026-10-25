@@ -14,11 +14,11 @@ struct WeekView: View {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("WEEK \(Calendar.current.component(.weekOfYear, from: selectedDay))")
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
+                        .font(Theme.serif(11, .semibold))
                         .tracking(2)
-                        .foregroundStyle(Theme.coverRed)
+                        .foregroundStyle(Theme.accent)
                     Text(rangeTitle(week))
-                        .font(.system(size: 24, weight: .semibold, design: .serif))
+                        .font(Theme.serif(24, .semibold))
                         .foregroundStyle(Theme.ink)
                 }
                 Spacer()
@@ -91,15 +91,15 @@ private struct WeekDayRow: View {
         HStack(alignment: .top, spacing: 12) {
             VStack(spacing: 0) {
                 Text(day.formatted(.dateTime.weekday(.abbreviated)).uppercased())
-                    .font(.system(size: 10, weight: .semibold, design: .serif))
+                    .font(Theme.serif(10, .semibold))
                     .tracking(1)
                 Text(day.formatted(.dateTime.day()))
-                    .font(.system(size: 20, weight: .semibold, design: .serif))
+                    .font(Theme.serif(20, .semibold))
                 if let mood = page?.mood {
                     Text(mood).font(.system(size: 12))
                 }
             }
-            .foregroundStyle(isToday ? Theme.coverRed : Theme.ink)
+            .foregroundStyle(isToday ? Theme.accent : Theme.ink)
             .frame(width: 40)
 
             VStack(alignment: .leading, spacing: 4) {
@@ -112,7 +112,7 @@ private struct WeekDayRow: View {
                 ForEach(items) { item in
                     HStack(alignment: .firstTextBaseline, spacing: 8) {
                         Text(item.symbol).font(.system(size: 13, weight: .bold)).frame(width: 12)
-                        Text(item.text).font(.system(size: 13, design: .serif)).lineLimit(1)
+                        Text(item.text).font(Theme.serif(13)).lineLimit(1)
                     }
                     .foregroundStyle(Theme.ink.opacity(item.isSettled ? 0.45 : 0.85))
                 }

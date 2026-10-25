@@ -23,8 +23,8 @@ struct LifeStickerView: View {
         case .colourPencil: ColourPencil().frame(width: 84, height: 18).rotationEffect(.degrees(-20)).stickerOutline()
         case .gradCap: symbol("graduationcap.fill", Color(red: 0.20, green: 0.20, blue: 0.28))
         case .laptop: palette("laptopcomputer", Color(red: 0.55, green: 0.58, blue: 0.65), Color(red: 0.62, green: 0.80, blue: 0.95))
-        case .alarmClock: palette("alarm.fill", Theme.accent, Color(red: 0.98, green: 0.95, blue: 0.88))
-        case .labelDeadline: TapeLabel(text: "deadline!", color: Theme.accent, textColor: .white)
+        case .alarmClock: palette("alarm.fill", Theme.red, Color(red: 0.98, green: 0.95, blue: 0.88))
+        case .labelDeadline: TapeLabel(text: "deadline!", color: Theme.red, textColor: .white)
         case .labelExam: TapeLabel(text: "exam", color: Color(red: 1.0, green: 0.85, blue: 0.35), textColor: Theme.ink)
 
         // Self-care
@@ -38,7 +38,7 @@ struct LifeStickerView: View {
         // Travel
         case .plane: symbol("airplane", Color(red: 0.35, green: 0.60, blue: 0.90)).rotationEffect(.degrees(-25))
         case .suitcase: palette("suitcase.rolling.fill", Color(red: 0.95, green: 0.60, blue: 0.35), Color(red: 0.35, green: 0.30, blue: 0.30))
-        case .mapPin: palette("mappin.and.ellipse", Theme.accent, Theme.ink.opacity(0.35))
+        case .mapPin: palette("mappin.and.ellipse", Theme.red, Theme.ink.opacity(0.35))
         case .camera: palette("camera.fill", Color(red: 0.30, green: 0.30, blue: 0.35), Color(red: 0.95, green: 0.70, blue: 0.75))
         case .globe: palette("globe.europe.africa.fill", Color(red: 0.45, green: 0.72, blue: 0.45), Color(red: 0.45, green: 0.68, blue: 0.95))
 
@@ -138,8 +138,8 @@ private struct ChristmasTree: View {
             }
             Rectangle().fill(Color(red: 0.50, green: 0.32, blue: 0.20)).frame(width: 8, height: 8).offset(y: 54)
             Image(systemName: "star.fill").font(.system(size: 13)).foregroundStyle(Color(red: 1.0, green: 0.82, blue: 0.30))
-            ForEach(Array([(-8.0, 24.0, Theme.accent), (9.0, 34.0, Color(red: 1.0, green: 0.82, blue: 0.3)),
-                           (-12.0, 44.0, Color(red: 0.45, green: 0.65, blue: 0.95)), (12.0, 46.0, Theme.accent)].enumerated()),
+            ForEach(Array([(-8.0, 24.0, Theme.red), (9.0, 34.0, Color(red: 1.0, green: 0.82, blue: 0.3)),
+                           (-12.0, 44.0, Color(red: 0.45, green: 0.65, blue: 0.95)), (12.0, 46.0, Theme.red)].enumerated()),
                     id: \.offset) { _, ball in
                 Circle().fill(ball.2).frame(width: 5).offset(x: ball.0, y: ball.1)
             }

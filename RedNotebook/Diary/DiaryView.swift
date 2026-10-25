@@ -23,15 +23,15 @@ struct DiaryView: View {
 
                 if matches.isEmpty {
                     Text(pages.isEmpty ? "No diary entries yet. Write one on the Today page." : "No entries match “\(search)”.")
-                        .font(.system(size: 15, design: .serif).italic())
+                        .font(Theme.serif(15).italic())
                         .foregroundStyle(Theme.ink.opacity(0.5))
                 }
 
                 ForEach(months.keys.sorted(by: >), id: \.self) { month in
                     Text(month.formatted(.dateTime.month(.wide).year()).uppercased())
-                        .font(.system(size: 11, weight: .semibold, design: .serif))
+                        .font(Theme.serif(11, .semibold))
                         .tracking(2)
-                        .foregroundStyle(Theme.coverRed)
+                        .foregroundStyle(Theme.accent)
                         .padding(.top, 6)
 
                     ForEach(months[month] ?? []) { page in
@@ -64,7 +64,7 @@ struct DiaryView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(Theme.ink.opacity(0.4))
             TextField("Search your diary", text: $search)
-                .font(.system(size: 15, design: .serif))
+                .font(Theme.serif(15))
                 .submitLabel(.search)
             if !search.isEmpty {
                 Button { search = "" } label: {
@@ -87,9 +87,9 @@ private struct DiaryEntry: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(page.day.formatted(.dateTime.day()))
-                    .font(.system(size: 22, weight: .semibold, design: .serif))
+                    .font(Theme.serif(22, .semibold))
                 Text(page.day.formatted(.dateTime.weekday(.wide)))
-                    .font(.system(size: 13, design: .serif))
+                    .font(Theme.serif(13))
                     .foregroundStyle(Theme.ink.opacity(0.55))
                 Spacer()
                 if let weather = page.weather {

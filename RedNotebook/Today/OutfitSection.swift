@@ -78,7 +78,7 @@ struct OutfitSection: View {
             Image(systemName: systemImage).font(.system(size: 18))
             Text(title)
         }
-        .font(.system(size: 11, design: .serif))
+        .font(Theme.serif(11))
         .foregroundStyle(Theme.ink.opacity(0.55))
         .frame(width: 100, height: 62)
         .background(

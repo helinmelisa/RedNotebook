@@ -25,7 +25,7 @@ struct StickerBookView: View {
             if lastAdded != nil {
                 Button { onOpenDay(day) } label: {
                     Label("Added to \(dayName) · Open page", systemImage: "checkmark")
-                        .font(.system(size: 13, weight: .semibold, design: .serif))
+                        .font(Theme.serif(13, .semibold))
                         .foregroundStyle(Theme.paper)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 9)
