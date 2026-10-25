@@ -19,6 +19,10 @@ struct MoreStickerView: View {
             Stamp(color: Color(red: 0.15, green: 0.30, blue: 0.62), title: "PORTO", value: "€1,20") {
                 BridgeArc().stroke(.white, lineWidth: 2).frame(width: 34, height: 16)
             }
+        case .stampLisboa:
+            Stamp(color: Color(red: 0.78, green: 0.20, blue: 0.20), title: "LISBOA", value: "€0,80") {
+                Image(systemName: "tram.fill").font(.system(size: 16)).foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.3))
+            }
         case .vianaHeart: VianaHeart().frame(width: 54, height: 50).stickerOutline()
 
         // Paper & scraps
@@ -53,7 +57,7 @@ struct MoreStickerView: View {
         case .weekdaySat: WeekdayBadge(text: "SAT", color: Color(red: 0.65, green: 0.58, blue: 0.85))
         case .weekdaySun: WeekdayBadge(text: "SUN", color: Color(red: 0.90, green: 0.55, blue: 0.75))
 
-        default: EmptyView()
+        default: LifeStickerView(sticker: sticker)
         }
     }
 }

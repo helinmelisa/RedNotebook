@@ -38,6 +38,7 @@
 		B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552C6D655B1FCD71EBBC41 /* TodoView.swift */; };
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
 		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
+		BB78ED30E9D56EB51C3A69C2 /* LifeStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679AA6F2257C2228E045E7F /* LifeStickers.swift */; };
 		CA6F165D5003D6BD21003FC6 /* StickerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */; };
 		D0BFDE4D311060225B20A73B /* CalendarHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */; };
 		D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45686A36B7F72E75004CFDE5 /* DayAgenda.swift */; };
@@ -87,6 +88,7 @@
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
+		A679AA6F2257C2228E045E7F /* LifeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStickers.swift; sourceTree = "<group>"; };
 		AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreStickers.swift; sourceTree = "<group>"; };
 		AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHeader.swift; sourceTree = "<group>"; };
 		B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerBookView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */,
 				7619AFA459ED5027E674AB77 /* DrawnSticker.swift */,
+				A679AA6F2257C2228E045E7F /* LifeStickers.swift */,
 				AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */,
 				21506043CFEC00E10FF1598A /* PhotoCutout.swift */,
 				B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */,
@@ -373,6 +376,7 @@
 				1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */,
 				74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */,
 				E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */,
+				BB78ED30E9D56EB51C3A69C2 /* LifeStickers.swift in Sources */,
 				E042A96584A68D7702E5BBF2 /* MealEntry.swift in Sources */,
 				9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */,
 				F91BC574873F25A296149314 /* MonthView.swift in Sources */,

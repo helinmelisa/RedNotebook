@@ -23,17 +23,32 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     case strawberry, cherries, mushroom, rainbow, catFace, bow
     // Weekdays
     case weekdayMon, weekdayTue, weekdayWed, weekdayThu, weekdayFri, weekdaySat, weekdaySun
+    // Seasons & holidays
+    case pumpkin, ghost, mapleLeaf, christmasTree, giftBox, tulip, sunflower, beachUmbrella, birthdayCake
+    // Study & work
+    case bookStack, colourPencil, gradCap, laptop, alarmClock, labelDeadline, labelExam
+    // Self-care
+    case waterGlass, sleepyMoon, teaCup, candle, pottedPlant, bubbleBath
+    // Travel
+    case plane, suitcase, mapPin, camera, globe
+    // More Portugal
+    case andorinha, portWine, stampLisboa
 
     var id: Self { self }
 
+    /// Sections of the sticker drawer, in the order they're shown.
     enum Category: String, CaseIterable {
         case cute = "Tape & cute"
+        case words = "Words"
+        case portugal = "Portugal 🇵🇹"
+        case seasons = "Seasons & holidays"
+        case study = "Study & work"
+        case selfCare = "Self-care"
+        case travel = "Travel"
         case labels = "Banners & labels"
         case doodles = "Ink doodles"
         case dividers = "Dividers & markers"
-        case portugal = "Portugal 🇵🇹"
         case paper = "Paper & scraps"
-        case words = "Words"
         case weekdays = "Weekdays"
     }
 
@@ -58,6 +73,16 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
             .cute
         case .weekdayMon, .weekdayTue, .weekdayWed, .weekdayThu, .weekdayFri, .weekdaySat, .weekdaySun:
             .weekdays
+        case .pumpkin, .ghost, .mapleLeaf, .christmasTree, .giftBox, .tulip, .sunflower, .beachUmbrella, .birthdayCake:
+            .seasons
+        case .bookStack, .colourPencil, .gradCap, .laptop, .alarmClock, .labelDeadline, .labelExam:
+            .study
+        case .waterGlass, .sleepyMoon, .teaCup, .candle, .pottedPlant, .bubbleBath:
+            .selfCare
+        case .plane, .suitcase, .mapPin, .camera, .globe:
+            .travel
+        case .andorinha, .portWine, .stampLisboa:
+            .portugal
         }
     }
 
@@ -128,6 +153,36 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .weekdayFri: "Friday"
         case .weekdaySat: "Saturday"
         case .weekdaySun: "Sunday"
+        case .pumpkin: "Pumpkin"
+        case .ghost: "Ghost"
+        case .mapleLeaf: "Autumn leaf"
+        case .christmasTree: "Christmas tree"
+        case .giftBox: "Gift"
+        case .tulip: "Tulip"
+        case .sunflower: "Sunflower"
+        case .beachUmbrella: "Beach umbrella"
+        case .birthdayCake: "Birthday cake"
+        case .bookStack: "Books"
+        case .colourPencil: "Pencil"
+        case .gradCap: "Graduation cap"
+        case .laptop: "Laptop"
+        case .alarmClock: "Alarm clock"
+        case .labelDeadline: "Deadline label"
+        case .labelExam: "Exam label"
+        case .waterGlass: "Glass of water"
+        case .sleepyMoon: "Sleepy moon"
+        case .teaCup: "Tea"
+        case .candle: "Candle"
+        case .pottedPlant: "Plant"
+        case .bubbleBath: "Bubble bath"
+        case .plane: "Plane"
+        case .suitcase: "Suitcase"
+        case .mapPin: "Map pin"
+        case .camera: "Camera"
+        case .globe: "Globe"
+        case .andorinha: "Swallow"
+        case .portWine: "Port wine"
+        case .stampLisboa: "Lisboa stamp"
         }
     }
 }
