@@ -13,7 +13,20 @@ xcodegen generate        # regenerate RedNotebook.xcodeproj after adding/removin
 open RedNotebook.xcodeproj
 ```
 
-Launch with the `--open` argument to skip the cover.
+Launch arguments for development: `--open` skips the cover, `--tab calendar|todo|diary|stickers` starts on a tab,
+and `--sample-data` fills in example content.
+
+### App icon
+
+The icon is drawn in code. To regenerate it:
+
+```sh
+swift Scripts/make_app_icon.swift /tmp/icon.png
+sips -s format jpeg /tmp/icon.png --out /tmp/icon.jpg   # flatten: App Store icons can't be transparent
+sips -s format png /tmp/icon.jpg --out RedNotebook/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png
+```
+
+The handwriting font is [Caveat](https://github.com/googlefonts/caveat) (SIL Open Font License, see `RedNotebook/Resources/Fonts`).
 
 ## Roadmap
 

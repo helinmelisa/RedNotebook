@@ -41,6 +41,7 @@
 		DE2C781C67F23A899E90DFF7 /* BujoStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */; };
 		E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B67464B0C01A407C165D896 /* TodayView.swift */; };
 		E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */; };
+		EEF02E1A0044CB524AEDD9E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F31EAF5D06AE9354D5832BBF /* Assets.xcassets */; };
 		F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF75A703FAD381D19C8103 /* DayPage.swift */; };
 		F91BC574873F25A296149314 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717348824E1F5A8A3AD713B3 /* MonthView.swift */; };
 		FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2F4039960E975B17AB58D /* NotebookSection.swift */; };
@@ -83,6 +84,7 @@
 		DE931863901B96C7EE8DC80E /* GridPaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPaper.swift; sourceTree = "<group>"; };
 		E35E6A0058041DA2C3004F1B /* StickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerContent.swift; sourceTree = "<group>"; };
 		E8D6B4E136C2B183144635B4 /* QuickNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNote.swift; sourceTree = "<group>"; };
+		F31EAF5D06AE9354D5832BBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
 		FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 		5F49E09DB6EB60ED62AB0203 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F31EAF5D06AE9354D5832BBF /* Assets.xcassets */,
 				59EFF0A1B0BE8D120852B6F6 /* Fonts */,
 			);
 			path = Resources;
@@ -300,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF02E1A0044CB524AEDD9E4 /* Assets.xcassets in Resources */,
 				1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */,
 				8797399104C8768C4ABB3389 /* Caveat.ttf in Resources */,
 			);
