@@ -26,6 +26,10 @@ struct MoreStickerView: View {
                     .symbolRenderingMode(.palette)
                     .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.35), .white)
             }
+        case .stampIstanbul:
+            Stamp(color: Color(red: 0.78, green: 0.12, blue: 0.15), title: "İSTANBUL", value: "₺15") {
+                Image(systemName: "moon.stars.fill").font(.system(size: 16)).foregroundStyle(.white)
+            }
         case .stampLisboa:
             Stamp(color: Color(red: 0.78, green: 0.20, blue: 0.20), title: "LISBOA", value: "€0,80") {
                 Image(systemName: "tram.fill").font(.system(size: 16)).foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.3))

@@ -51,6 +51,7 @@
 		9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */; };
 		A31921B064F7EA92777F501C /* MoreStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */; };
 		AD427AC12ABEAA3F126A3927 /* ClosetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DF040617BA6AFBFD07BF0E /* ClosetView.swift */; };
+		AF59FEC5AA64A013369F3B0F /* TurkiyeStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43376731151759376FDBA359 /* TurkiyeStickers.swift */; };
 		B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552C6D655B1FCD71EBBC41 /* TodoView.swift */; };
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
 		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
@@ -130,6 +131,7 @@
 		3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fraunces-Italic.ttf"; sourceTree = "<group>"; };
 		40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelpers.swift; sourceTree = "<group>"; };
 		4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletItem.swift; sourceTree = "<group>"; };
+		43376731151759376FDBA359 /* TurkiyeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkiyeStickers.swift; sourceTree = "<group>"; };
 		4528F7E9ECAD08D182A628D3 /* NotebookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookCoverView.swift; sourceTree = "<group>"; };
 		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
 		4AC5C815A656359CAD8772CA /* NotebookWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookWidget.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */,
 				FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */,
 				FAC37CDCAEC2F6EFE3C7BFA0 /* TravelStickers.swift */,
+				43376731151759376FDBA359 /* TurkiyeStickers.swift */,
 				675F81F330A865EB3A8A7F5D /* VintageStickers.swift */,
 			);
 			path = Stickers;
@@ -556,6 +559,7 @@
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,
 				B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */,
 				54D8393B772297A00A6B034C /* TravelStickers.swift in Sources */,
+				AF59FEC5AA64A013369F3B0F /* TurkiyeStickers.swift in Sources */,
 				FD62915744BC3A63787AEB0A /* VintageStickers.swift in Sources */,
 				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
 				DD8E664D5340BA141EA5AB85 /* YearView.swift in Sources */,

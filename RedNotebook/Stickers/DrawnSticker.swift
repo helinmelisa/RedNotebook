@@ -53,6 +53,8 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
     case waxSealRose, waxSealSprig, envelopeHeart, stampLavender, stampFern, newspaperScrap, musicSheet, kraftPaper,
          butterflyNight, butterflyCream, driedLavender, daisy, typewriter, satinBow, plasterTape, quoteStrip, pressedFlower,
          typedWords
+    // More Türkiye
+    case turkishCoffee, cezve, balloon, galataTower, tulipTR, seagull, kilimTile, stampIstanbul, kunefe, evilEyeHand
 
     var id: Self { self }
 
@@ -142,6 +144,8 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
              .butterflyNight, .butterflyCream, .driedLavender, .daisy, .typewriter, .satinBow, .plasterTape, .quoteStrip,
              .pressedFlower, .typedWords:
             .vintage
+        case .turkishCoffee, .cezve, .balloon, .galataTower, .tulipTR, .seagull, .kilimTile, .stampIstanbul, .kunefe, .evilEyeHand:
+            .turkiye
         }
     }
 
@@ -315,6 +319,16 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .quoteStrip: "Typed quote"
         case .pressedFlower: "Pressed flower"
         case .typedWords: "Typed words"
+        case .turkishCoffee: "Turkish coffee"
+        case .cezve: "Cezve"
+        case .balloon: "Cappadocia balloon"
+        case .galataTower: "Galata Tower"
+        case .tulipTR: "Lale"
+        case .seagull: "Seagull"
+        case .kilimTile: "Kilim pattern"
+        case .stampIstanbul: "İstanbul stamp"
+        case .kunefe: "Künefe"
+        case .evilEyeHand: "Hamsa with nazar"
         }
     }
 }

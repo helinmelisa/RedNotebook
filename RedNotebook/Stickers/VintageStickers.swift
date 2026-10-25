@@ -32,7 +32,7 @@ struct VintageStickerView: View {
                     TypedStrip(text: String(word)).offset(x: CGFloat(i % 2) * 8)
                 }
             }
-        default: EmptyView()
+        default: TurkiyeStickerView(sticker: sticker)
         }
     }
 }
