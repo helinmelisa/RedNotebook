@@ -53,6 +53,8 @@ struct NotebookView: View {
             CalendarView(selectedDay: $selectedDay, onOpenDay: openDay)
         case .todo:
             TodoView(onOpenDay: openDay)
+        case .stickers:
+            StickerBookView(day: selectedDay, onOpenDay: openDay)
         default:
             SectionPlaceholder(section: section)
                 .padding(.top, 20)

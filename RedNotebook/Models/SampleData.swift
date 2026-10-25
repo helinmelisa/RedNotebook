@@ -6,7 +6,7 @@ import SwiftData
 enum SampleData {
     @MainActor
     static let container: ModelContainer = {
-        let container = try! ModelContainer(for: DayPage.self,
+        let container = try! ModelContainer(for: DayPage.self, PhotoSticker.self,
                                             configurations: ModelConfiguration(isStoredInMemoryOnly: true))
         fill(container.mainContext)
         return container
@@ -35,6 +35,19 @@ enum SampleData {
         }
 
         let page = DayPage.page(for: .now, in: context)
+        if (page.stickers ?? []).isEmpty {
+            let examples: [(StickerChoice, Double, Double, Double)] = [
+                (.drawn(.washiPink), 0.45, 12, -4),
+                (.drawn(.flower), 0.85, 470, -10),
+                (.emoji("☕️"), 0.8, 760, 12),
+            ]
+            for (index, example) in examples.enumerated() {
+                let placement = StickerPlacement(choice: example.0, x: example.1, y: example.2,
+                                                 rotation: example.3, z: index)
+                context.insert(placement)
+                placement.page = page
+            }
+        }
         guard page.isEmpty else { return }
 
         page.mood = "😊"
