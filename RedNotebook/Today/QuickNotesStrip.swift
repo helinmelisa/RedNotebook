@@ -55,7 +55,7 @@ private struct StickyNote: View {
     var body: some View {
         TextField("Note…", text: $note.text, axis: .vertical)
             .lineLimit(5, reservesSpace: true)
-            .font(.system(size: 14, design: .serif))
+            .font(Theme.handwriting(size: 19))
             .foregroundStyle(Theme.ink)
             .padding(10)
             .frame(width: 120, height: 110, alignment: .topLeading)

@@ -5,6 +5,10 @@ import SwiftData
 struct RedNotebookApp: App {
     @State private var calendarStore = CalendarStore()
 
+    init() {
+        Theme.registerFonts()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()

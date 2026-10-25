@@ -1,3 +1,4 @@
+import CoreText
 import SwiftUI
 
 enum Theme {
@@ -28,6 +29,17 @@ enum Theme {
 
     /// Hobonichi's 3.7 mm grid, roughly in points on an iPhone.
     static let gridSpacing: CGFloat = 14
+
+    /// Caveat, a handwriting font, for the diary and sticky notes.
+    static func handwriting(size: CGFloat) -> Font {
+        .custom("Caveat", size: size)
+    }
+
+    /// Registers the bundled fonts. Call once at launch.
+    static func registerFonts() {
+        guard let url = Bundle.main.url(forResource: "Caveat", withExtension: "ttf") else { return }
+        CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
+    }
 }
 
 /// Small deterministic random generator so textures look the same on every render.

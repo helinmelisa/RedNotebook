@@ -71,8 +71,8 @@ private struct DayPageContent: View {
             PageSection(title: "Diary", color: NotebookSection.diary.tabColor) {
                 TextField("Dear diary…", text: $page.diaryText, axis: .vertical)
                     .lineLimit(6...)
-                    .font(.system(size: 16, design: .serif))
-                    .lineSpacing(6)
+                    .font(Theme.handwriting(size: 22))
+                    .lineSpacing(2)
                     .foregroundStyle(Theme.ink)
             }
 
