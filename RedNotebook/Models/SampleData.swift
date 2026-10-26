@@ -27,6 +27,26 @@ enum SampleData {
             }
         }
 
+        // Memories for "On this day", and some habit history for Year in pixels
+        let calendar = Calendar.current
+        for (offset, mood, text) in [(DateComponents(year: -1), "🥰", "First week in Porto! Walked along the Douro at sunset and ate a francesinha."),
+                                     (DateComponents(month: -1), "😊", "Thesis meeting went well, then coffee with Ana at Majestic.")] {
+            guard let day = calendar.date(byAdding: offset, to: .now) else { continue }
+            let memory = DayPage.page(for: day, in: context)
+            if memory.isEmpty {
+                memory.mood = mood
+                memory.diaryText = text
+            }
+        }
+        for offset in -40...0 {
+            guard let day = calendar.date(byAdding: .day, value: offset, to: .now) else { continue }
+            let page = DayPage.page(for: day, in: context)
+            if page.habitsDone.isEmpty {
+                page.habitsDone = Habit.defaults.map(\.id).filter { _ in Bool.random() }
+                if offset > -9 { page.habitsDone.append("water") }
+            }
+        }
+
         // Someday tasks have no page
         let someday = FetchDescriptor<BulletItem>(predicate: #Predicate { $0.page == nil })
         if (try? context.fetchCount(someday)) == 0 {

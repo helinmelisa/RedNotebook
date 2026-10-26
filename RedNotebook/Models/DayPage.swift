@@ -26,6 +26,11 @@ final class DayPage {
     @Attribute(.externalStorage) var outfitPhoto: Data?
     var outfitNote: String = ""
 
+    /// Ids of the habits ticked off on this day (see `Habit`).
+    var habitsDone: [String] = []
+    /// The answer to the question of the day.
+    var promptAnswer: String = ""
+
     /// Handwriting and doodles on the page (PencilKit drawing data).
     @Attribute(.externalStorage) var drawing: Data?
 
@@ -68,7 +73,7 @@ final class DayPage {
     }
 
     var isEmpty: Bool {
-        diaryText.isEmpty && mood == nil && weather == nil
+        diaryText.isEmpty && mood == nil && weather == nil && habitsDone.isEmpty && promptAnswer.isEmpty
             && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
             && [breakfast, lunch, dinner, snacks, outfitNote].allSatisfy(\.isEmpty) && outfitPhoto == nil
             && (outfitItems ?? []).isEmpty && drawing == nil && (meals ?? []).isEmpty

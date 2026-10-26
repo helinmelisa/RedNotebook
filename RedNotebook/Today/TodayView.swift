@@ -181,6 +181,8 @@ private struct DayPageContent: View {
         VStack(alignment: .leading, spacing: Theme.sectionSpacing) {
             DayHeader(page: page, day: $day)
 
+            HabitRow(page: page)
+
             PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
                 // Holiday and iPhone Calendar events first, then the notebook's own bullets
                 if let holiday = PortugueseHolidays.holiday(on: page.day) {
@@ -198,6 +200,9 @@ private struct DayPageContent: View {
                     .font(Theme.handwriting(size: 22))
                     .lineSpacing(2)
                     .foregroundStyle(Theme.ink)
+
+                DailyPromptCard(page: page)
+                    .padding(.top, 6)
             }
 
             if isShown(.outfit) {
@@ -223,6 +228,8 @@ private struct DayPageContent: View {
             }
 
             addToPage
+
+            OnThisDay(day: page.day) { day = $0 }
 
             PortugueseWordCard(day: page.day)
 
