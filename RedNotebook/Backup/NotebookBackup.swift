@@ -11,6 +11,10 @@ struct NotebookBackup: Codable {
     var photoStickers: [Data] = []
     var clothes: [Clothing] = []
     var bodyPhotos: [Data] = []
+    /// Settings kept outside the database (optional, so older backups still read).
+    var habits: String?
+    var countdowns: String?
+    var knownWords: String?
 
     static let lastBackupKey = "lastBackupDate"
 
@@ -93,6 +97,10 @@ extension NotebookBackup {
         }
 
         backup.bodyPhotos = try context.fetch(FetchDescriptor<BodyPhoto>()).compactMap(\.imageData)
+        let defaults = UserDefaults.standard
+        backup.habits = defaults.string(forKey: Habit.storageKey)
+        backup.countdowns = defaults.string(forKey: Countdown.storageKey)
+        backup.knownWords = defaults.string(forKey: WordDeck.knownKey)
 
         for page in try context.fetch(FetchDescriptor<DayPage>(sortBy: [SortDescriptor(\.day)])) where !page.isEmpty {
             backup.pages.append(Page(
@@ -182,6 +190,10 @@ extension NotebookBackup {
             return piece
         }
         for data in bodyPhotos { context.insert(BodyPhoto(imageData: data)) }
+        let defaults = UserDefaults.standard
+        for (key, value) in [(Habit.storageKey, habits), (Countdown.storageKey, countdowns), (WordDeck.knownKey, knownWords)] {
+            if let value { defaults.set(value, forKey: key) }
+        }
 
         for saved in pages {
             func makeItem(_ savedItem: Item) -> BulletItem {

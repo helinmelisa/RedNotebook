@@ -147,6 +147,22 @@ private struct DayPageContent: View {
     @State private var notesFrame: CGRect = .zero
     /// Optional sections opened from "Add to this page" (sections with something in them always show).
     @State private var opened: Set<OptionalSection> = []
+    @State private var countdownSheet: CountdownSheet?
+    @AppStorage(Countdown.storageKey) private var countdownsRaw = ""
+
+    enum CountdownSheet: Identifiable {
+        case new, edit(Countdown)
+        var id: String {
+            switch self {
+            case .new: "new"
+            case .edit(let countdown): countdown.id
+            }
+        }
+    }
+
+    private var hasUpcomingCountdown: Bool {
+        Countdown.list(from: countdownsRaw).contains { $0.daysLeft(from: page.day) >= 0 }
+    }
 
     enum OptionalSection: CaseIterable {
         case outfit, meals, notes
@@ -182,6 +198,8 @@ private struct DayPageContent: View {
             DayHeader(page: page, day: $day)
 
             HabitRow(page: page)
+
+            CountdownStrip(day: page.day, onAdd: { countdownSheet = .new }, onEdit: { countdownSheet = .edit($0) })
 
             PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
                 // Holiday and iPhone Calendar events first, then the notebook's own bullets
@@ -246,6 +264,12 @@ private struct DayPageContent: View {
                 .allowsHitTesting(!isDrawing)
         }
         .coordinateSpace(.named(Self.space))
+        .sheet(item: $countdownSheet) { sheet in
+            switch sheet {
+            case .new: CountdownEditor(countdown: nil)
+            case .edit(let countdown): CountdownEditor(countdown: countdown)
+            }
+        }
         .simultaneousGesture(swipeToFlip, including: selectedSticker == nil && !isDrawing ? .all : .subviews)
     }
 
@@ -255,13 +279,13 @@ private struct DayPageContent: View {
     @ViewBuilder
     private var addToPage: some View {
         let hidden = OptionalSection.allCases.filter { !isShown($0) }
-        if !hidden.isEmpty {
+        if !hidden.isEmpty || !hasUpcomingCountdown {
             VStack(alignment: .leading, spacing: 8) {
                 Text("ADD TO THIS PAGE")
                     .font(Theme.eyebrow)
                     .tracking(1.5)
                     .foregroundStyle(Theme.inkTertiary)
-                HStack(spacing: 8) {
+                FlowLayout(spacing: 8) {
                     ForEach(hidden, id: \.self) { section in
                         Button {
                             UISelectionFeedbackGenerator().selectionChanged()
@@ -270,18 +294,31 @@ private struct DayPageContent: View {
                                 QuickNote(colorIndex: 0).page = page
                             }
                         } label: {
-                            Label(section.title, systemImage: section.icon)
-                                .font(Theme.serif(13))
-                                .foregroundStyle(Theme.inkSecondary)
-                                .padding(.horizontal, 11)
-                                .padding(.vertical, 7)
-                                .background(Capsule().strokeBorder(Theme.hairline, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+                            chipLabel(section.title, systemImage: section.icon)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    if !hasUpcomingCountdown {
+                        Button {
+                            UISelectionFeedbackGenerator().selectionChanged()
+                            countdownSheet = .new
+                        } label: {
+                            chipLabel("Countdown", systemImage: "hourglass")
                         }
                         .buttonStyle(.plain)
                     }
                 }
             }
         }
+    }
+
+    private func chipLabel(_ title: String, systemImage: String) -> some View {
+        Label(title, systemImage: systemImage)
+            .font(Theme.serif(13))
+            .foregroundStyle(Theme.inkSecondary)
+            .padding(.horizontal, 11)
+            .padding(.vertical, 7)
+            .background(Capsule().strokeBorder(Theme.hairline, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
     }
 
     /// Swipe left for the next day, right for the previous one.

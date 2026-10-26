@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0170959D36B83C59AD422B96 /* Countdowns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D81FD67E0B22B17D65AB9 /* Countdowns.swift */; };
 		0250820A8412D1278045E60A /* BulletList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B96FEC539EE00FA3A10302 /* BulletList.swift */; };
 		02BA8C8D7615A57BC73A31F2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009BFB9BA002835C6D93AAEC /* CalendarView.swift */; };
 		035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B91D0224EBFFC32859A1120 /* DailyQuote.swift */; };
@@ -22,11 +23,13 @@
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
 		1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
 		1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */; };
+		1D69A6DA7F5C08CEA47235EF /* PortugueseWordCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A848BC0A87682D1413C3CAE /* PortugueseWordCard.swift */; };
 		1EFEF04072C971A7FEE02692 /* DailyPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C016C032D2F82D601B19855 /* DailyPrompt.swift */; };
 		2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB1D85FB3DE3714E7A592F /* CoverCustomizer.swift */; };
 		2A3ADB2B35284E5280C7E6AB /* Fraunces.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */; };
 		2B1F3CB7CBD97ED02BD61C30 /* Fraunces.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */; };
 		2C1CCB72515ACE59747A892B /* OnThisDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4FA104D069E7A77F9B448 /* OnThisDay.swift */; };
+		2C2D7194684E73C4A2BD3514 /* WordPractice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D441C7DB32D099FB8AEEFB0 /* WordPractice.swift */; };
 		2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331087EAB51100176211A0D /* QuickNotesStrip.swift */; };
 		2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */; };
 		3327FC883547FB5CC2B25F6D /* DrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */; };
@@ -130,6 +133,7 @@
 		24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortugueseHolidays.swift; sourceTree = "<group>"; };
 		25FF75A703FAD381D19C8103 /* DayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPage.swift; sourceTree = "<group>"; };
 		28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BujoStickers.swift; sourceTree = "<group>"; };
+		2A848BC0A87682D1413C3CAE /* PortugueseWordCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortugueseWordCard.swift; sourceTree = "<group>"; };
 		2E015E2082AC15B0D8B9A97C /* Seasons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seasons.swift; sourceTree = "<group>"; };
 		2EE892F9CE96993E0BEDD98B /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		363EAE3B2F3F2318C244BBCE /* WeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekView.swift; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 		365C3BEE813F4886FF60ADDB /* NotebookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookView.swift; sourceTree = "<group>"; };
 		3B4CE8760D86F9CF1995277C /* SoundEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffects.swift; sourceTree = "<group>"; };
 		3C03AF13F69E5A73BA5C9EA6 /* RedNotebook.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = RedNotebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D441C7DB32D099FB8AEEFB0 /* WordPractice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordPractice.swift; sourceTree = "<group>"; };
 		3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fraunces-Italic.ttf"; sourceTree = "<group>"; };
 		40D6E9C8CEF769CCD9FDE041 /* CalendarHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHelpers.swift; sourceTree = "<group>"; };
 		4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletItem.swift; sourceTree = "<group>"; };
@@ -166,6 +171,7 @@
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
 		9C016C032D2F82D601B19855 /* DailyPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrompt.swift; sourceTree = "<group>"; };
 		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
+		9D3D81FD67E0B22B17D65AB9 /* Countdowns.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdowns.swift; sourceTree = "<group>"; };
 		A391844B79F5B8404C4ECB55 /* BatchStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchStickers.swift; sourceTree = "<group>"; };
 		A679AA6F2257C2228E045E7F /* LifeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStickers.swift; sourceTree = "<group>"; };
 		AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreStickers.swift; sourceTree = "<group>"; };
@@ -342,6 +348,7 @@
 			children = (
 				78B96FEC539EE00FA3A10302 /* BulletList.swift */,
 				9CC635937986DF1B57FCB52A /* BulletMark.swift */,
+				9D3D81FD67E0B22B17D65AB9 /* Countdowns.swift */,
 				9C016C032D2F82D601B19855 /* DailyPrompt.swift */,
 				0B91D0224EBFFC32859A1120 /* DailyQuote.swift */,
 				AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */,
@@ -351,8 +358,10 @@
 				EAC4FA104D069E7A77F9B448 /* OnThisDay.swift */,
 				1E2C3BC7F4305F8D10F9E7E8 /* OutfitSection.swift */,
 				108712B02FB9535D942CA6F6 /* PortugueseWord.swift */,
+				2A848BC0A87682D1413C3CAE /* PortugueseWordCard.swift */,
 				C331087EAB51100176211A0D /* QuickNotesStrip.swift */,
 				1B67464B0C01A407C165D896 /* TodayView.swift */,
+				3D441C7DB32D099FB8AEEFB0 /* WordPractice.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -550,6 +559,7 @@
 				AD427AC12ABEAA3F126A3927 /* ClosetView.swift in Sources */,
 				1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */,
 				995E4699691492A30C5FE070 /* Components.swift in Sources */,
+				0170959D36B83C59AD422B96 /* Countdowns.swift in Sources */,
 				FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */,
 				2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */,
 				1EFEF04072C971A7FEE02692 /* DailyPrompt.swift in Sources */,
@@ -584,6 +594,7 @@
 				499B7BC1783669A253620FBA /* PhotoSticker.swift in Sources */,
 				D31273FAA4DE67580BA426FC /* PortugueseHolidays.swift in Sources */,
 				C01C7ACB871CA4A7C937B0FF /* PortugueseWord.swift in Sources */,
+				1D69A6DA7F5C08CEA47235EF /* PortugueseWordCard.swift in Sources */,
 				06CC6C8082F36D1D61884501 /* QuickNote.swift in Sources */,
 				2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */,
 				53B922E06CEFD54044C2615C /* RedNotebookApp.swift in Sources */,
@@ -602,6 +613,7 @@
 				AF59FEC5AA64A013369F3B0F /* TurkiyeStickers.swift in Sources */,
 				FD62915744BC3A63787AEB0A /* VintageStickers.swift in Sources */,
 				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
+				2C2D7194684E73C4A2BD3514 /* WordPractice.swift in Sources */,
 				DD8E664D5340BA141EA5AB85 /* YearView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

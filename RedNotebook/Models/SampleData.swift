@@ -47,6 +47,14 @@ enum SampleData {
             }
         }
 
+        if UserDefaults.standard.string(forKey: Countdown.storageKey) == nil {
+            UserDefaults.standard.set(Countdown.encode([
+                Countdown(emoji: "✈️", title: "Antalya", date: calendar.date(byAdding: .day, value: 12, to: .now)!),
+                Countdown(emoji: "🎄", title: "Christmas", date: calendar.date(from: DateComponents(year: calendar.component(.year, from: .now), month: 12, day: 25))!),
+                Countdown(emoji: "🎓", title: "Thesis", date: calendar.date(byAdding: .day, value: 94, to: .now)!),
+            ]), forKey: Countdown.storageKey)
+        }
+
         // Someday tasks have no page
         let someday = FetchDescriptor<BulletItem>(predicate: #Predicate { $0.page == nil })
         if (try? context.fetchCount(someday)) == 0 {

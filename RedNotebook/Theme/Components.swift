@@ -154,3 +154,51 @@ struct PrintGrain: View {
         .accessibilityHidden(true)
     }
 }
+
+/// Lays views out in rows, wrapping to the next line when one is full (like words in a paragraph).
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 8
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let rows = rows(for: subviews, width: proposal.width ?? .infinity)
+        var height: CGFloat = 0
+        var width: CGFloat = 0
+        for row in rows {
+            let sizes = row.map { $0.sizeThatFits(.unspecified) }
+            height += sizes.map(\.height).max() ?? 0
+            let rowWidth: CGFloat = sizes.map(\.width).reduce(0, +) + spacing * CGFloat(row.count - 1)
+            width = max(width, rowWidth)
+        }
+        height += spacing * CGFloat(max(rows.count - 1, 0))
+        return CGSize(width: proposal.width ?? width, height: height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        var y = bounds.minY
+        for row in rows(for: subviews, width: bounds.width) {
+            var x = bounds.minX
+            let rowHeight = row.map { $0.sizeThatFits(.unspecified).height }.max() ?? 0
+            for subview in row {
+                let size = subview.sizeThatFits(.unspecified)
+                subview.place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(size))
+                x += size.width + spacing
+            }
+            y += rowHeight + spacing
+        }
+    }
+
+    private func rows(for subviews: Subviews, width: CGFloat) -> [[LayoutSubviews.Element]] {
+        var rows: [[LayoutSubviews.Element]] = [[]]
+        var x: CGFloat = 0
+        for subview in subviews {
+            let w = subview.sizeThatFits(.unspecified).width
+            if x > 0 && x + w > width {
+                rows.append([])
+                x = 0
+            }
+            rows[rows.count - 1].append(subview)
+            x += w + spacing
+        }
+        return rows
+    }
+}
