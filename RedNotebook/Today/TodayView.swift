@@ -145,6 +145,37 @@ private struct DayPageContent: View {
     @Environment(CalendarStore.self) private var calendarStore
     /// Where the sticky notes strip is, so swiping inside it scrolls the notes instead of flipping the day.
     @State private var notesFrame: CGRect = .zero
+    /// Optional sections opened from "Add to this page" (sections with something in them always show).
+    @State private var opened: Set<OptionalSection> = []
+
+    enum OptionalSection: CaseIterable {
+        case outfit, meals, notes
+
+        var title: String {
+            switch self {
+            case .outfit: "Outfit"
+            case .meals: "What I ate"
+            case .notes: "Note"
+            }
+        }
+
+        var icon: String {
+            switch self {
+            case .outfit: "hanger"
+            case .meals: "fork.knife"
+            case .notes: "note.text"
+            }
+        }
+    }
+
+    private func isShown(_ section: OptionalSection) -> Bool {
+        if opened.contains(section) { return true }
+        switch section {
+        case .outfit: return !page.wornItems.isEmpty || page.outfitPhoto != nil || !page.outfitNote.isEmpty
+        case .meals: return !(page.meals ?? []).isEmpty || ![page.breakfast, page.lunch, page.dinner, page.snacks].allSatisfy(\.isEmpty)
+        case .notes: return !(page.notes ?? []).isEmpty
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.sectionSpacing) {
@@ -163,24 +194,35 @@ private struct DayPageContent: View {
 
             PageSection(title: "Diary", color: NotebookSection.diary.tabColor) {
                 TextField("Dear diary…", text: $page.diaryText, axis: .vertical)
-                    .lineLimit(6...)
+                    .lineLimit(3...)
                     .font(Theme.handwriting(size: 22))
                     .lineSpacing(2)
                     .foregroundStyle(Theme.ink)
             }
 
-            PageSection(title: "Today's outfit", color: NotebookSection.stickers.tabColor) {
-                OutfitSection(page: page, onDressUp: onDressUp)
+            if isShown(.outfit) {
+                PageSection(title: "Today's outfit", color: NotebookSection.stickers.tabColor) {
+                    OutfitSection(page: page, onDressUp: onDressUp)
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
-            PageSection(title: "What I ate", color: NotebookSection.calendar.tabColor) {
-                MealsSection(page: page)
+            if isShown(.meals) {
+                PageSection(title: "What I ate", color: NotebookSection.calendar.tabColor) {
+                    MealsSection(page: page)
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
-            PageSection(title: "Little notes", color: NotebookSection.today.tabColor) {
-                QuickNotesStrip(page: page)
-                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.space)) } action: { notesFrame = $0 }
+            if isShown(.notes) {
+                PageSection(title: "Little notes", color: NotebookSection.today.tabColor) {
+                    QuickNotesStrip(page: page)
+                        .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.space)) } action: { notesFrame = $0 }
+                }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
+
+            addToPage
 
             PortugueseWordCard(day: page.day)
 
@@ -201,6 +243,39 @@ private struct DayPageContent: View {
     }
 
     private static let space = "dayPage"
+
+    /// Chips for the sections this page doesn't use yet, so new pages stay short and calm.
+    @ViewBuilder
+    private var addToPage: some View {
+        let hidden = OptionalSection.allCases.filter { !isShown($0) }
+        if !hidden.isEmpty {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("ADD TO THIS PAGE")
+                    .font(Theme.eyebrow)
+                    .tracking(1.5)
+                    .foregroundStyle(Theme.inkTertiary)
+                HStack(spacing: 8) {
+                    ForEach(hidden, id: \.self) { section in
+                        Button {
+                            UISelectionFeedbackGenerator().selectionChanged()
+                            _ = withAnimation(.snappy) { opened.insert(section) }
+                            if section == .notes {
+                                QuickNote(colorIndex: 0).page = page
+                            }
+                        } label: {
+                            Label(section.title, systemImage: section.icon)
+                                .font(Theme.serif(13))
+                                .foregroundStyle(Theme.inkSecondary)
+                                .padding(.horizontal, 11)
+                                .padding(.vertical, 7)
+                                .background(Capsule().strokeBorder(Theme.hairline, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
+    }
 
     /// Swipe left for the next day, right for the previous one.
     private var swipeToFlip: some Gesture {

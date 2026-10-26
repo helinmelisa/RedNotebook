@@ -21,10 +21,15 @@ struct DayHeader: View {
                         .foregroundStyle(Theme.ink)
                     Text(page.day.formatted(.dateTime.month(.wide).year()))
                         .font(Theme.text(17))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                         .foregroundStyle(Theme.inkSecondary)
-                    HStack(spacing: 8) {
-                        Text(dayOfYearLabel)
-                            .foregroundStyle(Theme.inkTertiary)
+                    Text(dayOfYearLabel)
+                        .font(Theme.text(11))
+                        .foregroundStyle(Theme.inkTertiary)
+                        .lineLimit(1)
+                    HStack(spacing: 6) {
+                        weatherChip
                         if !Calendar.current.isDateInToday(page.day) {
                             Button("Today") { flip(to: .now) }
                                 .font(Theme.serif(11, .semibold))
@@ -35,7 +40,8 @@ struct DayHeader: View {
                                 .accessibilityLabel("Back to today")
                         }
                     }
-                    .font(Theme.text(11))
+                    .fixedSize()
+                    .padding(.top, 3)
                 }
 
                 Spacer(minLength: 0)
@@ -86,24 +92,44 @@ struct DayHeader: View {
                     .accessibilityAddTraits(selected ? .isSelected : [])
                 }
             }
-            HStack(spacing: 2) {
-                ForEach(Self.weathers, id: \.self) { weather in
-                    let selected = page.weather == weather
-                    Button { toggle(\.weather, weather) } label: {
-                        // Selected weather turns colourful; snowflake and wind have no filled variant
-                        Image(systemName: selected && !["snowflake", "wind"].contains(weather) ? "\(weather).fill" : weather)
-                            .symbolRenderingMode(selected ? .multicolor : .monochrome)
-                            .font(.system(size: 15))
-                            .frame(width: 32, height: 26)
-                            .foregroundStyle(selected ? Theme.ink : Theme.inkTertiary)
-                            .background(Capsule().fill(selected ? NotebookSection.calendar.tabColor.opacity(0.35) : .clear))
-                    }
-                    .accessibilityLabel("Weather \(weather)")
-                    .accessibilityAddTraits(selected ? .isSelected : [])
-                }
-            }
         }
         .buttonStyle(.plain)
+    }
+
+    /// Weather as one small chip; tap to choose. Saves a whole row on the page.
+    private var weatherChip: some View {
+        Menu {
+            ForEach(Self.weathers, id: \.self) { weather in
+                Button { toggle(\.weather, weather) } label: {
+                    Label(Self.weatherName(weather), systemImage: weather)
+                }
+            }
+        } label: {
+            HStack(spacing: 3) {
+                Image(systemName: page.weather.map { ["snowflake", "wind"].contains($0) ? $0 : "\($0).fill" } ?? "cloud.sun")
+                    .symbolRenderingMode(page.weather == nil ? .monochrome : .multicolor)
+                if page.weather == nil { Text("weather") }
+            }
+            .font(Theme.text(11))
+            .foregroundStyle(Theme.inkTertiary)
+            .padding(.horizontal, 7)
+            .padding(.vertical, 2)
+            .background(Capsule().stroke(Theme.hairline, lineWidth: 1))
+        }
+        .accessibilityLabel(page.weather.map { "Weather: \(Self.weatherName($0))" } ?? "Add weather")
+    }
+
+    private static func weatherName(_ symbol: String) -> String {
+        switch symbol {
+        case "sun.max": "Sunny"
+        case "cloud.sun": "Partly cloudy"
+        case "cloud": "Cloudy"
+        case "cloud.rain": "Rainy"
+        case "cloud.bolt": "Stormy"
+        case "snowflake": "Snow"
+        case "wind": "Windy"
+        default: symbol
+        }
     }
 
     private var dayOfYearLabel: String {
