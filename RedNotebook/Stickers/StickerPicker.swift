@@ -13,7 +13,10 @@ struct StickerPicker: View {
     @State private var isCutting = false
 
     var body: some View {
+        ScrollViewReader { proxy in
         VStack(alignment: .leading, spacing: 22) {
+            jumpBar(proxy)
+
             section("My stickers") {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 76), spacing: 12)], spacing: 12) {
                     addPolaroid
@@ -38,6 +41,7 @@ struct StickerPicker: View {
                         }
                     }
                 }
+                .id(category.rawValue)
             }
 
             section("Emoji") {
@@ -54,6 +58,7 @@ struct StickerPicker: View {
         .onChange(of: photoItem) { _, item in
             guard let item else { return }
             Task { await makeSticker(from: item) }
+        }
         }
 
     }
@@ -98,6 +103,29 @@ struct StickerPicker: View {
         }
         .disabled(isCutting)
         .accessibilityLabel("Add photos in a frame")
+    }
+
+    /// Category chips that jump to a group, so the whole sticker book doesn't have to be scrolled through.
+    private func jumpBar(_ proxy: ScrollViewProxy) -> some View {
+        ScrollView(.horizontal) {
+            HStack(spacing: 6) {
+                ForEach(DrawnSticker.Category.allCases, id: \.self) { category in
+                    Button {
+                        UISelectionFeedbackGenerator().selectionChanged()
+                        withAnimation(.easeInOut(duration: 0.35)) { proxy.scrollTo(category.rawValue, anchor: .top) }
+                    } label: {
+                        Text(category.rawValue)
+                            .font(Theme.serif(12, .semibold))
+                            .foregroundStyle(Theme.inkSecondary)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(Capsule().fill(NotebookSection.stickers.tabColor.opacity(0.25)))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .scrollIndicators(.hidden)
     }
 
     private func tile(_ choice: StickerChoice, size: CGFloat) -> some View {
