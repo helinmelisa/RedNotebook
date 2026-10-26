@@ -22,7 +22,7 @@ struct CoverCustomizer: View {
 
                     VStack(alignment: .leading, spacing: 12) {
                         SectionLabel(title: "Cover", color: color.accent)
-                        HStack(spacing: 10) {
+                        HStack(spacing: 8) {
                             ForEach(CoverColor.allCases) { option in
                                 Button {
                                     UISelectionFeedbackGenerator().selectionChanged()
@@ -31,7 +31,7 @@ struct CoverCustomizer: View {
                                     Circle()
                                         .fill(LinearGradient(colors: [option.light, option.base, option.dark],
                                                              startPoint: .topLeading, endPoint: .bottomTrailing))
-                                        .frame(width: 34, height: 34)
+                                        .frame(width: 32, height: 32)
                                         .overlay(Circle().stroke(Theme.paper, lineWidth: 2).padding(2))
                                         .overlay(Circle().stroke(option == color ? Theme.ink : .clear, lineWidth: 2))
                                 }
