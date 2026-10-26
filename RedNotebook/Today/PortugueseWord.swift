@@ -153,71 +153,22 @@ enum PortugueseSpeaker {
     }
 }
 
-/// "Palavra do dia": an index card at the bottom of each day's page.
-struct PortugueseWordCard: View {
-    let day: Date
-
+/// An index card: white with faint blue lines and a red margin line.
+struct IndexCardBackground: View {
     var body: some View {
-        let entry = PortugueseWord.of(day)
-
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(alignment: .firstTextBaseline) {
-                Text("PALAVRA DO DIA · 🇵🇹")
-                    .font(Theme.eyebrow)
-                    .tracking(1.5)
-                    .foregroundStyle(PortugueseHolidays.color)
-                Spacer()
-                Button {
-                    PortugueseSpeaker.say("\(entry.word). \(entry.sentence)")
-                } label: {
-                    Image(systemName: "speaker.wave.2")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(PortugueseHolidays.color)
-                        .frame(width: 32, height: 26)
+        // Lines drawn over the card (not beside it), so the card stays the size of what's on it
+        Rectangle()
+            .fill(Color(red: 1.0, green: 0.995, blue: 0.98))
+            .overlay(alignment: .topLeading) {
+                ZStack(alignment: .topLeading) {
+                    VStack(spacing: 22) {
+                        ForEach(0..<30, id: \.self) { _ in Rectangle().fill(Color(red: 0.55, green: 0.70, blue: 0.85).opacity(0.18)).frame(height: 0.7) }
+                    }
+                    .padding(.top, 34)
+                    Rectangle().fill(Color(red: 0.92, green: 0.45, blue: 0.45).opacity(0.35)).frame(height: 0.8).padding(.top, 30)
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Hear it in Portuguese")
-            }
-
-            Text(entry.word)
-                .font(Theme.serif(24, .semibold))
-                .foregroundStyle(Theme.ink)
-            Text(entry.meaning)
-                .font(Theme.serif(13).italic())
-                .foregroundStyle(Theme.inkSecondary)
-
-            Rectangle().fill(Theme.hairline).frame(height: 0.5).padding(.vertical, 2)
-
-            Text(entry.sentence)
-                .font(Theme.handwriting(size: 21))
-                .foregroundStyle(Theme.ink)
-            Text(entry.translation)
-                .font(Theme.serif(12))
-                .foregroundStyle(Theme.inkTertiary)
-        }
-        .padding(14)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            // An index card: white with faint blue lines and a red margin line
-            ZStack(alignment: .topLeading) {
-                Rectangle().fill(Color(red: 1.0, green: 0.995, blue: 0.98))
-                VStack(spacing: 22) {
-                    ForEach(0..<8) { _ in Rectangle().fill(Color(red: 0.55, green: 0.70, blue: 0.85).opacity(0.18)).frame(height: 0.7) }
-                }
-                .padding(.top, 34)
-                Rectangle().fill(Color(red: 0.92, green: 0.45, blue: 0.45).opacity(0.35)).frame(height: 0.8).padding(.top, 30)
             }
             .clipped()
             .shadow(color: .black.opacity(0.12), radius: 2, x: 1, y: 1.5)
-        )
-        // Held on with a strip of washi tape
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(PortugueseHolidays.color.opacity(0.35))
-                .frame(width: 64, height: 16)
-                .rotationEffect(.degrees(-4))
-                .offset(y: -8)
-        }
-        .rotationEffect(.degrees(-0.6))
     }
 }
