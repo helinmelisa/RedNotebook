@@ -4,6 +4,8 @@ import SwiftUI
 /// Stickers stuck on a day page. Tap one to select it, then drag, pinch and twist it.
 struct StickerLayer: View {
     let page: DayPage
+    /// The diary page's stickers instead of the Today page's.
+    var onDiary = false
     @Binding var selection: PersistentIdentifier?
 
     @Environment(\.modelContext) private var context
@@ -12,7 +14,7 @@ struct StickerLayer: View {
 
     var body: some View {
         GeometryReader { geo in
-            ForEach(page.sortedStickers) { placement in
+            ForEach(page.stickers(onDiary: onDiary)) { placement in
                 if let choice = placement.choice {
                     PlacedSticker(placement: placement, choice: choice, pageWidth: geo.size.width,
                                   isSelected: selection == placement.persistentModelID,
@@ -67,12 +69,13 @@ struct StickerLayer: View {
 
 extension DayPage {
     /// Sticks a new sticker near the top of the page, slightly tilted like it was stuck by hand.
-    func addSticker(_ choice: StickerChoice, in context: ModelContext) -> StickerPlacement {
+    func addSticker(_ choice: StickerChoice, in context: ModelContext, onDiary: Bool = false) -> StickerPlacement {
         let placement = StickerPlacement(choice: choice,
                                          x: .random(in: 0.3...0.7),
                                          y: .random(in: 140...260),
                                          rotation: .random(in: -12...12),
                                          z: (sortedStickers.last?.z ?? 0) + 1)
+        placement.onDiary = onDiary
         context.insert(placement)
         placement.page = self
         return placement

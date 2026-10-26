@@ -38,6 +38,8 @@ final class StickerPlacement {
     @Attribute(.externalStorage) var imageData: Data?
     /// Any further photos, for film and photo-booth strips.
     var extraImages: [Data]?
+    /// Stuck on the day's diary page rather than its Today page.
+    var onDiary: Bool = false
     var page: DayPage?
     var photo: PhotoSticker?
 

@@ -35,6 +35,8 @@ final class DayPage {
 
     /// Handwriting and doodles on the page (PencilKit drawing data).
     @Attribute(.externalStorage) var drawing: Data?
+    /// Handwriting and doodles on the day's dotted diary page.
+    @Attribute(.externalStorage) var diaryDrawing: Data?
 
     /// Clothes from the closet worn on this day.
     @Relationship(deleteRule: .nullify, inverse: \ClothingItem.days)
@@ -65,8 +67,13 @@ final class DayPage {
         (notes ?? []).sorted { $0.createdAt < $1.createdAt }
     }
 
+    /// Every sticker on the day, on the Today page and the diary page.
     var sortedStickers: [StickerPlacement] {
         (stickers ?? []).sorted { $0.z < $1.z }
+    }
+
+    func stickers(onDiary: Bool) -> [StickerPlacement] {
+        sortedStickers.filter { $0.onDiary == onDiary }
     }
 
     /// Worn clothes in the order they're layered on the body.
@@ -78,7 +85,7 @@ final class DayPage {
         diaryText.isEmpty && mood == nil && weather == nil && habitsDone.isEmpty && promptAnswer.isEmpty
             && (items ?? []).isEmpty && (notes ?? []).isEmpty && (stickers ?? []).isEmpty
             && [breakfast, lunch, dinner, snacks, outfitNote].allSatisfy(\.isEmpty) && outfitPhoto == nil
-            && (outfitItems ?? []).isEmpty && drawing == nil && (meals ?? []).isEmpty
+            && (outfitItems ?? []).isEmpty && drawing == nil && diaryDrawing == nil && (meals ?? []).isEmpty
     }
 }
 

@@ -52,7 +52,7 @@ struct NotebookView: View {
         case .todo:
             TodoView(onOpenDay: openDay)
         case .diary:
-            DiaryView(onOpenDay: openDay)
+            DiaryView(day: $selectedDay)
         case .closet:
             ClosetView(day: selectedDay)
         case .stickers:

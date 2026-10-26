@@ -29,6 +29,7 @@ struct NotebookBackup: Codable {
         var outfitPhoto: Data?
         var outfitNote: String
         var drawing: Data?
+        var diaryDrawing: Data?
         /// Indexes into `clothes`.
         var outfitItems: [Int]
         var items: [Item]
@@ -66,6 +67,7 @@ struct NotebookBackup: Codable {
         var text: String
         var imageData: Data?
         var extraImages: [Data]?
+        var onDiary: Bool?
         /// Index into `photoStickers`.
         var photo: Int?
     }
@@ -107,7 +109,7 @@ extension NotebookBackup {
             backup.pages.append(Page(
                 day: page.day, diaryText: page.diaryText, mood: page.mood, weather: page.weather,
                 habitsDone: page.habitsDone, promptAnswer: page.promptAnswer, hiddenParts: page.hiddenParts,
-                outfitPhoto: page.outfitPhoto, outfitNote: page.outfitNote, drawing: page.drawing,
+                outfitPhoto: page.outfitPhoto, outfitNote: page.outfitNote, drawing: page.drawing, diaryDrawing: page.diaryDrawing,
                 outfitItems: (page.outfitItems ?? []).compactMap { clothingIndex[$0.persistentModelID] },
                 items: page.sortedItems.map(Item.init),
                 meals: page.sortedMeals.map { Meal(time: $0.time, text: $0.text) },
@@ -116,7 +118,7 @@ extension NotebookBackup {
                     Sticker(kind: sticker.kindRaw, value: sticker.value, x: sticker.x, y: sticker.y,
                             scale: sticker.scale, rotation: sticker.rotation, z: sticker.z,
                             createdAt: sticker.createdAt, text: sticker.text, imageData: sticker.imageData,
-                            extraImages: sticker.extraImages,
+                            extraImages: sticker.extraImages, onDiary: sticker.onDiary,
                             photo: sticker.photo.flatMap { photoIndex[$0.persistentModelID] })
                 },
                 breakfast: page.breakfast, lunch: page.lunch, dinner: page.dinner, snacks: page.snacks
@@ -221,6 +223,7 @@ extension NotebookBackup {
             page.outfitPhoto = saved.outfitPhoto
             page.outfitNote = saved.outfitNote
             page.drawing = saved.drawing
+            page.diaryDrawing = saved.diaryDrawing
             page.breakfast = saved.breakfast
             page.lunch = saved.lunch
             page.dinner = saved.dinner
@@ -249,6 +252,7 @@ extension NotebookBackup {
                 sticker.text = savedSticker.text
                 sticker.imageData = savedSticker.imageData
                 sticker.extraImages = savedSticker.extraImages
+                sticker.onDiary = savedSticker.onDiary ?? false
                 context.insert(sticker)
                 sticker.page = page
                 if let index = savedSticker.photo, photoStickers.indices.contains(index) {

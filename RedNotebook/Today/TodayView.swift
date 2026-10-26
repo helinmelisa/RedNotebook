@@ -1,18 +1,7 @@
-import PhotosUI
 import SwiftUI
 import SwiftData
 
-/// What the tools are doing on the open page, shared between the page and the tool dock around it.
-@Observable
-final class PageTools {
-    var selectedSticker: PersistentIdentifier?
-    var isDrawing = false
-
-    /// Moving a sticker or drawing: drags belong to the page, so it neither scrolls nor turns.
-    var isBusy: Bool { selectedSticker != nil || isDrawing }
-}
-
-/// The "1 day 1 page" spread: header, bullets, diary, sticky notes and the quote of the day.
+/// The "1 day 1 page" spread: header, habits, tasks, the question of the day, sticky notes and the quote of the day.
 /// Turn the pages with a finger, like the real notebook.
 struct TodayView: View {
     @Binding var day: Date
@@ -21,7 +10,6 @@ struct TodayView: View {
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
     @State private var tools = PageTools()
-    @State private var showingStickers = false
 
     var body: some View {
         CurlingPages(day: $day, isLocked: tools.isBusy) { pageDay in
@@ -31,96 +19,7 @@ struct TodayView: View {
                 .environment(calendarStore)
                 .tint(Theme.accent)
         }
-        .overlay(alignment: .bottom) {
-            Group {
-                if tools.selectedSticker != nil {
-                    doneButton { tools.selectedSticker = nil }
-                        .padding(.bottom, 20)
-                } else if !tools.isDrawing {
-                    toolDock
-                }
-            }
-            .padding(.leading, 28)
-            .padding(.trailing, 44)
-        }
-        .overlay(alignment: .topTrailing) {
-            // The pen palette covers the bottom of the screen, so "Done" sits at the top,
-            // over the day arrows so a stray tap can't flip the page mid-drawing
-            if tools.isDrawing {
-                doneButton { tools.isDrawing = false }
-                    .padding(.top, 24)
-                    .padding(.trailing, 44)
-            }
-        }
-        .sheet(isPresented: $showingStickers) {
-            StickerDrawer { choice in
-                let placement = DayPage.page(for: day, in: context).addSticker(choice, in: context)
-                tools.selectedSticker = placement.persistentModelID
-            }
-        }
-        .onChange(of: day) {
-            tools.selectedSticker = nil
-            tools.isDrawing = false
-        }
-    }
-
-    /// Floating tools for decorating the page: stickers, a photo of the day and the pen.
-    private var toolDock: some View {
-        HStack(spacing: 4) {
-            dockButton("star.bubble", label: "Add sticker") { showingStickers = true }
-            Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
-            PhotoFramePicker(onPick: addPhotos) {
-                Image(systemName: "photo.on.rectangle")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundStyle(Theme.ink)
-                    .frame(width: 40, height: 36)
-            }
-            .accessibilityLabel("Add photos of the day")
-            Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
-            dockButton("pencil.tip", label: "Draw") {
-                tools.selectedSticker = nil
-                tools.isDrawing = true
-            }
-        }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 4)
-        .background(Capsule().fill(Theme.paper))
-        .overlay(Capsule().stroke(Theme.hairline, lineWidth: 1))
-        .shadow(color: .black.opacity(0.15), radius: 6, x: 0, y: 3)
-        .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.bottom, 18)
-        .transition(.scale(scale: 0.8).combined(with: .opacity))
-    }
-
-    /// Framed photos of the day land on the page, selected so a caption can be written on them.
-    private func addPhotos(_ choice: StickerChoice) {
-        let placement = DayPage.page(for: day, in: context).addSticker(choice, in: context)
-        tools.selectedSticker = placement.persistentModelID
-    }
-
-    private func dockButton(_ systemImage: String, label: String, action: @escaping () -> Void) -> some View {
-        Button {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            withAnimation(.snappy) { action() }
-        } label: {
-            Image(systemName: systemImage)
-                .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(Theme.ink)
-                .frame(width: 40, height: 36)
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(label)
-    }
-
-    private func doneButton(_ action: @escaping () -> Void) -> some View {
-        Button("Done") { withAnimation(.snappy) { action() } }
-            .font(Theme.serif(14, .semibold))
-            .foregroundStyle(Theme.paper)
-            .padding(.horizontal, 22)
-            .padding(.vertical, 9)
-            .background(Capsule().fill(Theme.accent))
-            .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
-            .transition(.move(edge: .bottom).combined(with: .opacity))
+        .pageTools(tools, day: day)
     }
 }
 
@@ -173,7 +72,7 @@ private struct DayPageContent: View {
 
     /// The parts of a day page. Any of them can be taken off a busy day and put back from "Add to this page".
     enum Part: String, CaseIterable {
-        case habits, countdowns, tasks, diary, outfit, meals, notes, memories, word
+        case habits, countdowns, tasks, question, outfit, meals, notes, memories, word
 
         /// Only on the page once you add them (or write in them).
         var isOptional: Bool { [.outfit, .meals, .notes].contains(self) }
@@ -183,7 +82,7 @@ private struct DayPageContent: View {
             case .habits: "Habits"
             case .countdowns: "Countdown"
             case .tasks: "Tasks"
-            case .diary: "Diary"
+            case .question: "Question of the day"
             case .outfit: "Outfit"
             case .meals: "What I ate"
             case .notes: "Note"
@@ -197,7 +96,7 @@ private struct DayPageContent: View {
             case .habits: "checkmark.circle"
             case .countdowns: "hourglass"
             case .tasks: "checklist"
-            case .diary: "book.closed"
+            case .question: "questionmark.bubble"
             case .outfit: "hanger"
             case .meals: "fork.knife"
             case .notes: "note.text"
@@ -265,18 +164,10 @@ private struct DayPageContent: View {
                 .removable(isArranging) { remove(.tasks) }
             }
 
-            if isShown(.diary) {
-                PageSection(title: "Diary", color: NotebookSection.diary.tabColor) {
-                    TextField("Dear diary…", text: $page.diaryText, axis: .vertical)
-                        .lineLimit(3...)
-                        .font(Theme.handwriting(size: 22))
-                        .lineSpacing(2)
-                        .foregroundStyle(Theme.ink)
-
-                    DailyPromptCard(page: page)
-                        .padding(.top, 6)
-                }
-                .removable(isArranging) { remove(.diary) }
+            // The diary itself has its own dotted page in the Diary tab
+            if isShown(.question) {
+                DailyPromptCard(page: page)
+                    .removable(isArranging) { remove(.question) }
             }
 
             if isShown(.outfit) {
