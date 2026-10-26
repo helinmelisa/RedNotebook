@@ -68,7 +68,7 @@ struct TodayView: View {
                 page = next
             } else {
                 SoundEffects.shared.play(.pageTurn)
-                withAnimation(.easeInOut(duration: 0.5)) { page = next }
+                withAnimation(.timingCurve(0.45, 0.05, 0.25, 1, duration: 0.6)) { page = next }
             }
         }
     }
@@ -380,25 +380,68 @@ private struct PageSection<Content: View>: View {
     .environment(CalendarStore())
 }
 
-/// A page turning over its left edge, like flipping a notebook page.
-private struct PageTurn: ViewModifier {
-    let angle: Double
+/// A page turning over its left edge, like flipping a notebook page: it lifts, catches the light along its
+/// bending edge and darkens as it turns away.
+private struct PageTurn: ViewModifier, Animatable {
+    /// 0 lying flat, 1 fully turned.
+    var progress: Double
+
+    var animatableData: Double {
+        get { progress }
+        set { progress = newValue }
+    }
 
     func body(content: Content) -> some View {
+        let lift = sin(progress * .pi) // most lifted halfway through
         content
-            .rotation3DEffect(.degrees(angle), axis: (x: 0, y: 1, z: 0), anchor: .leading, perspective: 0.4)
-            .shadow(color: .black.opacity(angle == 0 ? 0 : 0.2), radius: 8, x: 4, y: 0)
+            // Paper shading: darker towards the free edge as it turns away from the light
+            .overlay {
+                LinearGradient(colors: [.black.opacity(0.04 * progress), .black.opacity(0.32 * progress)],
+                               startPoint: .leading, endPoint: .trailing)
+                    .allowsHitTesting(false)
+            }
+            // The curl: a soft highlight along the bending edge
+            .overlay(alignment: .trailing) {
+                LinearGradient(colors: [.clear, .white.opacity(0.5 * lift), .black.opacity(0.12 * lift)],
+                               startPoint: .leading, endPoint: .trailing)
+                    .frame(width: 46)
+                    .allowsHitTesting(false)
+            }
+            .rotation3DEffect(.degrees(-92 * progress), axis: (x: 0.015 * lift, y: 1, z: 0),
+                              anchor: .leading, perspective: 0.55)
+            .offset(y: -6 * lift)
+            .shadow(color: .black.opacity(0.28 * lift), radius: 14 * lift, x: 10 * lift, y: 6 * lift)
+    }
+}
+
+/// The page underneath, in the shadow of the page turning over it.
+private struct UnderTurningPage: ViewModifier, Animatable {
+    /// 1 fully covered, 0 uncovered.
+    var shade: Double
+
+    var animatableData: Double {
+        get { shade }
+        set { shade = newValue }
+    }
+
+    func body(content: Content) -> some View {
+        content.overlay {
+            LinearGradient(colors: [.black.opacity(0.22 * shade), .black.opacity(0.05 * shade), .clear],
+                           startPoint: .leading, endPoint: .trailing)
+                .allowsHitTesting(false)
+        }
     }
 }
 
 private extension AnyTransition {
-    /// Forward: the old page turns away and the new one is underneath.
+    /// Forward: the old page turns away, uncovering the new one.
     /// Backward: the previous page turns back over the current one.
     static func pageTurn(forward: Bool) -> AnyTransition {
-        let turn = AnyTransition.modifier(active: PageTurn(angle: -90), identity: PageTurn(angle: 0))
-        let stay = AnyTransition.opacity.animation(.easeInOut(duration: 0.01).delay(0.5))
+        let turn = AnyTransition.modifier(active: PageTurn(progress: 1), identity: PageTurn(progress: 0))
+        let underneath = AnyTransition.modifier(active: UnderTurningPage(shade: 1), identity: UnderTurningPage(shade: 0))
+        let stay = AnyTransition.opacity.animation(.easeInOut(duration: 0.01).delay(0.6))
         return forward
-            ? .asymmetric(insertion: .identity, removal: turn)
-            : .asymmetric(insertion: turn, removal: stay)
+            ? .asymmetric(insertion: underneath, removal: turn)
+            : .asymmetric(insertion: turn, removal: underneath.combined(with: stay))
     }
 }
