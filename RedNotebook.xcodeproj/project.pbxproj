@@ -40,6 +40,7 @@
 		65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755C1FD0BC7BC295F8F29751 /* OutfitCanvas.swift */; };
 		6B9C8C399C61CA45FF54CAB3 /* NotebookWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC5C815A656359CAD8772CA /* NotebookWidget.swift */; };
 		6F1F2AC0EEA82A5A7CD1B454 /* PhotoFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */; };
+		6FB00D1A2CA2B49A89F82041 /* BatchStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A391844B79F5B8404C4ECB55 /* BatchStickers.swift */; };
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
 		7C79AEC275AE3529FB7ECDAC /* Fraunces-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
@@ -155,6 +156,7 @@
 		87F8FD4050BC69B234BFB9FA /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
 		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
+		A391844B79F5B8404C4ECB55 /* BatchStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchStickers.swift; sourceTree = "<group>"; };
 		A679AA6F2257C2228E045E7F /* LifeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStickers.swift; sourceTree = "<group>"; };
 		AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreStickers.swift; sourceTree = "<group>"; };
 		AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHeader.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		471E6BB85BF2B60A9F8501D0 /* Stickers */ = {
 			isa = PBXGroup;
 			children = (
+				A391844B79F5B8404C4ECB55 /* BatchStickers.swift */,
 				28BBA1394EF23D7D904EC7CD /* BujoStickers.swift */,
 				7619AFA459ED5027E674AB77 /* DrawnSticker.swift */,
 				4D77C99D490B502BD78C9F5E /* FunStickers.swift */,
@@ -509,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB00D1A2CA2B49A89F82041 /* BatchStickers.swift in Sources */,
 				DE2C781C67F23A899E90DFF7 /* BujoStickers.swift in Sources */,
 				1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */,
 				0250820A8412D1278045E60A /* BulletList.swift in Sources */,

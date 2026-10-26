@@ -55,6 +55,8 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
          typedWords
     // More Türkiye
     case turkishCoffee, cezve, balloon, galataTower, tulipTR, seagull, kilimTile, stampIstanbul, kunefe, evilEyeHand
+    // Batch: more Türkiye, vintage, animals, seasons, work, self-care and words in Portuguese & Turkish
+    case vapur, fairyChimney, ayran, mosque, streetCat, lahmacun, vintageKey, pocketWatch, quillInk, floralTeacup, vintageCamera, cassette, sleepyCat, puppy, panda, fox, hedgehog, whale, acorn, umbrella, kite, snowGlobe, beachBall, candyCane, calendarPage, clipboard, pomodoro, deskLamp, stickyStack, briefcase, sheetMask, serum, yoga, sleepMask, bathBomb, youGotThis, bomDia, saudadeWord, gunaydin, cokGuzel
 
     var id: Self { self }
 
@@ -146,6 +148,20 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
             .vintage
         case .turkishCoffee, .cezve, .balloon, .galataTower, .tulipTR, .seagull, .kilimTile, .stampIstanbul, .kunefe, .evilEyeHand:
             .turkiye
+        case .vapur, .fairyChimney, .ayran, .mosque, .streetCat, .lahmacun:
+            .turkiye
+        case .vintageKey, .pocketWatch, .quillInk, .floralTeacup, .vintageCamera, .cassette:
+            .vintage
+        case .sleepyCat, .puppy, .panda, .fox, .hedgehog, .whale:
+            .animals
+        case .acorn, .umbrella, .kite, .snowGlobe, .beachBall, .candyCane:
+            .seasons
+        case .calendarPage, .clipboard, .pomodoro, .deskLamp, .stickyStack, .briefcase:
+            .study
+        case .sheetMask, .serum, .yoga, .sleepMask, .bathBomb, .youGotThis:
+            .selfCare
+        case .bomDia, .saudadeWord, .gunaydin, .cokGuzel:
+            .words
         }
     }
 
@@ -329,6 +345,46 @@ enum DrawnSticker: String, CaseIterable, Identifiable {
         case .stampIstanbul: "İstanbul stamp"
         case .kunefe: "Künefe"
         case .evilEyeHand: "Hamsa with nazar"
+        case .vapur: "Vapur ferry"
+        case .fairyChimney: "Fairy chimneys"
+        case .ayran: "Ayran"
+        case .mosque: "Mosque skyline"
+        case .streetCat: "İstanbul street cat"
+        case .lahmacun: "Lahmacun"
+        case .vintageKey: "Old key"
+        case .pocketWatch: "Pocket watch"
+        case .quillInk: "Quill and ink"
+        case .floralTeacup: "Floral teacup"
+        case .vintageCamera: "Vintage camera"
+        case .cassette: "Cassette"
+        case .sleepyCat: "Sleeping cat"
+        case .puppy: "Puppy"
+        case .panda: "Panda"
+        case .fox: "Fox"
+        case .hedgehog: "Hedgehog"
+        case .whale: "Whale"
+        case .acorn: "Acorn"
+        case .umbrella: "Umbrella"
+        case .kite: "Kite"
+        case .snowGlobe: "Snow globe"
+        case .beachBall: "Beach ball"
+        case .candyCane: "Candy cane"
+        case .calendarPage: "Calendar page"
+        case .clipboard: "Clipboard"
+        case .pomodoro: "Pomodoro timer"
+        case .deskLamp: "Desk lamp"
+        case .stickyStack: "Sticky notes"
+        case .briefcase: "Briefcase"
+        case .sheetMask: "Sheet mask"
+        case .serum: "Skincare"
+        case .yoga: "Yoga"
+        case .sleepMask: "Sleep mask"
+        case .bathBomb: "Bath bomb"
+        case .youGotThis: "You got this"
+        case .bomDia: "bom dia"
+        case .saudadeWord: "saudade"
+        case .gunaydin: "günaydın"
+        case .cokGuzel: "çok güzel"
         }
     }
 }

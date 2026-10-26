@@ -15,7 +15,7 @@ struct TurkiyeStickerView: View {
         case .kilimTile: Kilim().frame(width: 58, height: 58).stickerOutline(1.5)
         case .kunefe: Kunefe().frame(width: 60, height: 44).stickerOutline()
         case .evilEyeHand: Hamsa().frame(width: 50, height: 62).stickerOutline()
-        default: EmptyView()
+        default: BatchStickerView(sticker: sticker)
         }
     }
 }
