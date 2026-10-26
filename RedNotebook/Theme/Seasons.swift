@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// The time of year, for small seasonal touches on the desk and the cover.
+/// The time of year, for the seasonal touches on the desk around the closed notebook.
 enum Season: String {
     case spring, summer, autumn, winter
 
@@ -130,36 +130,5 @@ struct SeasonalDesk: View {
                              with: .color(.white.opacity(twinkle)))
             }
         }
-    }
-}
-
-/// A little something tucked under the cover's elastic band.
-struct SeasonalCharm: View {
-    var season: Season = .current
-    let scale: CGFloat
-
-    var body: some View {
-        Group {
-            switch season {
-            case .autumn:
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 46 * scale))
-                    .foregroundStyle(LinearGradient(colors: [Color(red: 0.92, green: 0.55, blue: 0.18), Color(red: 0.72, green: 0.22, blue: 0.14)],
-                                                    startPoint: .top, endPoint: .bottom))
-                    .rotationEffect(.degrees(35))
-            case .winter:
-                Image(systemName: "snowflake")
-                    .font(.system(size: 50 * scale, weight: .regular))
-                    .foregroundStyle(.white.opacity(0.95))
-                    .rotationEffect(.degrees(12))
-            case .spring:
-                DrawnStickerView(sticker: .sakura).scaleEffect(0.8 * scale).rotationEffect(.degrees(-60))
-            case .summer:
-                DrawnStickerView(sticker: .lemon).scaleEffect(0.75 * scale).rotationEffect(.degrees(18))
-            }
-        }
-        .shadow(color: .black.opacity(0.3), radius: 2 * scale, x: scale, y: 2 * scale)
-        .allowsHitTesting(false)
-        .accessibilityHidden(true)
     }
 }

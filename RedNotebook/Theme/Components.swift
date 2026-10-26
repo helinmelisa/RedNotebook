@@ -85,6 +85,9 @@ extension SectionLabel where Trailing == EmptyView {
 
 /// Woven linen, the desk the notebook lies on.
 struct DeskBackground: View {
+    /// Leaves, snow or petals drifting across it (only around the closed notebook, so they don't distract from writing).
+    var showsSeason = false
+
     var body: some View {
         Canvas { context, size in
             context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(Theme.desk))
@@ -110,7 +113,11 @@ struct DeskBackground: View {
                              with: .color(.black.opacity(0.05)))
             }
         }
-        .overlay { SeasonalDesk() }
+        .overlay {
+            if showsSeason {
+                SeasonalDesk().transition(.opacity)
+            }
+        }
         .ignoresSafeArea()
         .allowsHitTesting(false)
     }
