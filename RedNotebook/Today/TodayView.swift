@@ -75,14 +75,14 @@ private struct DayPageContent: View {
         case habits, countdowns, tasks, question, outfit, meals, notes, memories, word
 
         /// Only on the page once you add them (or write in them).
-        var isOptional: Bool { [.outfit, .meals, .notes].contains(self) }
+        var isOptional: Bool { [.question, .outfit, .meals, .notes].contains(self) }
 
         var title: String {
             switch self {
             case .habits: "Habits"
             case .countdowns: "Countdown"
             case .tasks: "Tasks"
-            case .question: "Question of the day"
+            case .question: "Q&A"
             case .outfit: "Outfit"
             case .meals: "What I ate"
             case .notes: "Note"
@@ -113,6 +113,7 @@ private struct DayPageContent: View {
         case .outfit: return !page.wornItems.isEmpty || page.outfitPhoto != nil || !page.outfitNote.isEmpty
         case .meals: return !(page.meals ?? []).isEmpty || ![page.breakfast, page.lunch, page.dinner, page.snacks].allSatisfy(\.isEmpty)
         case .notes: return !(page.notes ?? []).isEmpty
+        case .question: return !page.promptAnswer.isEmpty
         default: return true
         }
     }
