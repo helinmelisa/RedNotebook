@@ -150,8 +150,10 @@ private struct DayPageContent: View {
 
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
-    /// Optional sections opened from "Add to this page" (sections with something in them always show).
-    @State private var opened: Set<OptionalSection> = []
+    /// Optional parts opened from "Add to this page" (parts with something in them always show).
+    @State private var opened: Set<Part> = []
+    /// Showing a remove button beside each part.
+    @State private var isArranging = false
     @State private var countdownSheet: CountdownSheet?
     @AppStorage(Countdown.storageKey) private var countdownsRaw = ""
 
@@ -169,32 +171,70 @@ private struct DayPageContent: View {
         Countdown.list(from: countdownsRaw).contains { $0.daysLeft(from: page.day) >= 0 }
     }
 
-    enum OptionalSection: CaseIterable {
-        case outfit, meals, notes
+    /// The parts of a day page. Any of them can be taken off a busy day and put back from "Add to this page".
+    enum Part: String, CaseIterable {
+        case habits, countdowns, tasks, diary, outfit, meals, notes, memories, word
+
+        /// Only on the page once you add them (or write in them).
+        var isOptional: Bool { [.outfit, .meals, .notes].contains(self) }
 
         var title: String {
             switch self {
+            case .habits: "Habits"
+            case .countdowns: "Countdown"
+            case .tasks: "Tasks"
+            case .diary: "Diary"
             case .outfit: "Outfit"
             case .meals: "What I ate"
             case .notes: "Note"
+            case .memories: "On this day"
+            case .word: "Portuguese word"
             }
         }
 
         var icon: String {
             switch self {
+            case .habits: "checkmark.circle"
+            case .countdowns: "hourglass"
+            case .tasks: "checklist"
+            case .diary: "book.closed"
             case .outfit: "hanger"
             case .meals: "fork.knife"
             case .notes: "note.text"
+            case .memories: "clock.arrow.circlepath"
+            case .word: "character.book.closed"
             }
         }
     }
 
-    private func isShown(_ section: OptionalSection) -> Bool {
-        if opened.contains(section) { return true }
-        switch section {
+    private func isShown(_ part: Part) -> Bool {
+        if page.hiddenParts.contains(part.rawValue) { return false }
+        if !part.isOptional || opened.contains(part) { return true }
+        switch part {
         case .outfit: return !page.wornItems.isEmpty || page.outfitPhoto != nil || !page.outfitNote.isEmpty
         case .meals: return !(page.meals ?? []).isEmpty || ![page.breakfast, page.lunch, page.dinner, page.snacks].allSatisfy(\.isEmpty)
         case .notes: return !(page.notes ?? []).isEmpty
+        default: return true
+        }
+    }
+
+    /// Takes a part off this day's page (what's written in it is kept).
+    private func remove(_ part: Part) {
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        withAnimation(.snappy) {
+            page.hiddenParts.append(part.rawValue)
+            opened.remove(part)
+        }
+    }
+
+    private func putBack(_ part: Part) {
+        UISelectionFeedbackGenerator().selectionChanged()
+        withAnimation(.snappy) {
+            page.hiddenParts.removeAll { $0 == part.rawValue }
+            if part.isOptional { opened.insert(part) }
+        }
+        if part == .notes && (page.notes ?? []).isEmpty {
+            QuickNote(colorIndex: 0).page = page
         }
     }
 
@@ -202,36 +242,48 @@ private struct DayPageContent: View {
         VStack(alignment: .leading, spacing: Theme.sectionSpacing) {
             DayHeader(page: page, day: $day)
 
-            HabitRow(page: page)
-
-            CountdownStrip(day: page.day, onAdd: { countdownSheet = .new }, onEdit: { countdownSheet = .edit($0) })
-
-            PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
-                // Holiday and iPhone Calendar events first, then the notebook's own bullets
-                if let holiday = PortugueseHolidays.holiday(on: page.day) {
-                    HolidayLine(holiday: holiday)
-                }
-                ForEach(calendarStore.events(on: page.day), id: \.calendarItemIdentifier) { event in
-                    EventLine(event: event)
-                }
-                BulletList(page: page, onMigrate: migrate)
+            if isShown(.habits) {
+                HabitRow(page: page).removable(isArranging) { remove(.habits) }
             }
 
-            PageSection(title: "Diary", color: NotebookSection.diary.tabColor) {
-                TextField("Dear diary…", text: $page.diaryText, axis: .vertical)
-                    .lineLimit(3...)
-                    .font(Theme.handwriting(size: 22))
-                    .lineSpacing(2)
-                    .foregroundStyle(Theme.ink)
+            if isShown(.countdowns) {
+                CountdownStrip(day: page.day, onAdd: { countdownSheet = .new }, onEdit: { countdownSheet = .edit($0) })
+                    .removable(isArranging && hasUpcomingCountdown) { remove(.countdowns) }
+            }
 
-                DailyPromptCard(page: page)
-                    .padding(.top, 6)
+            if isShown(.tasks) {
+                PageSection(title: "Tasks & events", color: NotebookSection.todo.tabColor) {
+                    // Holiday and iPhone Calendar events first, then the notebook's own bullets
+                    if let holiday = PortugueseHolidays.holiday(on: page.day) {
+                        HolidayLine(holiday: holiday)
+                    }
+                    ForEach(calendarStore.events(on: page.day), id: \.calendarItemIdentifier) { event in
+                        EventLine(event: event)
+                    }
+                    BulletList(page: page, onMigrate: migrate)
+                }
+                .removable(isArranging) { remove(.tasks) }
+            }
+
+            if isShown(.diary) {
+                PageSection(title: "Diary", color: NotebookSection.diary.tabColor) {
+                    TextField("Dear diary…", text: $page.diaryText, axis: .vertical)
+                        .lineLimit(3...)
+                        .font(Theme.handwriting(size: 22))
+                        .lineSpacing(2)
+                        .foregroundStyle(Theme.ink)
+
+                    DailyPromptCard(page: page)
+                        .padding(.top, 6)
+                }
+                .removable(isArranging) { remove(.diary) }
             }
 
             if isShown(.outfit) {
                 PageSection(title: "Today's outfit", color: NotebookSection.stickers.tabColor) {
                     OutfitSection(page: page, onDressUp: onDressUp)
                 }
+                .removable(isArranging) { remove(.outfit) }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
@@ -239,6 +291,7 @@ private struct DayPageContent: View {
                 PageSection(title: "What I ate", color: NotebookSection.calendar.tabColor) {
                     MealsSection(page: page)
                 }
+                .removable(isArranging) { remove(.meals) }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
@@ -246,14 +299,21 @@ private struct DayPageContent: View {
                 PageSection(title: "Little notes", color: NotebookSection.today.tabColor) {
                     QuickNotesStrip(page: page)
                 }
+                .removable(isArranging) { remove(.notes) }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
             addToPage
 
-            OnThisDay(day: page.day) { day = $0 }
+            if isShown(.memories) {
+                OnThisDay(day: page.day) { day = $0 }
+                    .removable(isArranging) { remove(.memories) }
+            }
 
-            PortugueseWordCard(day: page.day)
+            if isShown(.word) {
+                PortugueseWordCard(day: page.day)
+                    .removable(isArranging) { remove(.word) }
+            }
 
             quote
         }
@@ -275,39 +335,43 @@ private struct DayPageContent: View {
         }
     }
 
-    /// Chips for the sections this page doesn't use yet, so new pages stay short and calm.
-    @ViewBuilder
+    /// Chips for the parts this page doesn't have, so new pages stay short and calm,
+    /// and a way to take parts off a busy day.
     private var addToPage: some View {
-        let hidden = OptionalSection.allCases.filter { !isShown($0) }
-        if !hidden.isEmpty || !hasUpcomingCountdown {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("ADD TO THIS PAGE")
-                    .font(Theme.eyebrow)
-                    .tracking(1.5)
-                    .foregroundStyle(Theme.inkTertiary)
-                FlowLayout(spacing: 8) {
-                    ForEach(hidden, id: \.self) { section in
-                        Button {
-                            UISelectionFeedbackGenerator().selectionChanged()
-                            _ = withAnimation(.snappy) { opened.insert(section) }
-                            if section == .notes {
-                                QuickNote(colorIndex: 0).page = page
-                            }
-                        } label: {
-                            chipLabel(section.title, systemImage: section.icon)
-                        }
-                        .buttonStyle(.plain)
+        let missing = Part.allCases.filter { !isShown($0) }
+        return VStack(alignment: .leading, spacing: 8) {
+            Text("ADD TO THIS PAGE")
+                .font(Theme.eyebrow)
+                .tracking(1.5)
+                .foregroundStyle(Theme.inkTertiary)
+            FlowLayout(spacing: 8) {
+                ForEach(missing, id: \.self) { part in
+                    Button { putBack(part) } label: {
+                        chipLabel(part.title, systemImage: part.icon)
                     }
-                    if !hasUpcomingCountdown {
-                        Button {
-                            UISelectionFeedbackGenerator().selectionChanged()
-                            countdownSheet = .new
-                        } label: {
-                            chipLabel("Countdown", systemImage: "hourglass")
-                        }
-                        .buttonStyle(.plain)
-                    }
+                    .buttonStyle(.plain)
                 }
+                if isShown(.countdowns) && !hasUpcomingCountdown {
+                    Button {
+                        UISelectionFeedbackGenerator().selectionChanged()
+                        countdownSheet = .new
+                    } label: {
+                        chipLabel("Countdown", systemImage: "hourglass")
+                    }
+                    .buttonStyle(.plain)
+                }
+                Button {
+                    UISelectionFeedbackGenerator().selectionChanged()
+                    withAnimation(.snappy) { isArranging.toggle() }
+                } label: {
+                    Label(isArranging ? "Done" : "Remove parts", systemImage: isArranging ? "checkmark" : "minus.circle")
+                        .font(Theme.serif(13, isArranging ? .semibold : .regular))
+                        .foregroundStyle(isArranging ? Theme.paper : Theme.inkTertiary)
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 7)
+                        .background(Capsule().fill(isArranging ? Theme.accent : .clear))
+                }
+                .buttonStyle(.plain)
             }
         }
     }
@@ -339,6 +403,27 @@ private struct DayPageContent: View {
         guard let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: page.day) else { return }
         item.schedule(on: tomorrow, in: context)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+    }
+}
+
+private extension View {
+    /// While arranging the page: a red "−" in the margin beside the part, to take it off this day.
+    func removable(_ isArranging: Bool, onRemove: @escaping () -> Void) -> some View {
+        overlay(alignment: .topTrailing) {
+            if isArranging {
+                Button(action: onRemove) {
+                    Image(systemName: "minus.circle.fill")
+                        .font(.system(size: 20))
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.white, Theme.red)
+                        .shadow(color: .black.opacity(0.15), radius: 1, y: 1)
+                }
+                .buttonStyle(.plain)
+                .offset(x: 33, y: -3) // out in the right margin
+                .transition(.scale.combined(with: .opacity))
+                .accessibilityLabel("Remove from this page")
+            }
+        }
     }
 }
 

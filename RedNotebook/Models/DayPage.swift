@@ -30,6 +30,8 @@ final class DayPage {
     var habitsDone: [String] = []
     /// The answer to the question of the day.
     var promptAnswer: String = ""
+    /// Parts of the page taken off this day (see `DayPageContent.Part`).
+    var hiddenParts: [String] = []
 
     /// Handwriting and doodles on the page (PencilKit drawing data).
     @Attribute(.externalStorage) var drawing: Data?

@@ -25,6 +25,7 @@ struct NotebookBackup: Codable {
         var weather: String?
         var habitsDone: [String]
         var promptAnswer: String
+        var hiddenParts: [String]?
         var outfitPhoto: Data?
         var outfitNote: String
         var drawing: Data?
@@ -105,7 +106,7 @@ extension NotebookBackup {
         for page in try context.fetch(FetchDescriptor<DayPage>(sortBy: [SortDescriptor(\.day)])) where !page.isEmpty {
             backup.pages.append(Page(
                 day: page.day, diaryText: page.diaryText, mood: page.mood, weather: page.weather,
-                habitsDone: page.habitsDone, promptAnswer: page.promptAnswer,
+                habitsDone: page.habitsDone, promptAnswer: page.promptAnswer, hiddenParts: page.hiddenParts,
                 outfitPhoto: page.outfitPhoto, outfitNote: page.outfitNote, drawing: page.drawing,
                 outfitItems: (page.outfitItems ?? []).compactMap { clothingIndex[$0.persistentModelID] },
                 items: page.sortedItems.map(Item.init),
@@ -216,6 +217,7 @@ extension NotebookBackup {
             page.weather = saved.weather
             page.habitsDone = saved.habitsDone
             page.promptAnswer = saved.promptAnswer
+            page.hiddenParts = saved.hiddenParts ?? []
             page.outfitPhoto = saved.outfitPhoto
             page.outfitNote = saved.outfitNote
             page.drawing = saved.drawing
