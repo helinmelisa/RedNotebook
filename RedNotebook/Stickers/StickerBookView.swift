@@ -1,10 +1,11 @@
 import SwiftData
 import SwiftUI
 
-/// The Stickers tab: your sticker book. Tapping a sticker sticks it on the selected day's page.
+/// The Stickers tab: your sticker book. Tapping a sticker sticks it on the selected day's diary page.
 struct StickerBookView: View {
     let day: Date
-    var onOpenDay: (Date) -> Void
+    /// Turns to the day's diary page.
+    var onOpenDiary: (Date) -> Void
 
     @Environment(\.modelContext) private var context
     @State private var lastAdded: Date?
@@ -24,8 +25,8 @@ struct StickerBookView: View {
         .scrollIndicators(.hidden)
         .overlay(alignment: .bottom) {
             if lastAdded != nil {
-                Button { onOpenDay(day) } label: {
-                    Label("Added to \(dayName) · Open page", systemImage: "checkmark")
+                Button { onOpenDiary(day) } label: {
+                    Label("Added to \(dayName) · Open diary", systemImage: "checkmark")
                         .font(Theme.serif(13, .semibold))
                         .foregroundStyle(Theme.paper)
                         .padding(.horizontal, 14)
@@ -39,11 +40,11 @@ struct StickerBookView: View {
     }
 
     private var dayName: String {
-        Calendar.current.isDateInToday(day) ? "today's page" : day.formatted(.dateTime.day().month(.wide))
+        Calendar.current.isDateInToday(day) ? "today's diary" : "the diary on " + day.formatted(.dateTime.day().month(.wide))
     }
 
     private func add(_ choice: StickerChoice) {
-        _ = DayPage.page(for: day, in: context).addSticker(choice, in: context)
+        _ = DayPage.page(for: day, in: context).addSticker(choice, in: context, onDiary: true)
         let added = Date.now
         withAnimation(.snappy) { lastAdded = added }
         Task {

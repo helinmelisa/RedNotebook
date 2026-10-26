@@ -56,7 +56,10 @@ struct NotebookView: View {
         case .closet:
             ClosetView(day: selectedDay)
         case .stickers:
-            StickerBookView(day: selectedDay, onOpenDay: openDay)
+            StickerBookView(day: selectedDay) { day in
+                selectedDay = day
+                withAnimation(.easeInOut(duration: 0.3)) { section = .diary }
+            }
         }
     }
 
