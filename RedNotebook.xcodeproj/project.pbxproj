@@ -64,6 +64,7 @@
 		AF59FEC5AA64A013369F3B0F /* TurkiyeStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43376731151759376FDBA359 /* TurkiyeStickers.swift */; };
 		B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74552C6D655B1FCD71EBBC41 /* TodoView.swift */; };
 		B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363EAE3B2F3F2318C244BBCE /* WeekView.swift */; };
+		B951570DCD0B12D601850099 /* WashiMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2FEEA9FA0D7F6C1F966D7A /* WashiMaker.swift */; };
 		BA28AC966A95AE987AE464BE /* CalendarStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9300B14907F57F2D942E6F /* CalendarStore.swift */; };
 		BB78ED30E9D56EB51C3A69C2 /* LifeStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A679AA6F2257C2228E045E7F /* LifeStickers.swift */; };
 		C01C7ACB871CA4A7C937B0FF /* PortugueseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108712B02FB9535D942CA6F6 /* PortugueseWord.swift */; };
@@ -168,6 +169,7 @@
 		8684AAE4FB761EBAE54266A4 /* AppLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLock.swift; sourceTree = "<group>"; };
 		87F8FD4050BC69B234BFB9FA /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		89C9A362E1D53313E3CB8151 /* MonthPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPDF.swift; sourceTree = "<group>"; };
+		8A2FEEA9FA0D7F6C1F966D7A /* WashiMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WashiMaker.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
 		9C016C032D2F82D601B19855 /* DailyPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrompt.swift; sourceTree = "<group>"; };
 		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				FAC37CDCAEC2F6EFE3C7BFA0 /* TravelStickers.swift */,
 				43376731151759376FDBA359 /* TurkiyeStickers.swift */,
 				675F81F330A865EB3A8A7F5D /* VintageStickers.swift */,
+				8A2FEEA9FA0D7F6C1F966D7A /* WashiMaker.swift */,
 			);
 			path = Stickers;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				54D8393B772297A00A6B034C /* TravelStickers.swift in Sources */,
 				AF59FEC5AA64A013369F3B0F /* TurkiyeStickers.swift in Sources */,
 				FD62915744BC3A63787AEB0A /* VintageStickers.swift in Sources */,
+				B951570DCD0B12D601850099 /* WashiMaker.swift in Sources */,
 				B79EC6AE59E598F7746DC3C4 /* WeekView.swift in Sources */,
 				2C2D7194684E73C4A2BD3514 /* WordPractice.swift in Sources */,
 				DD8E664D5340BA141EA5AB85 /* YearView.swift in Sources */,

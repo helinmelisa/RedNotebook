@@ -467,52 +467,18 @@ extension View {
 // MARK: - Shapes
 
 private struct WashiTape: View {
-    enum Pattern { case stripes, grid, dots }
+    typealias Pattern = WashiPattern
     let color: Color
     let pattern: Pattern
 
     var body: some View {
-        Canvas { context, size in
-            let rect = CGRect(origin: .zero, size: size)
-            context.clip(to: ZigzagEnds().path(in: rect))
-            context.fill(Path(rect), with: .color(color))
-
-            let ink = GraphicsContext.Shading.color(.white.opacity(0.55))
-            switch pattern {
-            case .stripes:
-                var x: CGFloat = -size.height
-                while x < size.width {
-                    var stripe = Path()
-                    stripe.move(to: CGPoint(x: x, y: size.height))
-                    stripe.addLine(to: CGPoint(x: x + size.height, y: 0))
-                    context.stroke(stripe, with: ink, lineWidth: 4)
-                    x += 12
-                }
-            case .grid:
-                var lines = Path()
-                for x in stride(from: 6.0, to: size.width, by: 8) {
-                    lines.move(to: CGPoint(x: x, y: 0)); lines.addLine(to: CGPoint(x: x, y: size.height))
-                }
-                for y in stride(from: 5.0, to: size.height, by: 8) {
-                    lines.move(to: CGPoint(x: 0, y: y)); lines.addLine(to: CGPoint(x: size.width, y: y))
-                }
-                context.stroke(lines, with: ink, lineWidth: 1)
-            case .dots:
-                for x in stride(from: 8.0, to: size.width, by: 12) {
-                    for y in stride(from: 7.0, to: size.height, by: 12) {
-                        context.fill(Path(ellipseIn: CGRect(x: x - 2, y: y - 2, width: 4, height: 4)), with: ink)
-                    }
-                }
-            }
-        }
-        .frame(width: 120, height: 30)
-        .opacity(0.85) // tape is a little see-through
-        .shadow(color: .black.opacity(0.12), radius: 1, x: 0, y: 1)
+        WashiPaper(color: color, pattern: pattern)
+            .frame(width: 120, height: 30)
     }
 }
 
 /// Rectangle with torn zigzag edges on the left and right.
-private struct ZigzagEnds: Shape {
+struct ZigzagEnds: Shape {
     func path(in rect: CGRect) -> Path {
         let teeth = 5
         let depth: CGFloat = 4

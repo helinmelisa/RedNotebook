@@ -11,6 +11,9 @@ struct StickerPicker: View {
 
     @State private var photoItem: PhotosPickerItem?
     @State private var isCutting = false
+    @State private var makingWashi = false
+    /// Tape made in the maker, stuck on once its sheet has closed.
+    @State private var madeWashi: StickerChoice?
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -20,6 +23,7 @@ struct StickerPicker: View {
             section("My stickers") {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 76), spacing: 12)], spacing: 12) {
                     addPolaroid
+                    addWashi
                     addFromPhotos
                     ForEach(photoStickers) { sticker in
                         tile(.photo(sticker), size: 76)
@@ -103,6 +107,33 @@ struct StickerPicker: View {
         }
         .disabled(isCutting)
         .accessibilityLabel("Add photos in a frame")
+    }
+
+    /// Make your own washi tape with any pattern, colour and writing.
+    private var addWashi: some View {
+        Button { makingWashi = true } label: {
+            VStack(spacing: 6) {
+                WashiPaper(color: WashiStyle.colors[0].color, pattern: .gingham)
+                    .frame(width: 60, height: 18)
+                    .rotationEffect(.degrees(-6))
+                Text("Washi tape")
+            }
+            .font(Theme.serif(11))
+            .foregroundStyle(Theme.inkSecondary)
+            .frame(width: 76, height: 76)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .strokeBorder(Theme.ink.opacity(0.25), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+            )
+        }
+        .buttonStyle(.plain)
+        .sheet(isPresented: $makingWashi, onDismiss: {
+            if let madeWashi { pick(madeWashi) }
+            madeWashi = nil
+        }) {
+            WashiMaker { style, text in madeWashi = .washi(style, text: text) }
+        }
+        .accessibilityLabel("Make washi tape")
     }
 
     /// Category chips that jump to a group, so the whole sticker book doesn't have to be scrolled through.

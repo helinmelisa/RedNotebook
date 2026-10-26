@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 enum StickerKind: String {
-    case emoji, drawn, photo, polaroid
+    case emoji, drawn, photo, polaroid, washi
 }
 
 /// Something you can stick on a page.
@@ -12,6 +12,8 @@ enum StickerChoice {
     case photo(PhotoSticker)
     /// Photos of the day in a frame: a polaroid, instax, film strip or photo-booth strip (JPEGs, not cut out).
     case photos(PhotoFrameStyle, [Data])
+    /// Your own washi tape, with what's written on it.
+    case washi(WashiStyle, text: String)
 }
 
 /// A sticker stuck on a day page, with where it sits and how it's been resized and turned.
@@ -55,6 +57,10 @@ final class StickerPlacement {
             value = style.rawValue
             imageData = images.first
             extraImages = images.count > 1 ? Array(images.dropFirst()) : nil
+        case .washi(let style, let text):
+            kindRaw = StickerKind.washi.rawValue
+            value = style.value
+            self.text = text
         }
         self.x = x
         self.y = y
@@ -66,7 +72,7 @@ final class StickerPlacement {
     var isWritable: Bool {
         switch StickerKind(rawValue: kindRaw) {
         case .drawn: DrawnSticker(rawValue: value)?.isWritable ?? false
-        case .polaroid: true
+        case .polaroid, .washi: true
         default: false
         }
     }
@@ -77,6 +83,7 @@ final class StickerPlacement {
         case .drawn: DrawnSticker(rawValue: value).map { .drawn($0) }
         case .photo: photo.map { .photo($0) }
         case .polaroid: imageData.map { .photos(PhotoFrameStyle(rawValue: value) ?? .polaroid, [$0] + (extraImages ?? [])) }
+        case .washi: WashiStyle(value: value).map { .washi($0, text: text) }
         case nil: nil
         }
     }
