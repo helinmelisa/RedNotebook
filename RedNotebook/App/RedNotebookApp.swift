@@ -26,6 +26,8 @@ struct RootView: View {
     @Environment(CalendarStore.self) private var calendarStore
     /// Picking a new cover colour redraws the whole notebook in it.
     @AppStorage(CoverColor.storageKey) private var coverColor = CoverColor.red.rawValue
+    @AppStorage(AppLock.enabledKey) private var isLocked = false
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
@@ -38,6 +40,20 @@ struct RootView: View {
                 NotebookCoverView(onOpen: { isOpen = true })
                     .transition(.opacity)
             }
+        }
+        // Locked notebooks hide their pages in the app switcher and close when you leave
+        .overlay {
+            if isLocked && isOpen && scenePhase != .active {
+                ZStack {
+                    DeskBackground()
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 30))
+                        .foregroundStyle(Theme.inkTertiary)
+                }
+            }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background && isLocked { isOpen = false }
         }
         .id(coverColor)
         // A paper notebook looks the same in Dark Mode; the cover's colour instead of iOS blue for controls

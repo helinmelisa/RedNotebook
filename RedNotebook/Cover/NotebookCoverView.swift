@@ -10,6 +10,7 @@ struct NotebookCoverView: View {
     @State private var coverAngle: Double = 0
     @State private var isOpening = false
     @State private var showingCustomizer = false
+    @AppStorage(AppLock.enabledKey) private var isLocked = false
 
     var body: some View {
         VStack(spacing: 24) {
@@ -39,13 +40,15 @@ struct NotebookCoverView: View {
             }
 
             VStack(spacing: 10) {
-                Text("Tap to open")
+                Label(isLocked ? "Tap to open with \(AppLock.methodName)" : "Tap to open",
+                      systemImage: isLocked ? "lock.fill" : "hand.tap")
+                    .labelStyle(TapHintLabelStyle(showsIcon: isLocked))
                     .font(Theme.serif(13).italic())
                     .foregroundStyle(Theme.inkSecondary)
                 Button {
                     showingCustomizer = true
                 } label: {
-                    Label("Customize cover", systemImage: "paintbrush")
+                    Label("Cover & settings", systemImage: "paintbrush")
                         .font(Theme.serif(13, .semibold))
                         .foregroundStyle(Theme.ink.opacity(0.7))
                         .padding(.horizontal, 14)
@@ -77,6 +80,13 @@ struct NotebookCoverView: View {
         UIImpactFeedbackGenerator(style: .soft).impactOccurred()
 
         Task { @MainActor in
+            if isLocked {
+                guard await AppLock.authenticate() else {
+                    isOpening = false
+                    UINotificationFeedbackGenerator().notificationOccurred(.warning)
+                    return
+                }
+            }
             withAnimation(.easeIn(duration: 0.25)) { bandOff = true }
             try? await Task.sleep(for: .milliseconds(280))
 
@@ -216,5 +226,19 @@ private struct PageEdges: View {
     ZStack {
         DeskBackground()
         NotebookCoverView(onOpen: {})
+    }
+}
+
+/// "Tap to open", with a small lock in front when Face ID guards the notebook.
+private struct TapHintLabelStyle: LabelStyle {
+    let showsIcon: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 5) {
+            if showsIcon {
+                configuration.icon.font(.system(size: 10, weight: .semibold))
+            }
+            configuration.title
+        }
     }
 }

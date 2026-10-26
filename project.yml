@@ -26,6 +26,7 @@ targets:
         ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS: YES
         INFOPLIST_KEY_CFBundleDisplayName: "helin's"
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_NSFaceIDUsageDescription: helin's uses Face ID to keep your notebook private.
         INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription: helin's shows your calendar events in the agenda and can add new events you plan in the notebook.
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         TARGETED_DEVICE_FAMILY: "1"

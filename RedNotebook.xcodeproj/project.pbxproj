@@ -12,6 +12,7 @@
 		035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B91D0224EBFFC32859A1120 /* DailyQuote.swift */; };
 		03E134CE56F068F962FF5098 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175E70D7A93D0DE220F4E6E3 /* Theme.swift */; };
 		06CC6C8082F36D1D61884501 /* QuickNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D6B4E136C2B183144635B4 /* QuickNote.swift */; };
+		07180701A429FFFE26E8562C /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E432EF136EEAA9285A2B0A4 /* Habits.swift */; };
 		072906640E4003836EDCF129 /* NotebookWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C16AB8B3C16A0F4DF60A8084 /* NotebookWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0859A65B80A07B717F027964 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
 		0E09FFA2EE8C2D98D173522E /* PortugueseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108712B02FB9535D942CA6F6 /* PortugueseWord.swift */; };
@@ -21,9 +22,11 @@
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
 		1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
 		1C74FEA361B8695CF91E94EC /* ClothingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */; };
+		1EFEF04072C971A7FEE02692 /* DailyPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C016C032D2F82D601B19855 /* DailyPrompt.swift */; };
 		2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB1D85FB3DE3714E7A592F /* CoverCustomizer.swift */; };
 		2A3ADB2B35284E5280C7E6AB /* Fraunces.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */; };
 		2B1F3CB7CBD97ED02BD61C30 /* Fraunces.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */; };
+		2C1CCB72515ACE59747A892B /* OnThisDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4FA104D069E7A77F9B448 /* OnThisDay.swift */; };
 		2D531E804E797BBD8D0F779C /* QuickNotesStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331087EAB51100176211A0D /* QuickNotesStrip.swift */; };
 		2E0F657FFEEF2F004353CF96 /* StickerBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2807A3D9B88BA8B789794D6 /* StickerBookView.swift */; };
 		3327FC883547FB5CC2B25F6D /* DrawingCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */; };
@@ -41,7 +44,9 @@
 		6B9C8C399C61CA45FF54CAB3 /* NotebookWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC5C815A656359CAD8772CA /* NotebookWidget.swift */; };
 		6F1F2AC0EEA82A5A7CD1B454 /* PhotoFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */; };
 		6FB00D1A2CA2B49A89F82041 /* BatchStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A391844B79F5B8404C4ECB55 /* BatchStickers.swift */; };
+		74DF52E1B942CFCF442B8CAF /* AppLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8684AAE4FB761EBAE54266A4 /* AppLock.swift */; };
 		74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE931863901B96C7EE8DC80E /* GridPaper.swift */; };
+		7ABA07F14BF66C6D4C0F9485 /* MonthPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9A362E1D53313E3CB8151 /* MonthPDF.swift */; };
 		7C79AEC275AE3529FB7ECDAC /* Fraunces-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E6E6523E13413005A69FB72 /* Fraunces-Italic.ttf */; };
 		7D6EE61A6498F01D4882AB08 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C052A2D6F617E026C8935FF /* SampleData.swift */; };
 		8797399104C8768C4ABB3389 /* Caveat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */; };
@@ -78,6 +83,7 @@
 		E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0CC407E3C76316CC108B1F /* LeatherTexture.swift */; };
 		EEF02E1A0044CB524AEDD9E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F31EAF5D06AE9354D5832BBF /* Assets.xcassets */; };
 		EFE5D46903641771529B4E73 /* PortugueseHolidays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F68620424B01853E4B1B9B /* PortugueseHolidays.swift */; };
+		F36D4AFF83DE6AD94C965F5D /* NotebookBackup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AA802834C499AD1E11EFDD /* NotebookBackup.swift */; };
 		F83A43DCC6F2C93952DA6CC6 /* DayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FF75A703FAD381D19C8103 /* DayPage.swift */; };
 		F91BC574873F25A296149314 /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717348824E1F5A8A3AD713B3 /* MonthView.swift */; };
 		FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8D6B99A7BFDC26370768D5 /* CoverColor.swift */; };
@@ -142,6 +148,7 @@
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
 		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
 		675F81F330A865EB3A8A7F5D /* VintageStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VintageStickers.swift; sourceTree = "<group>"; };
+		6E432EF136EEAA9285A2B0A4 /* Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habits.swift; sourceTree = "<group>"; };
 		717348824E1F5A8A3AD713B3 /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
 		73FDF827F6D5FB47225F8E8F /* Fraunces.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fraunces.ttf; sourceTree = "<group>"; };
 		74552C6D655B1FCD71EBBC41 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -153,8 +160,11 @@
 		7C052A2D6F617E026C8935FF /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
 		7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrames.swift; sourceTree = "<group>"; };
+		8684AAE4FB761EBAE54266A4 /* AppLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLock.swift; sourceTree = "<group>"; };
 		87F8FD4050BC69B234BFB9FA /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
+		89C9A362E1D53313E3CB8151 /* MonthPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPDF.swift; sourceTree = "<group>"; };
 		946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLayer.swift; sourceTree = "<group>"; };
+		9C016C032D2F82D601B19855 /* DailyPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrompt.swift; sourceTree = "<group>"; };
 		9CC635937986DF1B57FCB52A /* BulletMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletMark.swift; sourceTree = "<group>"; };
 		A391844B79F5B8404C4ECB55 /* BatchStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchStickers.swift; sourceTree = "<group>"; };
 		A679AA6F2257C2228E045E7F /* LifeStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeStickers.swift; sourceTree = "<group>"; };
@@ -169,11 +179,13 @@
 		C16AB8B3C16A0F4DF60A8084 /* NotebookWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = NotebookWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2091EAC3FC5AB762DE07290 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C331087EAB51100176211A0D /* QuickNotesStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNotesStrip.swift; sourceTree = "<group>"; };
+		D2AA802834C499AD1E11EFDD /* NotebookBackup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookBackup.swift; sourceTree = "<group>"; };
 		DC9A834ABA899341DBFF5624 /* MealEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntry.swift; sourceTree = "<group>"; };
 		DE931863901B96C7EE8DC80E /* GridPaper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridPaper.swift; sourceTree = "<group>"; };
 		E35E6A0058041DA2C3004F1B /* StickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerContent.swift; sourceTree = "<group>"; };
 		E51C27F5BB51982DD3A25FB3 /* ClothingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothingItem.swift; sourceTree = "<group>"; };
 		E8D6B4E136C2B183144635B4 /* QuickNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNote.swift; sourceTree = "<group>"; };
+		EAC4FA104D069E7A77F9B448 /* OnThisDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnThisDay.swift; sourceTree = "<group>"; };
 		F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvas.swift; sourceTree = "<group>"; };
 		F31EAF5D06AE9354D5832BBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F98A6ECCF909440C19BB1BD2 /* Caveat.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Caveat.ttf; sourceTree = "<group>"; };
@@ -193,6 +205,15 @@
 			path = Notebook;
 			sourceTree = "<group>";
 		};
+		11399798B13F88AFC4D5D755 /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+				89C9A362E1D53313E3CB8151 /* MonthPDF.swift */,
+				D2AA802834C499AD1E11EFDD /* NotebookBackup.swift */,
+			);
+			path = Backup;
+			sourceTree = "<group>";
+		};
 		20B535D62EEA320C6B130557 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				6FFA7123CCCA0E31C3A60DF2 /* App */,
+				11399798B13F88AFC4D5D755 /* Backup */,
 				5ECD0194119FD2EF7541CF08 /* Calendar */,
 				8B42C915EA8DFE6380737A2C /* Closet */,
 				D5B9385A2D4B4265DA9AAC87 /* Cover */,
@@ -282,6 +304,7 @@
 		6FFA7123CCCA0E31C3A60DF2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				8684AAE4FB761EBAE54266A4 /* AppLock.swift */,
 				B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */,
 			);
 			path = App;
@@ -319,10 +342,13 @@
 			children = (
 				78B96FEC539EE00FA3A10302 /* BulletList.swift */,
 				9CC635937986DF1B57FCB52A /* BulletMark.swift */,
+				9C016C032D2F82D601B19855 /* DailyPrompt.swift */,
 				0B91D0224EBFFC32859A1120 /* DailyQuote.swift */,
 				AEEBE3FA4F7894993FA93CBF /* DayHeader.swift */,
 				F0DB23DADD9BACE487CCE861 /* DrawingCanvas.swift */,
+				6E432EF136EEAA9285A2B0A4 /* Habits.swift */,
 				64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */,
+				EAC4FA104D069E7A77F9B448 /* OnThisDay.swift */,
 				1E2C3BC7F4305F8D10F9E7E8 /* OutfitSection.swift */,
 				108712B02FB9535D942CA6F6 /* PortugueseWord.swift */,
 				C331087EAB51100176211A0D /* QuickNotesStrip.swift */,
@@ -512,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74DF52E1B942CFCF442B8CAF /* AppLock.swift in Sources */,
 				6FB00D1A2CA2B49A89F82041 /* BatchStickers.swift in Sources */,
 				DE2C781C67F23A899E90DFF7 /* BujoStickers.swift in Sources */,
 				1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */,
@@ -525,6 +552,7 @@
 				995E4699691492A30C5FE070 /* Components.swift in Sources */,
 				FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */,
 				2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */,
+				1EFEF04072C971A7FEE02692 /* DailyPrompt.swift in Sources */,
 				035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */,
 				D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */,
 				3C85897ADFEAC509002CEE68 /* DayHeader.swift in Sources */,
@@ -534,17 +562,21 @@
 				1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */,
 				1173DF56981D114DEEA1038C /* FunStickers.swift in Sources */,
 				74FDEF32104188D47DBF1B00 /* GridPaper.swift in Sources */,
+				07180701A429FFFE26E8562C /* Habits.swift in Sources */,
 				E43E657029AA28CE077A1DE7 /* LeatherTexture.swift in Sources */,
 				BB78ED30E9D56EB51C3A69C2 /* LifeStickers.swift in Sources */,
 				E042A96584A68D7702E5BBF2 /* MealEntry.swift in Sources */,
 				9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */,
+				7ABA07F14BF66C6D4C0F9485 /* MonthPDF.swift in Sources */,
 				F91BC574873F25A296149314 /* MonthView.swift in Sources */,
 				C3400C3B4110D8E3E0587F75 /* Moods.swift in Sources */,
 				A31921B064F7EA92777F501C /* MoreStickers.swift in Sources */,
 				9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */,
+				F36D4AFF83DE6AD94C965F5D /* NotebookBackup.swift in Sources */,
 				93980741B58B428ACDFC6ABC /* NotebookCoverView.swift in Sources */,
 				FF19909C083A8004D32F78F7 /* NotebookSection.swift in Sources */,
 				D5A42FC49A398EFCEAEB579D /* NotebookView.swift in Sources */,
+				2C1CCB72515ACE59747A892B /* OnThisDay.swift in Sources */,
 				65CAA04E7EE41B00C21B4E19 /* OutfitCanvas.swift in Sources */,
 				9A170195B9383BCD870C0E1C /* OutfitSection.swift in Sources */,
 				DA653CAA3CA99917ABC222B2 /* PhotoCutout.swift in Sources */,
@@ -661,6 +693,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "helin's";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "helin's shows your calendar events in the agenda and can add new events you plan in the notebook.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "helin's uses Face ID to keep your notebook private.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -697,6 +730,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "helin's";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "helin's shows your calendar events in the agenda and can add new events you plan in the notebook.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "helin's uses Face ID to keep your notebook private.";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
