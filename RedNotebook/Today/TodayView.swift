@@ -2,44 +2,41 @@ import PhotosUI
 import SwiftUI
 import SwiftData
 
+/// What the tools are doing on the open page, shared between the page and the tool dock around it.
+@Observable
+final class PageTools {
+    var selectedSticker: PersistentIdentifier?
+    var isDrawing = false
+
+    /// Moving a sticker or drawing: drags belong to the page, so it neither scrolls nor turns.
+    var isBusy: Bool { selectedSticker != nil || isDrawing }
+}
+
 /// The "1 day 1 page" spread: header, bullets, diary, sticky notes and the quote of the day.
+/// Turn the pages with a finger, like the real notebook.
 struct TodayView: View {
     @Binding var day: Date
     var onDressUp: () -> Void = {}
 
     @Environment(\.modelContext) private var context
-    @State private var page: DayPage?
-    @State private var selectedSticker: PersistentIdentifier?
+    @Environment(CalendarStore.self) private var calendarStore
+    @State private var tools = PageTools()
     @State private var showingStickers = false
-    @State private var turningForward = true
-    @State private var isDrawing = false
 
     var body: some View {
-        ScrollView {
-            // ZStack so the old and new page overlap while one turns over the other
-            ZStack(alignment: .top) {
-                if let page {
-                    DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
-                                   isDrawing: isDrawing, onDressUp: onDressUp)
-                        // Its own paper, so the page looks solid while turning and scrolls as one
-                        .notebookPage()
-                        .id(page.persistentModelID)
-                        // The earlier day is always on top: it turns away going forward, and back over going backward
-                        .zIndex(-page.day.timeIntervalSinceReferenceDate / 1e9)
-                        .transition(.pageTurn(forward: turningForward))
-                }
-            }
+        CurlingPages(day: $day, isLocked: tools.isBusy) { pageDay in
+            DayPageScroll(page: DayPage.page(for: pageDay, in: context), day: $day, tools: tools, onDressUp: onDressUp)
+                // Each page lives in its own UIKit host, so it gets the notebook's environment handed over
+                .modelContext(context)
+                .environment(calendarStore)
+                .tint(Theme.accent)
         }
-        .scrollIndicators(.hidden)
-        .scrollDismissesKeyboard(.interactively)
-        // While moving a sticker or drawing, drags belong to the page, not the scroll view
-        .scrollDisabled(selectedSticker != nil || isDrawing)
         .overlay(alignment: .bottom) {
             Group {
-                if selectedSticker != nil {
-                    doneButton { selectedSticker = nil }
+                if tools.selectedSticker != nil {
+                    doneButton { tools.selectedSticker = nil }
                         .padding(.bottom, 20)
-                } else if !isDrawing {
+                } else if !tools.isDrawing {
                     toolDock
                 }
             }
@@ -49,32 +46,21 @@ struct TodayView: View {
         .overlay(alignment: .topTrailing) {
             // The pen palette covers the bottom of the screen, so "Done" sits at the top,
             // over the day arrows so a stray tap can't flip the page mid-drawing
-            if isDrawing {
-                doneButton { isDrawing = false }
+            if tools.isDrawing {
+                doneButton { tools.isDrawing = false }
                     .padding(.top, 24)
                     .padding(.trailing, 44)
             }
         }
         .sheet(isPresented: $showingStickers) {
             StickerDrawer { choice in
-                guard let page else { return }
-                let placement = page.addSticker(choice, in: context)
-                selectedSticker = placement.persistentModelID
+                let placement = DayPage.page(for: day, in: context).addSticker(choice, in: context)
+                tools.selectedSticker = placement.persistentModelID
             }
         }
-        .onChange(of: day) { oldDay, newDay in
-            turningForward = newDay > oldDay
-        }
-        .task(id: day) {
-            selectedSticker = nil
-            isDrawing = false
-            let next = DayPage.page(for: day, in: context)
-            if page == nil {
-                page = next
-            } else {
-                SoundEffects.shared.play(.pageTurn)
-                withAnimation(.timingCurve(0.45, 0.05, 0.25, 1, duration: 0.6)) { page = next }
-            }
+        .onChange(of: day) {
+            tools.selectedSticker = nil
+            tools.isDrawing = false
         }
     }
 
@@ -92,8 +78,8 @@ struct TodayView: View {
             .accessibilityLabel("Add photos of the day")
             Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
             dockButton("pencil.tip", label: "Draw") {
-                selectedSticker = nil
-                isDrawing = true
+                tools.selectedSticker = nil
+                tools.isDrawing = true
             }
         }
         .padding(.horizontal, 6)
@@ -108,9 +94,8 @@ struct TodayView: View {
 
     /// Framed photos of the day land on the page, selected so a caption can be written on them.
     private func addPhotos(_ choice: StickerChoice) {
-        guard let page else { return }
-        let placement = page.addSticker(choice, in: context)
-        selectedSticker = placement.persistentModelID
+        let placement = DayPage.page(for: day, in: context).addSticker(choice, in: context)
+        tools.selectedSticker = placement.persistentModelID
     }
 
     private func dockButton(_ systemImage: String, label: String, action: @escaping () -> Void) -> some View {
@@ -139,17 +124,32 @@ struct TodayView: View {
     }
 }
 
+/// One day's page, scrolling on its own paper.
+private struct DayPageScroll: View {
+    let page: DayPage
+    @Binding var day: Date
+    let tools: PageTools
+    var onDressUp: () -> Void
+
+    var body: some View {
+        ScrollView {
+            DayPageContent(page: page, day: $day, tools: tools, onDressUp: onDressUp)
+                .notebookPage()
+        }
+        .scrollIndicators(.hidden)
+        .scrollDismissesKeyboard(.interactively)
+        .scrollDisabled(tools.isBusy)
+    }
+}
+
 private struct DayPageContent: View {
     @Bindable var page: DayPage
     @Binding var day: Date
-    @Binding var selectedSticker: PersistentIdentifier?
-    let isDrawing: Bool
+    @Bindable var tools: PageTools
     var onDressUp: () -> Void
 
     @Environment(\.modelContext) private var context
     @Environment(CalendarStore.self) private var calendarStore
-    /// Where the sticky notes strip is, so swiping inside it scrolls the notes instead of flipping the day.
-    @State private var notesFrame: CGRect = .zero
     /// Optional sections opened from "Add to this page" (sections with something in them always show).
     @State private var opened: Set<OptionalSection> = []
     @State private var countdownSheet: CountdownSheet?
@@ -245,7 +245,6 @@ private struct DayPageContent: View {
             if isShown(.notes) {
                 PageSection(title: "Little notes", color: NotebookSection.today.tabColor) {
                     QuickNotesStrip(page: page)
-                        .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.space)) } action: { notesFrame = $0 }
                 }
                 .transition(.opacity.combined(with: .move(edge: .top)))
             }
@@ -262,23 +261,19 @@ private struct DayPageContent: View {
         .padding(.bottom, 80)
         .overlay {
             // Drawing sits under the stickers, like ink under something stuck on the page
-            DrawingCanvas(data: $page.drawing, isActive: isDrawing)
+            DrawingCanvas(data: $page.drawing, isActive: tools.isDrawing && Calendar.current.isDate(page.day, inSameDayAs: day))
         }
         .overlay {
-            StickerLayer(page: page, selection: $selectedSticker)
-                .allowsHitTesting(!isDrawing)
+            StickerLayer(page: page, selection: $tools.selectedSticker)
+                .allowsHitTesting(!tools.isDrawing)
         }
-        .coordinateSpace(.named(Self.space))
         .sheet(item: $countdownSheet) { sheet in
             switch sheet {
             case .new: CountdownEditor(countdown: nil)
             case .edit(let countdown): CountdownEditor(countdown: countdown)
             }
         }
-        .simultaneousGesture(swipeToFlip, including: selectedSticker == nil && !isDrawing ? .all : .subviews)
     }
-
-    private static let space = "dayPage"
 
     /// Chips for the sections this page doesn't use yet, so new pages stay short and calm.
     @ViewBuilder
@@ -326,19 +321,6 @@ private struct DayPageContent: View {
             .background(Capsule().strokeBorder(Theme.hairline, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
     }
 
-    /// Swipe left for the next day, right for the previous one.
-    private var swipeToFlip: some Gesture {
-        DragGesture(minimumDistance: 30, coordinateSpace: .named(Self.space))
-            .onEnded { value in
-                let dx = value.translation.width, dy = value.translation.height
-                guard abs(dx) > 80, abs(dx) > abs(dy) * 2,
-                      !notesFrame.contains(value.startLocation),
-                      let target = Calendar.current.date(byAdding: .day, value: dx < 0 ? 1 : -1, to: day) else { return }
-                UISelectionFeedbackGenerator().selectionChanged()
-                day = target
-            }
-    }
-
     private var quote: some View {
         let quote = DailyQuote.quote(for: page.day)
         return VStack(alignment: .leading, spacing: 4) {
@@ -371,82 +353,5 @@ private struct PageSection<Content: View>: View {
             SectionLabel(title: title, color: color)
             content
         }
-    }
-}
-
-#Preview {
-    @Previewable @State var day = Date.now
-    ZStack {
-        GridPaper().ignoresSafeArea()
-        TodayView(day: $day)
-            .padding(.horizontal, 24)
-    }
-    .modelContainer(SampleData.container)
-    .environment(CalendarStore())
-}
-
-/// A page turning over its left edge, like flipping a notebook page: it lifts, catches the light along its
-/// bending edge and darkens as it turns away.
-private struct PageTurn: ViewModifier, Animatable {
-    /// 0 lying flat, 1 fully turned.
-    var progress: Double
-
-    var animatableData: Double {
-        get { progress }
-        set { progress = newValue }
-    }
-
-    func body(content: Content) -> some View {
-        let lift = sin(progress * .pi) // most lifted halfway through
-        content
-            // Paper shading: darker towards the free edge as it turns away from the light
-            .overlay {
-                LinearGradient(colors: [.black.opacity(0.04 * progress), .black.opacity(0.32 * progress)],
-                               startPoint: .leading, endPoint: .trailing)
-                    .allowsHitTesting(false)
-            }
-            // The curl: a soft highlight along the bending edge
-            .overlay(alignment: .trailing) {
-                LinearGradient(colors: [.clear, .white.opacity(0.5 * lift), .black.opacity(0.12 * lift)],
-                               startPoint: .leading, endPoint: .trailing)
-                    .frame(width: 46)
-                    .allowsHitTesting(false)
-            }
-            .rotation3DEffect(.degrees(-92 * progress), axis: (x: 0.015 * lift, y: 1, z: 0),
-                              anchor: .leading, perspective: 0.55)
-            .offset(y: -6 * lift)
-            .shadow(color: .black.opacity(0.28 * lift), radius: 14 * lift, x: 10 * lift, y: 6 * lift)
-    }
-}
-
-/// The page underneath, in the shadow of the page turning over it.
-private struct UnderTurningPage: ViewModifier, Animatable {
-    /// 1 fully covered, 0 uncovered.
-    var shade: Double
-
-    var animatableData: Double {
-        get { shade }
-        set { shade = newValue }
-    }
-
-    func body(content: Content) -> some View {
-        content.overlay {
-            LinearGradient(colors: [.black.opacity(0.22 * shade), .black.opacity(0.05 * shade), .clear],
-                           startPoint: .leading, endPoint: .trailing)
-                .allowsHitTesting(false)
-        }
-    }
-}
-
-private extension AnyTransition {
-    /// Forward: the old page turns away, uncovering the new one.
-    /// Backward: the previous page turns back over the current one.
-    static func pageTurn(forward: Bool) -> AnyTransition {
-        let turn = AnyTransition.modifier(active: PageTurn(progress: 1), identity: PageTurn(progress: 0))
-        let underneath = AnyTransition.modifier(active: UnderTurningPage(shade: 1), identity: UnderTurningPage(shade: 0))
-        let stay = AnyTransition.opacity.animation(.easeInOut(duration: 0.01).delay(0.6))
-        return forward
-            ? .asymmetric(insertion: underneath, removal: turn)
-            : .asymmetric(insertion: turn, removal: underneath.combined(with: stay))
     }
 }

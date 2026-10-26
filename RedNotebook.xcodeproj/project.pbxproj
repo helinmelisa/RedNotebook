@@ -16,6 +16,7 @@
 		07180701A429FFFE26E8562C /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E432EF136EEAA9285A2B0A4 /* Habits.swift */; };
 		072906640E4003836EDCF129 /* NotebookWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C16AB8B3C16A0F4DF60A8084 /* NotebookWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0859A65B80A07B717F027964 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
+		097BD345C64C92F4E195C104 /* CurlingPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE6CE19058C9E940796303 /* CurlingPages.swift */; };
 		0E09FFA2EE8C2D98D173522E /* PortugueseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108712B02FB9535D942CA6F6 /* PortugueseWord.swift */; };
 		1173DF56981D114DEEA1038C /* FunStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77C99D490B502BD78C9F5E /* FunStickers.swift */; };
 		1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */; };
@@ -151,6 +152,7 @@
 		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
 		4AC5C815A656359CAD8772CA /* NotebookWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookWidget.swift; sourceTree = "<group>"; };
 		4D77C99D490B502BD78C9F5E /* FunStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunStickers.swift; sourceTree = "<group>"; };
+		57CE6CE19058C9E940796303 /* CurlingPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurlingPages.swift; sourceTree = "<group>"; };
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
 		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
 		675F81F330A865EB3A8A7F5D /* VintageStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VintageStickers.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		01BC9BECCCE545A0977A9081 /* Notebook */ = {
 			isa = PBXGroup;
 			children = (
+				57CE6CE19058C9E940796303 /* CurlingPages.swift */,
 				DE931863901B96C7EE8DC80E /* GridPaper.swift */,
 				BDF2F4039960E975B17AB58D /* NotebookSection.swift */,
 				365C3BEE813F4886FF60ADDB /* NotebookView.swift */,
@@ -565,6 +568,7 @@
 				0170959D36B83C59AD422B96 /* Countdowns.swift in Sources */,
 				FA0AC2E3B84523C5208AF6D3 /* CoverColor.swift in Sources */,
 				2456EE72F0356140BB67E1B3 /* CoverCustomizer.swift in Sources */,
+				097BD345C64C92F4E195C104 /* CurlingPages.swift in Sources */,
 				1EFEF04072C971A7FEE02692 /* DailyPrompt.swift in Sources */,
 				035BF7F45049107E7EAEBEFF /* DailyQuote.swift in Sources */,
 				D2BF4F358BDA6B484DE285AC /* DayAgenda.swift in Sources */,
