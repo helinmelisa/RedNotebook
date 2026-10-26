@@ -39,3 +39,69 @@ struct GridPaper: View {
 #Preview {
     GridPaper().ignoresSafeArea()
 }
+
+/// Bullet journal dot grid: a dot where the grid lines would cross.
+struct DotPaper: View {
+    var spacing: CGFloat = Theme.gridSpacing
+
+    var body: some View {
+        Canvas { context, size in
+            let dot = GraphicsContext.Shading.color(Theme.ink.opacity(0.22))
+            var dots = Path()
+            for y in stride(from: spacing, to: size.height, by: spacing) {
+                for x in stride(from: spacing, to: size.width, by: spacing) {
+                    dots.addEllipse(in: CGRect(x: x - 0.9, y: y - 0.9, width: 1.8, height: 1.8))
+                }
+            }
+            context.fill(dots, with: dot)
+        }
+        .background(Theme.paper)
+        .allowsHitTesting(false)
+    }
+}
+
+/// Red satin ribbon bookmark hanging from the top of the page.
+struct Ribbon: View {
+    var body: some View {
+        VStack(spacing: 0) {
+            Rectangle()
+                .fill(LinearGradient(colors: [Theme.ribbon.opacity(0.85), Theme.ribbon, Theme.ribbon.opacity(0.8)],
+                                     startPoint: .leading, endPoint: .trailing))
+                .frame(width: 9, height: 70)
+            // Forked tail
+            Path { p in
+                p.move(to: .zero)
+                p.addLine(to: CGPoint(x: 9, y: 0))
+                p.addLine(to: CGPoint(x: 9, y: 8))
+                p.addLine(to: CGPoint(x: 4.5, y: 4))
+                p.addLine(to: CGPoint(x: 0, y: 8))
+                p.closeSubpath()
+            }
+            .fill(Theme.ribbon)
+            .frame(width: 9, height: 8)
+        }
+        .shadow(color: .black.opacity(0.2), radius: 1, x: 1, y: 1)
+        .allowsHitTesting(false)
+    }
+}
+
+extension View {
+    /// Lays scrolling content on a notebook page: margins either side, and the paper and ribbon underneath
+    /// scrolling along with it, so the whole page moves together and the writing stays on its squares.
+    func notebookPage(dotted: Bool = false) -> some View {
+        frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 28)
+            .padding(.trailing, 44) // keep text clear of the ribbon
+            .background(alignment: .top) {
+                Group {
+                    if dotted { DotPaper() } else { GridPaper() }
+                }
+                // Paper well past both ends, for pulling the page past the top or bottom
+                // (a whole number of squares, so the grid still starts on the page's top edge)
+                .padding(.vertical, -Theme.gridSpacing * 100)
+            }
+            .overlay(alignment: .topTrailing) {
+                Ribbon().padding(.trailing, 22)
+            }
+    }
+}

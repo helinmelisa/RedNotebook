@@ -19,6 +19,7 @@ struct StickerBookView: View {
             }
             .padding(.top, 20)
             .padding(.bottom, 40)
+            .notebookPage()
         }
         .scrollIndicators(.hidden)
         .overlay(alignment: .bottom) {

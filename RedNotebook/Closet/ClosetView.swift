@@ -32,6 +32,7 @@ struct ClosetView: View {
             }
             .padding(.top, 20)
             .padding(.bottom, 24)
+            .notebookPage()
         }
         .scrollIndicators(.hidden)
         // While adjusting a piece, drags move it instead of scrolling

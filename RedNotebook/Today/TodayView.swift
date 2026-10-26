@@ -21,8 +21,8 @@ struct TodayView: View {
                 if let page {
                     DayPageContent(page: page, day: $day, selectedSticker: $selectedSticker,
                                    isDrawing: isDrawing, onDressUp: onDressUp)
-                        // Paper behind the page so it looks solid while turning, lined up with the notebook's grid
-                        .background(GridPaper().padding(.leading, -28).padding(.trailing, -44))
+                        // Its own paper, so the page looks solid while turning and scrolls as one
+                        .notebookPage()
                         .id(page.persistentModelID)
                         // The earlier day is always on top: it turns away going forward, and back over going backward
                         .zIndex(-page.day.timeIntervalSinceReferenceDate / 1e9)
@@ -35,12 +35,16 @@ struct TodayView: View {
         // While moving a sticker or drawing, drags belong to the page, not the scroll view
         .scrollDisabled(selectedSticker != nil || isDrawing)
         .overlay(alignment: .bottom) {
-            if selectedSticker != nil {
-                doneButton { selectedSticker = nil }
-                    .padding(.bottom, 20)
-            } else if !isDrawing {
-                toolDock
+            Group {
+                if selectedSticker != nil {
+                    doneButton { selectedSticker = nil }
+                        .padding(.bottom, 20)
+                } else if !isDrawing {
+                    toolDock
+                }
             }
+            .padding(.leading, 28)
+            .padding(.trailing, 44)
         }
         .overlay(alignment: .topTrailing) {
             // The pen palette covers the bottom of the screen, so "Done" sits at the top,
@@ -48,6 +52,7 @@ struct TodayView: View {
             if isDrawing {
                 doneButton { isDrawing = false }
                     .padding(.top, 24)
+                    .padding(.trailing, 44)
             }
         }
         .sheet(isPresented: $showingStickers) {

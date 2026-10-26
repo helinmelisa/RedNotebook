@@ -23,24 +23,19 @@ struct NotebookView: View {
         return ZStack(alignment: .topLeading) {
             GridPaper()
 
+            // Each section scrolls its own paper (see `notebookPage()`), edge to edge
+            sectionContent
+                .id(section)
+                .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
+                                        removal: .opacity))
+
             // Binding shadow on the left edge
             LinearGradient(colors: [.black.opacity(0.18), .clear],
                            startPoint: .leading, endPoint: .trailing)
                 .frame(width: 22)
                 .allowsHitTesting(false)
 
-            sectionContent
-                .padding(.leading, 28)
-                .padding(.trailing, 44) // keep text clear of the ribbon
-                .id(section)
-                .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity),
-                                        removal: .opacity))
-
             PrintGrain()
-
-            Ribbon()
-                .padding(.trailing, 22)
-                .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .clipShape(shape)
         .background(PageStack())
@@ -77,31 +72,6 @@ struct NotebookView: View {
         let arguments = ProcessInfo.processInfo.arguments
         guard let index = arguments.firstIndex(of: "--tab"), index + 1 < arguments.count else { return .today }
         return NotebookSection(rawValue: arguments[index + 1]) ?? .today
-    }
-}
-
-/// Red satin ribbon bookmark hanging from the top of the page.
-private struct Ribbon: View {
-    var body: some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(LinearGradient(colors: [Theme.ribbon.opacity(0.85), Theme.ribbon, Theme.ribbon.opacity(0.8)],
-                                     startPoint: .leading, endPoint: .trailing))
-                .frame(width: 9, height: 70)
-            // Forked tail
-            Path { p in
-                p.move(to: .zero)
-                p.addLine(to: CGPoint(x: 9, y: 0))
-                p.addLine(to: CGPoint(x: 9, y: 8))
-                p.addLine(to: CGPoint(x: 4.5, y: 4))
-                p.addLine(to: CGPoint(x: 0, y: 8))
-                p.closeSubpath()
-            }
-            .fill(Theme.ribbon)
-            .frame(width: 9, height: 8)
-        }
-        .shadow(color: .black.opacity(0.2), radius: 1, x: 1, y: 1)
-        .allowsHitTesting(false)
     }
 }
 
