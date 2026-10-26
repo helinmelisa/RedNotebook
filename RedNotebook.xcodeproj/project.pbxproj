@@ -58,6 +58,7 @@
 		995E4699691492A30C5FE070 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE892F9CE96993E0BEDD98B /* Components.swift */; };
 		9A170195B9383BCD870C0E1C /* OutfitSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2C3BC7F4305F8D10F9E7E8 /* OutfitSection.swift */; };
 		9B63790BA65C7FBFC1251BDC /* MealsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */; };
+		9BF35ADE5C40162432D21ECA /* TapToDismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526E3AD5955834BED695E68F /* TapToDismissKeyboard.swift */; };
 		9DA4B4AC3CF4E8C22A14A7CA /* NewEventSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2E587CB9652567AA20C815 /* NewEventSheet.swift */; };
 		9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */; };
 		A31921B064F7EA92777F501C /* MoreStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE4DB8A7904F2D88EC8E9AB9 /* MoreStickers.swift */; };
@@ -152,6 +153,7 @@
 		45686A36B7F72E75004CFDE5 /* DayAgenda.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayAgenda.swift; sourceTree = "<group>"; };
 		4AC5C815A656359CAD8772CA /* NotebookWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookWidget.swift; sourceTree = "<group>"; };
 		4D77C99D490B502BD78C9F5E /* FunStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunStickers.swift; sourceTree = "<group>"; };
+		526E3AD5955834BED695E68F /* TapToDismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToDismissKeyboard.swift; sourceTree = "<group>"; };
 		57CE6CE19058C9E940796303 /* CurlingPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurlingPages.swift; sourceTree = "<group>"; };
 		64D4B6AF9F59D99BC5AE7A27 /* MealsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsSection.swift; sourceTree = "<group>"; };
 		65DF040617BA6AFBFD07BF0E /* ClosetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosetView.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			children = (
 				8684AAE4FB761EBAE54266A4 /* AppLock.swift */,
 				B4EB6C3F05BEA26B6C54F39E /* RedNotebookApp.swift */,
+				526E3AD5955834BED695E68F /* TapToDismissKeyboard.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */,
 				CA6F165D5003D6BD21003FC6 /* StickerPicker.swift in Sources */,
 				17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */,
+				9BF35ADE5C40162432D21ECA /* TapToDismissKeyboard.swift in Sources */,
 				D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */,
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,
 				B5ABE5E3FEE6AD0F2E0DAE95 /* TodoView.swift in Sources */,

@@ -36,6 +36,7 @@ struct RootView: View {
     var body: some View {
         ZStack {
             DeskBackground(showsSeason: !isOpen)
+            TapToDismissKeyboard().frame(width: 0, height: 0)
 
             if isOpen {
                 NotebookView(onClose: { withAnimation(.easeInOut(duration: 0.4)) { isOpen = false } })
