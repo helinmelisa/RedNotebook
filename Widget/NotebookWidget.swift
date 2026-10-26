@@ -18,11 +18,11 @@ struct NotebookWidgets: WidgetBundle {
 
 /// The cover colour, picked when editing the widget (the widget can't read the app's settings).
 enum WidgetCover: String, AppEnum {
-    case red, teal, navy, pink, barbie, hotPink, matcha, orange
+    case red, teal, navy, pink, hotPink, matcha, orange
 
     static let typeDisplayRepresentation: TypeDisplayRepresentation = "Cover colour"
     static let caseDisplayRepresentations: [WidgetCover: DisplayRepresentation] = [
-        .red: "Wine red", .teal: "Teal", .navy: "Navy", .pink: "Pastel pink", .barbie: "Barbie pink", .hotPink: "Hot pink", .matcha: "Matcha", .orange: "Glossy orange",
+        .red: "Wine red", .teal: "Teal", .navy: "Navy", .pink: "Pastel pink", .hotPink: "Hot pink", .matcha: "Matcha", .orange: "Glossy orange",
     ]
 
     var color: CoverColor { CoverColor(rawValue: rawValue) ?? .red }

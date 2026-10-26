@@ -7,6 +7,10 @@ struct RedNotebookApp: App {
 
     init() {
         Theme.registerFonts()
+        // Barbie pink was retired: it was nearly the same as hot pink
+        if UserDefaults.standard.string(forKey: CoverColor.storageKey) == "barbie" {
+            UserDefaults.standard.set(CoverColor.hotPink.rawValue, forKey: CoverColor.storageKey)
+        }
     }
 
     var body: some Scene {
@@ -59,6 +63,11 @@ struct RootView: View {
         // A paper notebook looks the same in Dark Mode; the cover's colour instead of iOS blue for controls
         .preferredColorScheme(.light)
         .tint(Theme.accent)
+        .task {
+            if UIApplication.shared.alternateIconName == "AppIcon-barbie" {
+                try? await UIApplication.shared.setAlternateIconName(CoverColor.current.iconName)
+            }
+        }
         #if DEBUG
         .task {
             if ProcessInfo.processInfo.arguments.contains("--sample-data") {

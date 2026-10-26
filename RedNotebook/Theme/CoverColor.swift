@@ -3,7 +3,7 @@ import SwiftUI
 /// The notebook's cover colour. The rest of the app takes its accent and ribbon from it.
 enum CoverColor: String, CaseIterable, Identifiable {
     // Raw values are saved in settings: "red" is the wine red cover and stays the default.
-    case red, teal, navy, pink, barbie, hotPink, matcha, orange
+    case red, teal, navy, pink, hotPink, matcha, orange
 
     var id: Self { self }
 
@@ -20,7 +20,6 @@ enum CoverColor: String, CaseIterable, Identifiable {
         case .teal: "Teal"
         case .navy: "Navy"
         case .pink: "Pastel pink"
-        case .barbie: "Barbie pink"
         case .hotPink: "Hot pink"
         case .matcha: "Matcha"
         case .orange: "Glossy orange"
@@ -33,7 +32,6 @@ enum CoverColor: String, CaseIterable, Identifiable {
         case .teal: Color(red: 0.05, green: 0.48, blue: 0.50)
         case .navy: Color(red: 0.13, green: 0.20, blue: 0.38)
         case .pink: Color(red: 0.98, green: 0.82, blue: 0.86)
-        case .barbie: Color(red: 0.88, green: 0.13, blue: 0.54)
         case .hotPink: Color(red: 1.0, green: 0.25, blue: 0.60)
         case .matcha: Color(red: 0.55, green: 0.66, blue: 0.40)
         case .orange: Color(red: 0.97, green: 0.46, blue: 0.10)
@@ -61,7 +59,6 @@ enum CoverColor: String, CaseIterable, Identifiable {
         case .teal: Color(red: 0.0, green: 0.43, blue: 0.45)
         case .navy: Color(red: 0.18, green: 0.30, blue: 0.58)
         case .pink: Color(red: 0.82, green: 0.42, blue: 0.55)
-        case .barbie: Color(red: 0.82, green: 0.10, blue: 0.50)
         case .hotPink: Color(red: 0.90, green: 0.12, blue: 0.48)
         case .matcha: Color(red: 0.33, green: 0.48, blue: 0.20)
         case .orange: Color(red: 0.82, green: 0.36, blue: 0.04)
@@ -69,5 +66,5 @@ enum CoverColor: String, CaseIterable, Identifiable {
     }
 
     /// A smooth, lacquered cover with a shine, instead of leather.
-    var isGlossy: Bool { self == .orange || self == .barbie }
+    var isGlossy: Bool { self == .orange }
 }
