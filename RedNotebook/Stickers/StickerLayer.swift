@@ -39,7 +39,7 @@ struct StickerLayer: View {
             }
         }
         .sheet(item: $rewritingNote) { note in
-            NoteMaker(initialStyle: NoteStyle(value: note.value), initialText: note.text) { style, text in
+            NoteMaker(initialStyle: NoteStyle(value: note.value), initialText: note.text) { style, text, _ in
                 note.value = style.value
                 note.text = text
             }

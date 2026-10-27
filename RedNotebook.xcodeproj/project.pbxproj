@@ -20,6 +20,7 @@
 		0E09FFA2EE8C2D98D173522E /* PortugueseWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108712B02FB9535D942CA6F6 /* PortugueseWord.swift */; };
 		1173DF56981D114DEEA1038C /* FunStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77C99D490B502BD78C9F5E /* FunStickers.swift */; };
 		1599DE450F6A895CD4B74745 /* BulletItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4283E7D4EFB83D1AB4EEA366 /* BulletItem.swift */; };
+		164664EA03DB87A289128B11 /* StickerTargetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DB26E51916D36AD41E2C2 /* StickerTargetPicker.swift */; };
 		1653A706E4D2B0BE61FD1E0F /* DrawnSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7619AFA459ED5027E674AB77 /* DrawnSticker.swift */; };
 		17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520AD7989256F0CD2BAF608 /* StickerPlacement.swift */; };
 		1B36A619148FAB596E105AF1 /* Caveat-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0DC25225B4AE0FFBE00457D0 /* Caveat-OFL.txt */; };
@@ -174,6 +175,7 @@
 		7C9300B14907F57F2D942E6F /* CalendarStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStore.swift; sourceTree = "<group>"; };
 		7F88EC8CA9FC139740C76F3A /* PhotoFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFrames.swift; sourceTree = "<group>"; };
 		8684AAE4FB761EBAE54266A4 /* AppLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLock.swift; sourceTree = "<group>"; };
+		870DB26E51916D36AD41E2C2 /* StickerTargetPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerTargetPicker.swift; sourceTree = "<group>"; };
 		87F8FD4050BC69B234BFB9FA /* YearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearView.swift; sourceTree = "<group>"; };
 		89C9A362E1D53313E3CB8151 /* MonthPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPDF.swift; sourceTree = "<group>"; };
 		8A2FEEA9FA0D7F6C1F966D7A /* WashiMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WashiMaker.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				E35E6A0058041DA2C3004F1B /* StickerContent.swift */,
 				946ECCADA2F15D391C3D7B72 /* StickerLayer.swift */,
 				FF14BD97A98CF983AB2E6534 /* StickerPicker.swift */,
+				870DB26E51916D36AD41E2C2 /* StickerTargetPicker.swift */,
 				FAC37CDCAEC2F6EFE3C7BFA0 /* TravelStickers.swift */,
 				43376731151759376FDBA359 /* TurkiyeStickers.swift */,
 				675F81F330A865EB3A8A7F5D /* VintageStickers.swift */,
@@ -624,6 +627,7 @@
 				9F6BA5DEE10E96F2E81090B9 /* StickerLayer.swift in Sources */,
 				CA6F165D5003D6BD21003FC6 /* StickerPicker.swift in Sources */,
 				17B643A8FB766A08EE4C0368 /* StickerPlacement.swift in Sources */,
+				164664EA03DB87A289128B11 /* StickerTargetPicker.swift in Sources */,
 				9BF35ADE5C40162432D21ECA /* TapToDismissKeyboard.swift in Sources */,
 				D7146A3E5A463D759499ADD0 /* Theme.swift in Sources */,
 				E0911CCE57D13F9B19D72775 /* TodayView.swift in Sources */,

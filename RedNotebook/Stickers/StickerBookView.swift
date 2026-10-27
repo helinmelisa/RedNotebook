@@ -43,8 +43,8 @@ struct StickerBookView: View {
         Calendar.current.isDateInToday(day) ? "today's diary" : "the diary on " + day.formatted(.dateTime.day().month(.wide))
     }
 
-    private func add(_ choice: StickerChoice) {
-        _ = DayPage.page(for: day, in: context).addSticker(choice, in: context, onDiary: true)
+    private func add(_ choice: StickerChoice, to target: StickerTarget?) {
+        _ = DayPage.page(for: day, in: context).addSticker(choice, in: context, onDiary: target != .today)
         let added = Date.now
         withAnimation(.snappy) { lastAdded = added }
         Task {

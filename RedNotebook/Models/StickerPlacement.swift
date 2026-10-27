@@ -5,6 +5,18 @@ enum StickerKind: String {
     case emoji, drawn, photo, polaroid, washi, note
 }
 
+/// Which of the day's pages something is stuck on.
+enum StickerTarget: String, CaseIterable {
+    case today, diary
+
+    var title: String {
+        switch self {
+        case .today: "Today"
+        case .diary: "Diary"
+        }
+    }
+}
+
 /// Something you can stick on a page.
 enum StickerChoice {
     case emoji(String)

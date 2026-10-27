@@ -4,7 +4,8 @@ import SwiftUI
 
 /// All stickers: your own from photos, the drawn pack and emoji. Tap one to pick it.
 struct StickerPicker: View {
-    var onPick: (StickerChoice) -> Void
+    /// The target is set when it was chosen in the tape or note maker; otherwise it's the page it was opened from.
+    var onPick: (StickerChoice, StickerTarget?) -> Void
 
     @Environment(\.modelContext) private var context
     @Query(sort: \PhotoSticker.createdAt, order: .reverse) private var photoStickers: [PhotoSticker]
@@ -13,9 +14,9 @@ struct StickerPicker: View {
     @State private var isCutting = false
     @State private var makingWashi = false
     /// Tape made in the maker, stuck on once its sheet has closed.
-    @State private var madeWashi: StickerChoice?
+    @State private var madeWashi: (StickerChoice, StickerTarget)?
     @State private var makingNote = false
-    @State private var madeNote: StickerChoice?
+    @State private var madeNote: (StickerChoice, StickerTarget)?
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -94,7 +95,7 @@ struct StickerPicker: View {
 
     /// Photos of the day in a frame: polaroid, instax, film strip or photo-booth strip.
     private var addPolaroid: some View {
-        PhotoFramePicker(onPick: pick) {
+        PhotoFramePicker(onPick: { pick($0) }) {
             VStack(spacing: 4) {
                 Image(systemName: "photo.on.rectangle").font(.system(size: 20))
                 Text("Photo frame")
@@ -131,10 +132,10 @@ struct StickerPicker: View {
         }
         .buttonStyle(.plain)
         .sheet(isPresented: $makingWashi, onDismiss: {
-            if let madeWashi { pick(madeWashi) }
+            if let madeWashi { pick(madeWashi.0, to: madeWashi.1) }
             madeWashi = nil
         }) {
-            WashiMaker { style, text in madeWashi = .washi(style, text: text) }
+            WashiMaker { style, text, target in madeWashi = (.washi(style, text: text), target) }
         }
         .accessibilityLabel("Make washi tape")
     }
@@ -144,7 +145,7 @@ struct StickerPicker: View {
         Button { makingNote = true } label: {
             VStack(spacing: 6) {
                 Rectangle()
-                    .fill(NoteStyle.colors[0].color)
+                    .fill(NoteStyle.colors[2].color)
                     .frame(width: 34, height: 32)
                     .shadow(color: .black.opacity(0.15), radius: 1, x: 1, y: 1)
                     .rotationEffect(.degrees(-5))
@@ -160,10 +161,10 @@ struct StickerPicker: View {
         }
         .buttonStyle(.plain)
         .sheet(isPresented: $makingNote, onDismiss: {
-            if let madeNote { pick(madeNote) }
+            if let madeNote { pick(madeNote.0, to: madeNote.1) }
             madeNote = nil
         }) {
-            NoteMaker { style, text in madeNote = .note(style, text: text) }
+            NoteMaker { style, text, target in madeNote = (.note(style, text: text), target) }
         }
         .accessibilityLabel("Write a sticky note")
     }
@@ -208,9 +209,9 @@ struct StickerPicker: View {
         }
     }
 
-    private func pick(_ choice: StickerChoice) {
+    private func pick(_ choice: StickerChoice, to target: StickerTarget? = nil) {
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
-        onPick(choice)
+        onPick(choice, target)
     }
 
     private func makeSticker(from item: PhotosPickerItem) async {
@@ -225,14 +226,14 @@ struct StickerPicker: View {
 
 /// Sheet version of the picker, opened from a day page.
 struct StickerDrawer: View {
-    var onPick: (StickerChoice) -> Void
+    var onPick: (StickerChoice, StickerTarget?) -> Void
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                StickerPicker { choice in
-                    onPick(choice)
+                StickerPicker { choice, target in
+                    onPick(choice, target)
                     dismiss()
                 }
                 .padding(20)

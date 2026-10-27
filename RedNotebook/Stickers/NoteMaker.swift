@@ -54,19 +54,20 @@ struct NoteStyle: Hashable {
     var design: NoteDesign
     var colorIndex: Int
 
+    /// Soft paper colours, like a pad of real sticky notes.
     static let colors: [(name: String, color: Color)] = [
-        ("Butter", Color(red: 1.0, green: 0.91, blue: 0.52)),
-        ("Blush", Color(red: 0.99, green: 0.78, blue: 0.80)),
-        ("Mint", Color(red: 0.72, green: 0.92, blue: 0.80)),
-        ("Sky", Color(red: 0.73, green: 0.86, blue: 0.98)),
-        ("Lilac", Color(red: 0.84, green: 0.78, blue: 0.97)),
-        ("Peach", Color(red: 1.0, green: 0.80, blue: 0.64)),
-        ("Lime", Color(red: 0.86, green: 0.95, blue: 0.55)),
-        ("Coral", Color(red: 1.0, green: 0.62, blue: 0.56)),
-        ("Hot pink", Color(red: 1.0, green: 0.55, blue: 0.75)),
-        ("Aqua", Color(red: 0.55, green: 0.90, blue: 0.90)),
-        ("Paper", Color(red: 0.995, green: 0.99, blue: 0.97)),
-        ("Kraft", Color(red: 0.84, green: 0.72, blue: 0.56)),
+        ("White", Color(red: 0.995, green: 0.995, blue: 0.99)),
+        ("Off-white", Color(red: 0.98, green: 0.96, blue: 0.90)),
+        ("Soft yellow", Color(red: 0.99, green: 0.94, blue: 0.70)),
+        ("Soft pink", Color(red: 0.98, green: 0.86, blue: 0.86)),
+        ("Soft peach", Color(red: 0.99, green: 0.88, blue: 0.78)),
+        ("Soft green", Color(red: 0.85, green: 0.92, blue: 0.81)),
+        ("Sage", Color(red: 0.78, green: 0.84, blue: 0.74)),
+        ("Soft blue", Color(red: 0.84, green: 0.90, blue: 0.97)),
+        ("Soft lilac", Color(red: 0.89, green: 0.86, blue: 0.95)),
+        ("Soft grey", Color(red: 0.89, green: 0.89, blue: 0.88)),
+        ("Soft brown", Color(red: 0.87, green: 0.79, blue: 0.69)),
+        ("Kraft", Color(red: 0.80, green: 0.70, blue: 0.57)),
     ]
 
     var color: Color { Self.colors[colorIndex % Self.colors.count].color }
@@ -323,11 +324,14 @@ private struct NoteTagShape: Shape {
 struct NoteMaker: View {
     var initialStyle: NoteStyle? = nil
     var initialText = ""
-    var onMake: (NoteStyle, String) -> Void
+    /// When editing a note that's already stuck on, where it goes isn't asked.
+    var onMake: (NoteStyle, String, StickerTarget) -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("lastNote") private var lastNote = "classic:0"
-    @State private var style = NoteStyle(design: .classic, colorIndex: 0)
+    @AppStorage("lastNote") private var lastNote = "classic:2"
+    /// Notes go on the Today page unless you choose the diary.
+    @State private var target = StickerTarget.today
+    @State private var style = NoteStyle(design: .classic, colorIndex: 2)
     @State private var text = ""
     @FocusState private var writing: Bool
 
@@ -393,6 +397,10 @@ struct NoteMaker: View {
                             }
                         }
                     }
+
+                    if !isEditing {
+                        StickerTargetPicker(target: $target, color: style.color)
+                    }
                 }
                 .padding(24)
             }
@@ -407,7 +415,7 @@ struct NoteMaker: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(isEditing ? "Done" : "Stick it") {
                         lastNote = style.value
-                        onMake(style, text.trimmingCharacters(in: .whitespacesAndNewlines))
+                        onMake(style, text.trimmingCharacters(in: .whitespacesAndNewlines), target)
                         dismiss()
                     }
                     .font(Theme.serif(16, .semibold))

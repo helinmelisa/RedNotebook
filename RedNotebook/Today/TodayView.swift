@@ -287,8 +287,12 @@ private struct DayPageContent: View {
     private static let space = "dayPage"
 
     /// Sticks the note just above "Add to this page" and picks it up, ready to be moved where it belongs.
-    private func stickNote(_ style: NoteStyle, text: String) {
-        let note = page.addSticker(.note(style, text: text), in: context)
+    private func stickNote(_ style: NoteStyle, text: String, on target: StickerTarget) {
+        let note = page.addSticker(.note(style, text: text), in: context, onDiary: target == .diary)
+        guard target == .today else {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            return
+        }
         note.x = 0.45
         note.y = max(addToPageY - 60, 120)
         tools.selectedSticker = note.persistentModelID

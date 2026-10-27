@@ -150,12 +150,14 @@ struct CustomWashi: View {
 
 /// "Make your own tape": pick a pattern and a colour, write on it, and stick it on the page.
 struct WashiMaker: View {
-    var onMake: (WashiStyle, String) -> Void
+    var onMake: (WashiStyle, String, StickerTarget) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @AppStorage("lastWashi") private var lastWashi = "stripes:0"
     @State private var style = WashiStyle(pattern: .stripes, colorIndex: 0)
     @State private var text = ""
+    /// Tape goes on the diary page unless you choose Today.
+    @State private var target = StickerTarget.diary
     @FocusState private var writing: Bool
 
     var body: some View {
@@ -216,6 +218,8 @@ struct WashiMaker: View {
                             }
                         }
                     }
+
+                    StickerTargetPicker(target: $target, color: style.color)
                 }
                 .padding(24)
             }
@@ -229,7 +233,7 @@ struct WashiMaker: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Stick it") {
                         lastWashi = style.value
-                        onMake(style, text.trimmingCharacters(in: .whitespaces))
+                        onMake(style, text.trimmingCharacters(in: .whitespaces), target)
                         dismiss()
                     }
                     .font(Theme.serif(16, .semibold))

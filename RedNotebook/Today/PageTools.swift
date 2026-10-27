@@ -65,7 +65,7 @@ private struct PageToolsOverlay: ViewModifier {
         HStack(spacing: 4) {
             dockButton("star.bubble", label: "Add sticker") { showingStickers = true }
             Rectangle().fill(Theme.hairline).frame(width: 1, height: 20)
-            PhotoFramePicker(onPick: stick) {
+            PhotoFramePicker(onPick: { stick($0) }) {
                 Image(systemName: "photo.on.rectangle")
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(Theme.ink)
@@ -89,9 +89,15 @@ private struct PageToolsOverlay: ViewModifier {
     }
 
     /// Stickers and framed photos land on the page selected, ready to move (or to write a caption on).
-    private func stick(_ choice: StickerChoice) {
-        let placement = DayPage.page(for: day, in: context).addSticker(choice, in: context, onDiary: onDiary)
-        tools.selectedSticker = placement.persistentModelID
+    private func stick(_ choice: StickerChoice, to target: StickerTarget? = nil) {
+        let diary = target.map { $0 == .diary } ?? onDiary
+        let placement = DayPage.page(for: day, in: context).addSticker(choice, in: context, onDiary: diary)
+        if diary == onDiary {
+            tools.selectedSticker = placement.persistentModelID
+        } else {
+            // Stuck on the day's other page
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        }
     }
 
     private func dockButton(_ systemImage: String, label: String, action: @escaping () -> Void) -> some View {
