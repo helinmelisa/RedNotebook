@@ -54,6 +54,9 @@ private struct DayPageContent: View {
     /// Showing a remove button beside each part.
     @State private var isArranging = false
     @State private var countdownSheet: CountdownSheet?
+    @State private var writingNote = false
+    /// Where "Add to this page" sits, so a new sticky note lands where you are on the page.
+    @State private var addToPageY: CGFloat = 300
     @AppStorage(Countdown.storageKey) private var countdownsRaw = ""
 
     enum CountdownSheet: Identifiable {
@@ -196,6 +199,7 @@ private struct DayPageContent: View {
             }
 
             addToPage
+                .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(Self.space)).minY } action: { addToPageY = $0 }
 
             if isShown(.memories) {
                 OnThisDay(day: page.day) { day = $0 }
@@ -211,6 +215,7 @@ private struct DayPageContent: View {
         }
         .padding(.top, 20)
         .padding(.bottom, 80)
+        .coordinateSpace(.named(Self.space))
         .overlay {
             // Drawing sits under the stickers, like ink under something stuck on the page
             DrawingCanvas(data: $page.drawing, isActive: tools.isDrawing && Calendar.current.isDate(page.day, inSameDayAs: day))
@@ -218,6 +223,9 @@ private struct DayPageContent: View {
         .overlay {
             StickerLayer(page: page, selection: $tools.selectedSticker)
                 .allowsHitTesting(!tools.isDrawing)
+        }
+        .sheet(isPresented: $writingNote) {
+            NoteMaker(onMake: stickNote)
         }
         .sheet(item: $countdownSheet) { sheet in
             switch sheet {
@@ -230,7 +238,8 @@ private struct DayPageContent: View {
     /// Chips for the parts this page doesn't have, so new pages stay short and calm,
     /// and a way to take parts off a busy day.
     private var addToPage: some View {
-        let missing = Part.allCases.filter { !isShown($0) }
+        // Notes are sticky notes stuck anywhere now; the old strip only comes back for pages that had one
+        let missing = Part.allCases.filter { !isShown($0) && ($0 != .notes || !(page.notes ?? []).isEmpty) }
         return VStack(alignment: .leading, spacing: 8) {
             Text("ADD TO THIS PAGE")
                 .font(Theme.eyebrow)
@@ -243,6 +252,13 @@ private struct DayPageContent: View {
                     }
                     .buttonStyle(.plain)
                 }
+                Button {
+                    UISelectionFeedbackGenerator().selectionChanged()
+                    writingNote = true
+                } label: {
+                    chipLabel("Sticky note", systemImage: "note.text")
+                }
+                .buttonStyle(.plain)
                 if isShown(.countdowns) && !hasUpcomingCountdown {
                     Button {
                         UISelectionFeedbackGenerator().selectionChanged()
@@ -266,6 +282,16 @@ private struct DayPageContent: View {
                 .buttonStyle(.plain)
             }
         }
+    }
+
+    private static let space = "dayPage"
+
+    /// Sticks the note just above "Add to this page" and picks it up, ready to be moved where it belongs.
+    private func stickNote(_ style: NoteStyle, text: String) {
+        let note = page.addSticker(.note(style, text: text), in: context)
+        note.x = 0.45
+        note.y = max(addToPageY - 60, 120)
+        tools.selectedSticker = note.persistentModelID
     }
 
     private func chipLabel(_ title: String, systemImage: String) -> some View {

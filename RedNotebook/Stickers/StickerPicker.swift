@@ -14,6 +14,8 @@ struct StickerPicker: View {
     @State private var makingWashi = false
     /// Tape made in the maker, stuck on once its sheet has closed.
     @State private var madeWashi: StickerChoice?
+    @State private var makingNote = false
+    @State private var madeNote: StickerChoice?
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -24,6 +26,7 @@ struct StickerPicker: View {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 76), spacing: 12)], spacing: 12) {
                     addPolaroid
                     addWashi
+                    addNote
                     addFromPhotos
                     ForEach(photoStickers) { sticker in
                         tile(.photo(sticker), size: 76)
@@ -134,6 +137,35 @@ struct StickerPicker: View {
             WashiMaker { style, text in madeWashi = .washi(style, text: text) }
         }
         .accessibilityLabel("Make washi tape")
+    }
+
+    /// Write a sticky note in any design and colour.
+    private var addNote: some View {
+        Button { makingNote = true } label: {
+            VStack(spacing: 6) {
+                Rectangle()
+                    .fill(NoteStyle.colors[0].color)
+                    .frame(width: 34, height: 32)
+                    .shadow(color: .black.opacity(0.15), radius: 1, x: 1, y: 1)
+                    .rotationEffect(.degrees(-5))
+                Text("Sticky note")
+            }
+            .font(Theme.serif(11))
+            .foregroundStyle(Theme.inkSecondary)
+            .frame(width: 76, height: 76)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .strokeBorder(Theme.ink.opacity(0.25), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+            )
+        }
+        .buttonStyle(.plain)
+        .sheet(isPresented: $makingNote, onDismiss: {
+            if let madeNote { pick(madeNote) }
+            madeNote = nil
+        }) {
+            NoteMaker { style, text in madeNote = .note(style, text: text) }
+        }
+        .accessibilityLabel("Write a sticky note")
     }
 
     /// Category chips that jump to a group, so the whole sticker book doesn't have to be scrolled through.

@@ -17,6 +17,8 @@ struct StickerContent: View {
             PhotoFrameView(style: style, photos: photos, caption: text)
         case .washi(let style, _):
             CustomWashi(style: style, text: text)
+        case .note(let style, _):
+            NoteSticker(style: style, text: text)
         case .photo(let photo):
             if let image = photo.image {
                 Image(uiImage: image)

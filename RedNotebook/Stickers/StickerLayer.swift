@@ -10,6 +10,8 @@ struct StickerLayer: View {
 
     @Environment(\.modelContext) private var context
     @State private var writingOn: StickerPlacement?
+    /// A sticky note being rewritten in the note maker.
+    @State private var rewritingNote: StickerPlacement?
     @State private var draft = ""
 
     var body: some View {
@@ -36,6 +38,12 @@ struct StickerLayer: View {
                 startWriting(on: placement)
             }
         }
+        .sheet(item: $rewritingNote) { note in
+            NoteMaker(initialStyle: NoteStyle(value: note.value), initialText: note.text) { style, text in
+                note.value = style.value
+                note.text = text
+            }
+        }
         .alert("Write on it", isPresented: Binding(get: { writingOn != nil }, set: { if !$0 { writingOn = nil } })) {
             TextField("A word or two", text: $draft)
             Button("Done") {
@@ -57,6 +65,10 @@ struct StickerLayer: View {
     }
 
     private func startWriting(on placement: StickerPlacement) {
+        if StickerKind(rawValue: placement.kindRaw) == .note {
+            rewritingNote = placement
+            return
+        }
         draft = placement.text
         writingOn = placement
     }
